@@ -1,0 +1,55 @@
+name: Update Configs
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+concurrency:
+  group: update-configs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -r Files/requirements.txt
+
+      - name: Validate Python
+        run: python -m unittest discover -s Files -p 'test_*.py' -v
+
+      - name: Run Python script and save output to file
+        run: python Files/app.py
+
+      - name: Run Splitter script and save output to file
+        run: python Files/sort.py
+
+      - name: Commit and push files
+        uses: EndBug/add-and-commit@v11.1.1
+        with:
+          author_name: "mrdevmohamed"
+          author_email: "mrdevmohamed@github.com"
+          message: "Fresh🔥❤️‍🔥"
+          add: |
+            All_Configs_Sub.txt
+            All_Configs_base64_Sub.txt
+            Sub*.txt
+            Base64/Sub*_base64.txt
+            Splitted-By-Protocol/*.txt
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
