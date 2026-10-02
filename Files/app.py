@@ -7,6 +7,9 @@ import re
 import urllib.parse
 import socket
 import time
+import os
+import subprocess
+import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -17,6 +20,9 @@ MIN_CONFIGS_EXPECTED = 1
 HEALTH_CHECK_ENABLED = True
 HEALTH_CHECK_TIMEOUT = 4
 HEALTH_CHECK_WORKERS = 128
+LITESPEEDTEST_BINARY = os.environ.get("LITESPEEDTEST_BINARY", "")
+LITESPEEDTEST_TIMEOUT = int(os.environ.get("LITESPEEDTEST_TIMEOUT", "20"))
+LITESPEEDTEST_CONCURRENCY = int(os.environ.get("LITESPEEDTEST_CONCURRENCY", "16"))
 GEOIP_BATCH_SIZE = 100
 MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
@@ -215,6 +221,135 @@ def health_check_configs(configs):
     return healthy
 
 
+def validate_configs(configs):
+    """Validate every config, using LiteSpeedTest where supported.
+
+    Protocols not understood by LiteSpeedTest are retained in a separate
+    fallback set and validated with the existing TCP endpoint check.
+    """
+    if not LITESPEEDTEST_BINARY:
+        print("WARNING: LiteSpeedTest binary is not configured; using TCP health checks")
+        return health_check_configs(configs)
+
+    litespeed_healthy, unsupported = run_litespeedtest(configs)
+    fallback_healthy = health_check_configs(unsupported) if unsupported else []
+
+    healthy = []
+    for item in litespeed_healthy + fallback_healthy:
+        endpoint = extract_endpoint(item["config"])
+        if not endpoint:
+            continue
+        item["host"], item["port"] = endpoint
+        item.setdefault("test_method", "tcp")
+        healthy.append(item)
+
+    healthy.sort(key=lambda item: item["latency_ms"])
+    print(f"Validation: {len(healthy)}/{len(configs)} configs passed")
+    return healthy
+
+
+LITESPEEDTEST_SUPPORTED_SCHEMES = {"vmess", "vless", "trojan", "ss", "ssr"}
+
+
+def litespeedtest_supported(config_line):
+    """Return whether LiteSpeedTest can parse this config URI."""
+    if "://" not in config_line:
+        return False
+    scheme = config_line.split("://", 1)[0].lower()
+    return scheme in LITESPEEDTEST_SUPPORTED_SCHEMES
+
+
+def run_litespeedtest(configs, binary_path=None):
+    """Validate supported configs with LiteSpeedTest and return its metrics.
+
+    LiteSpeedTest v0.15.0 parses VMess, VLESS, Trojan, SS and SSR links.
+    The repository also contains HY2/TUIC/WARP, so those are deliberately
+    left for the existing TCP fallback instead of being silently dropped.
+    """
+    binary = binary_path or LITESPEEDTEST_BINARY
+    if not binary:
+        raise RuntimeError("LITESPEEDTEST_BINARY is not configured")
+
+    supported = [config for config in configs if litespeedtest_supported(config)]
+    unsupported = [config for config in configs if not litespeedtest_supported(config)]
+    if not supported:
+        return [], unsupported
+
+    with tempfile.TemporaryDirectory(prefix="litespeedtest-") as temp_dir:
+        temp_path = Path(temp_dir)
+        input_path = temp_path / "configs.txt"
+        config_path = temp_path / "config.json"
+        output_path = temp_path / "output.json"
+
+        input_path.write_text("\n".join(supported) + "\n", encoding="utf-8")
+        config_path.write_text(
+            json.dumps(
+                {
+                    "group": BRAND,
+                    "speedtestMode": "pingonly",
+                    "pingMethod": "googleping",
+                    "sortMethod": "ping",
+                    "concurrency": LITESPEEDTEST_CONCURRENCY,
+                    "testMode": 2,
+                    "subscription": str(input_path),
+                    "timeout": LITESPEEDTEST_TIMEOUT,
+                    "language": "en",
+                    "unique": True,
+                    "outputMode": 3,
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        completed = subprocess.run(
+            [binary, "--config", str(config_path), "--test", str(input_path)],
+            cwd=temp_dir,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=max(LITESPEEDTEST_TIMEOUT * 2, 60) * max(1, len(supported) // max(LITESPEEDTEST_CONCURRENCY, 1) + 1),
+            check=False,
+        )
+        if not output_path.exists():
+            raise RuntimeError(
+                "LiteSpeedTest did not produce output.json. "
+                f"exit={completed.returncode}; output={completed.stdout[-2000:]}"
+            )
+
+        payload = json.loads(output_path.read_text(encoding="utf-8"))
+        nodes = payload.get("nodes", []) if isinstance(payload, dict) else []
+        by_config = {}
+        for node in nodes:
+            link = node.get("Link") or node.get("link")
+            if not link:
+                continue
+            ping_raw = node.get("Ping") or node.get("ping") or "0"
+            try:
+                latency_ms = float(str(ping_raw).replace("ms", ""))
+            except ValueError:
+                latency_ms = 0.0
+            by_config[link] = {
+                "config": link,
+                "latency_ms": round(latency_ms, 1),
+                "litespeedtest_ok": bool(node.get("IsOk", node.get("isOk", False))) and latency_ms > 0,
+                "speed_avg": node.get("AvgSpeed", node.get("avgSpeed", 0)),
+                "speed_max": node.get("MaxSpeed", node.get("maxSpeed", 0)),
+                "test_method": "litespeedtest",
+            }
+
+        healthy = [
+            by_config[config]
+            for config in supported
+            if config in by_config and by_config[config]["litespeedtest_ok"]
+        ]
+        healthy.sort(key=lambda item: item["latency_ms"])
+        print(
+            f"LiteSpeedTest: {len(healthy)}/{len(supported)} supported configs passed; "
+            f"{len(unsupported)} configs require TCP fallback"
+        )
+        return healthy, unsupported
+
+
 def lookup_countries(hosts):
     """Resolve public IPs/hosts to country metadata in batches."""
     unique_hosts = list(dict.fromkeys(hosts))
@@ -318,6 +453,9 @@ def write_server_metrics(healthy_configs, output_folder):
             "latency_ms": item["latency_ms"],
             "country": item.get("country", "Unknown"),
             "country_code": item.get("country_code", "XX"),
+            "test_method": item.get("test_method", "tcp"),
+            "speed_avg": item.get("speed_avg", 0),
+            "speed_max": item.get("speed_max", 0),
             "config": item["config"],
         }
         for item in healthy_configs
@@ -440,8 +578,8 @@ def main():
         raise RuntimeError("No valid configurations were obtained from any source. Refusing to publish empty output files.")
 
     if HEALTH_CHECK_ENABLED:
-        print("Checking server reachability and measuring TCP latency...")
-        healthy = health_check_configs(real_configs)
+        print("Testing configs with LiteSpeedTest where supported...")
+        healthy = validate_configs(real_configs)
         if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
             raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")
         country_groups = write_country_files(healthy, output_folder)

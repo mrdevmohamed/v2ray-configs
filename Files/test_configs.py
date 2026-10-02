@@ -66,6 +66,16 @@ class FilteringTests(unittest.TestCase):
 
 
 class HealthTests(unittest.TestCase):
+    def test_litespeedtest_supported_protocols(self):
+        for scheme in ("vmess", "vless", "trojan", "ss", "ssr"):
+            with self.subTest(scheme=scheme):
+                self.assertTrue(app.litespeedtest_supported(f"{scheme}://example"))
+
+    def test_litespeedtest_unsupported_protocols_use_fallback(self):
+        for scheme in ("hysteria2", "hy2", "tuic", "warp"):
+            with self.subTest(scheme=scheme):
+                self.assertFalse(app.litespeedtest_supported(f"{scheme}://example"))
+
     def test_vless_endpoint_extraction(self):
         self.assertEqual(
             app.extract_endpoint("vless://uuid@example.com:443?security=tls#test"),

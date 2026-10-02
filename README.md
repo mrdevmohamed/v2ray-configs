@@ -10,7 +10,7 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Multi-protocol support** for VMess, VLESS, Trojan, Shadowsocks, ShadowsocksR, Hysteria2, and TUIC.
 - **Deduplication and filtering** of collected configuration URIs.
 - **Live reachability checks** that remove servers whose TCP endpoint cannot be reached within the configured timeout.
-- **Latency measurement and ranking** so reachable servers are ordered by measured TCP connection latency.
+- **Protocol-aware validation and latency measurement** using LiteSpeedTest for VMess, VLESS, Trojan, Shadowsocks, and ShadowsocksR, with a TCP fallback for protocols LiteSpeedTest does not parse.
 - **Country classification** with separate country-specific subscription files.
 - **Readable server names** that include the country flag, country name, measured latency, and project brand.
 - **Base64 subscription output** for clients that support Base64 subscriptions.
@@ -33,15 +33,15 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 
 The protocol files are generated automatically. A protocol file may be empty when no valid configurations for that protocol are available from the current upstream sources.
 
-## Server Health, Speed, and Countries
+## Server Validation, Speed, and Countries
 
-Before publishing the final dataset, the pipeline performs a concurrent TCP health check against extracted server endpoints. Unreachable endpoints are removed, while reachable endpoints receive a measured connection latency in milliseconds.
+Before publishing the final dataset, the pipeline validates configs with [LiteSpeedTest](https://github.com/xxf098/LiteSpeedTest). The GitHub Actions runner uses LiteSpeedTest v0.15.0 in command-line JSON-output mode with concurrent testing. VMess, VLESS, Trojan, Shadowsocks, and ShadowsocksR are tested through the proxy implementation rather than only checking whether a TCP socket accepts a connection. Hysteria2, TUIC, and WARP are currently validated with the project's TCP fallback because LiteSpeedTest does not parse those URI schemes.
 
-Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, and configuration URI.
+Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, test method, and configuration URI.
 
 Each published server URI receives a readable remark such as `🇩🇪 Germany • 42.5ms • mrdevmohamed`, making the country and measured TCP latency visible directly inside compatible clients.
 
-> **Important:** TCP reachability is not the same as successful proxy authentication or end-to-end protocol functionality. A server can accept a TCP connection and still reject a client, require valid credentials, be rate-limited, or fail during TLS/protocol negotiation. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device.
+> **Important:** LiteSpeedTest validation is stronger than a raw TCP check for the protocols it supports, but a passing test still does not guarantee long-term availability, account validity, or identical performance from your device. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device. Unsupported protocols use the TCP fallback and therefore do not receive the same end-to-end validation.
 
 Country classification uses public IP geolocation and may be unavailable or inaccurate for domains, CDNs, proxies, or frequently changing IP addresses.
 
