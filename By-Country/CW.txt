@@ -1,1 +1,1 @@
-vless://probabblynot-ch@5.10.247.142:2087?alpn=http/1.1&encryption=none&fp=chrome&host=probabblynot.fazelextremeisreal.com&path=/@probabblynot&security=tls&sni=probabblynot.fazelextremeisreal.com&type=ws#%F0%9F%87%A8%F0%9F%87%BC%20Curacao%20%E2%80%A2%202.1ms%20%E2%80%A2%20mrdevmohamed
+vless://probabblynot-ch@5.10.247.142:2087?alpn=http/1.1&encryption=none&fp=chrome&host=probabblynot.fazelextremeisreal.com&path=/@probabblynot&security=tls&sni=probabblynot.fazelextremeisreal.com&type=ws#%F0%9F%87%A8%F0%9F%87%BC%20Cura%C3%A7ao%20%E2%80%A2%2011.1ms%20%E2%80%A2%20mrdevmohamed

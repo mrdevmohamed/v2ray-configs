@@ -1,1 +1,1 @@
-trojan://bpb-trojan@190.93.244.202:443?path=/tr?ed&security=tls&host=fcspring.ggff.net&type=ws&sni=fcspring.ggff.net#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%203.5ms%20%E2%80%A2%20mrdevmohamed
+trojan://bpb-trojan@190.93.244.202:443?path=/tr?ed&security=tls&host=fcspring.ggff.net&type=ws&sni=fcspring.ggff.net#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%2011.7ms%20%E2%80%A2%20mrdevmohamed
