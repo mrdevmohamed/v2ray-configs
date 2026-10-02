@@ -1,2 +1,2 @@
-ss://YWVzLTEyOC1nY206Y2U0NWIxNmFkZWM2NmU0YTE5OWQ5MmI5Njg5ZWFlOWY@109.248.148.139:11469#mrdevmohamed
-vless://26524cce-d514-4014-a426-365fb266a14d@31.56.197.149:443?path=/danfeng-pw8lj2-nzliwt-h23l-978coeve&security=tls&encryption=none&insecure=0&host=qcswhj2.edge-cache.danfeng4.xyz&fp=chrome&type=ws&allowInsecure=0&sni=qcswhj2.edge-cache.danfeng4.xyz#mrdevmohamed
+ss://YWVzLTEyOC1nY206Y2U0NWIxNmFkZWM2NmU0YTE5OWQ5MmI5Njg5ZWFlOWY@109.248.148.139:11469#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20124.6ms%20%E2%80%A2%20mrdevmohamed
+vless://26524cce-d514-4014-a426-365fb266a14d@31.56.197.149:443?path=/danfeng-pw8lj2-nzliwt-h23l-978coeve&security=tls&encryption=none&insecure=0&host=qcswhj2.edge-cache.danfeng4.xyz&fp=chrome&type=ws&allowInsecure=0&sni=qcswhj2.edge-cache.danfeng4.xyz#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20312ms%20%E2%80%A2%20mrdevmohamed

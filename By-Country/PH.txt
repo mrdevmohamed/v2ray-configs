@@ -1,2 +1,2 @@
-vless://Channel:telegram:TurboConfigs@61.245.11.28:9090?encryption=none&headerType=http&host=play-apps-features.googleusercontent.com&path=/&security=none&type=tcp#mrdevmohamed
-ss://YWVzLTI1Ni1nY206a0RXdlhZWm9UQmNHa0M0@149.104.109.252:8882#mrdevmohamed
+vless://Channel:telegram:TurboConfigs@61.245.11.28:9090?encryption=none&headerType=http&host=play-apps-features.googleusercontent.com&path=/&security=none&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%20203.2ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206a0RXdlhZWm9UQmNHa0M0@149.104.109.252:8882#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%20241.8ms%20%E2%80%A2%20mrdevmohamed

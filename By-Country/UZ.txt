@@ -1,1 +1,1 @@
-vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@94.154.128.132:443?&security=tls&fp=chrome&sni=free.cndyw.ggff.net&type=ws&headerType=none&host=free.cndyw.ggff.net&path=pyip=bpb.yousef.isegaro.com#mrdevmohamed
+vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@94.154.128.132:443?&security=tls&fp=chrome&sni=free.cndyw.ggff.net&type=ws&headerType=none&host=free.cndyw.ggff.net&path=pyip=bpb.yousef.isegaro.com#%F0%9F%87%BA%F0%9F%87%BF%20Uzbekistan%20%E2%80%A2%20186.4ms%20%E2%80%A2%20mrdevmohamed
