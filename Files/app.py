@@ -216,25 +216,47 @@ def health_check_configs(configs):
 
 
 def lookup_countries(hosts):
-    """Resolve public IP geolocation in batches using ip-api.com."""
+    """Resolve public IPs/hosts to country metadata in batches."""
     unique_hosts = list(dict.fromkeys(hosts))
     results = {}
     for start in range(0, len(unique_hosts), GEOIP_BATCH_SIZE):
         batch = unique_hosts[start:start + GEOIP_BATCH_SIZE]
+        host_to_ip = {}
+        ip_batch = []
+        for host in batch:
+            try:
+                ip = host
+                socket.inet_pton(socket.AF_INET, host)
+            except OSError:
+                try:
+                    ip = socket.getaddrinfo(host, None, type=socket.SOCK_STREAM)[0][4][0]
+                except OSError:
+                    continue
+            host_to_ip.setdefault(ip, []).append(host)
+            ip_batch.append(ip)
+        if not ip_batch:
+            continue
         try:
             response = requests.post(
-                "http://ip-api.com/batch",
-                json=[{"query": host, "fields": "status,message,country,countryCode,query"} for host in batch],
-                timeout=TIMEOUT,
+                "https://countries.dev/ip",
+                json=list(dict.fromkeys(ip_batch)),
+                timeout=10,
             )
             response.raise_for_status()
-            for item in response.json():
-                if item.get("status") == "success":
-                    results[item.get("query")] = {
-                        "country": item.get("country") or "Unknown",
-                        "country_code": item.get("countryCode") or "XX",
+            payload = response.json()
+            if not isinstance(payload, list):
+                payload = [payload]
+            for item in payload:
+                ip = item.get("ip")
+                country = item.get("country") or {}
+                if ip and isinstance(country, dict):
+                    location = {
+                        "country": country.get("name") or "Unknown",
+                        "country_code": country.get("alpha2Code") or item.get("countryCode") or "XX",
                     }
-        except (requests.RequestException, ValueError) as exc:
+                    for host in host_to_ip.get(ip, []):
+                        results[host] = location
+        except (requests.RequestException, ValueError, TypeError) as exc:
             print(f"WARNING: GeoIP lookup failed: {exc}")
     return results
 
