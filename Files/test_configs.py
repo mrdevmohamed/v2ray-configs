@@ -113,6 +113,24 @@ class HealthTests(unittest.TestCase):
         with self.assertRaises(app.UnsupportedProtocol):
             app._singbox_outbound(value)
 
+    def test_xray_xhttp_outbound(self):
+        value = "vless://uuid@example.com:443?security=tls&sni=example.com&fp=chrome&type=xhttp&path=%2Fproxy&mode=stream-one&host=cdn.example.com"
+        outbound = app._xray_outbound(value, 10880)
+        self.assertEqual(outbound["outbounds"][0]["protocol"], "vless")
+        stream = outbound["outbounds"][0]["streamSettings"]
+        self.assertEqual(stream["network"], "xhttp")
+        self.assertEqual(stream["xhttpSettings"]["mode"], "stream-one")
+        self.assertEqual(stream["xhttpSettings"]["path"], "/proxy")
+        self.assertEqual(stream["xhttpSettings"]["host"], "cdn.example.com")
+
+    def test_xray_reality_outbound(self):
+        value = "vless://uuid@example.com:443?security=reality&sni=example.com&fp=chrome&pbk=public-key&sid=1234"
+        outbound = app._xray_outbound(value, 10881)
+        stream = outbound["outbounds"][0]["streamSettings"]
+        self.assertEqual(stream["security"], "reality")
+        self.assertEqual(stream["realitySettings"]["publicKey"], "public-key")
+        self.assertEqual(stream["realitySettings"]["shortId"], "1234")
+
 
 class RenameTests(unittest.TestCase):
     def test_country_emoji(self):

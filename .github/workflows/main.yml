@@ -52,6 +52,19 @@ jobs:
             /tmp/sing-box
           /tmp/sing-box version
 
+      - name: Install Xray
+        run: |
+          set -euo pipefail
+          XRAY_VERSION="v26.6.27"
+          curl -fsSL --retry 3 \
+            -o /tmp/xray.zip \
+            "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-linux-64.zip"
+          rm -rf /tmp/xray
+          mkdir -p /tmp/xray
+          unzip -q /tmp/xray.zip -d /tmp/xray
+          install -m 0755 /tmp/xray/xray /tmp/xray-bin
+          /tmp/xray-bin version
+
       - name: Validate Python
         run: python -m unittest discover -s Files -p 'test_*.py' -v
 
@@ -78,6 +91,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SING_BOX_BINARY: /tmp/sing-box
+      XRAY_BINARY: /tmp/xray-bin
       PROTOCOL_VALIDATION_TIMEOUT: "8"
       PROTOCOL_VALIDATION_WORKERS: "64"
       PROTOCOL_VALIDATION_MAX_RUNTIME: "900"

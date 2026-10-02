@@ -24,6 +24,7 @@ PROTOCOL_TEST_WORKERS = int(os.environ.get("PROTOCOL_VALIDATION_WORKERS", os.env
 PROTOCOL_VALIDATION_MAX_RUNTIME = int(os.environ.get("PROTOCOL_VALIDATION_MAX_RUNTIME", "900"))
 PROTOCOL_TEST_URL = os.environ.get("PROTOCOL_TEST_URL", "https://www.gstatic.com/generate_204")
 SING_BOX_BINARY = os.environ.get("SING_BOX_BINARY") or shutil.which("sing-box") or ""
+XRAY_BINARY = os.environ.get("XRAY_BINARY") or shutil.which("xray") or ""
 GEOIP_BATCH_SIZE = 100
 MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
@@ -225,7 +226,7 @@ def _transport_options(query):
             result["host"] = _first(query, "host")
         return result
     if transport == "xhttp":
-        raise ValueError("xhttp requires an engine-specific transport implementation")
+        raise UnsupportedProtocol("xhttp requires the Xray transport engine")
     raise ValueError(f"unsupported transport: {transport}")
 
 
@@ -330,6 +331,111 @@ def _singbox_outbound(config_line):
     raise UnsupportedProtocol(f"unsupported protocol: {scheme or 'unknown'}")
 
 
+def _xray_xhttp_settings(query):
+    """Build Xray's engine-specific XHTTP settings from a VLESS URI."""
+    settings = {}
+    extra = _first(query, "extra")
+    if extra:
+        try:
+            decoded = urllib.parse.unquote(extra)
+            parsed_extra = json.loads(decoded)
+            if isinstance(parsed_extra, dict):
+                settings.update(parsed_extra)
+        except (TypeError, ValueError, json.JSONDecodeError):
+            pass
+
+    for key in ("host", "path", "mode"):
+        value = _first(query, key)
+        if value:
+            settings[key] = value
+
+    padding = _first(query, "x_padding_bytes") or _first(query, "xPaddingBytes")
+    if padding:
+        settings["xPaddingBytes"] = padding
+
+    return settings
+
+
+def _xray_outbound(config_line, socks_port):
+    """Build an Xray VLESS outbound for transports unsupported by sing-box."""
+    parsed = urllib.parse.urlsplit(config_line)
+    query = _query(parsed)
+    host = parsed.hostname
+    try:
+        port = parsed.port
+    except ValueError as exc:
+        raise ValueError("invalid server port") from exc
+    if not host or not port or not parsed.username:
+        raise ValueError("missing server, port, or credentials")
+
+    flow = _first(query, "flow")
+    user = {"id": urllib.parse.unquote(parsed.username), "encryption": "none"}
+    if flow:
+        user["flow"] = flow
+
+    stream = {
+        "network": (_first(query, "type") or _first(query, "network") or "tcp").lower(),
+        "security": (_first(query, "security") or "none").lower(),
+    }
+    security = stream["security"]
+    server_name = _first(query, "sni") or _first(query, "serverName")
+    alpn = _first(query, "alpn")
+    fingerprint = _first(query, "fp") or "chrome"
+
+    if security == "tls":
+        tls = {"fingerprint": fingerprint}
+        if server_name:
+            tls["serverName"] = server_name
+        if alpn:
+            tls["alpn"] = [x for x in alpn.split(",") if x]
+        if _first(query, "insecure") == "1" or _first(query, "allowInsecure") == "1":
+            tls["allowInsecure"] = True
+        stream["tlsSettings"] = tls
+    elif security == "reality":
+        reality = {"fingerprint": fingerprint}
+        if server_name:
+            reality["serverName"] = server_name
+        if _first(query, "pbk"):
+            reality["publicKey"] = _first(query, "pbk")
+        if _first(query, "sid"):
+            reality["shortId"] = _first(query, "sid")
+        if _first(query, "spiderX"):
+            reality["spiderX"] = _first(query, "spiderX")
+        if alpn:
+            reality["alpn"] = [x for x in alpn.split(",") if x]
+        stream["realitySettings"] = reality
+
+    if stream["network"] == "xhttp":
+        stream["xhttpSettings"] = _xray_xhttp_settings(query)
+    elif stream["network"] == "ws":
+        ws = {}
+        if _first(query, "path"):
+            ws["path"] = _first(query, "path")
+        if _first(query, "host"):
+            ws["headers"] = {"Host": _first(query, "host")}
+        stream["wsSettings"] = ws
+    elif stream["network"] == "grpc":
+        grpc = {}
+        if _first(query, "serviceName"):
+            grpc["serviceName"] = _first(query, "serviceName")
+        elif _first(query, "path"):
+            grpc["serviceName"] = _first(query, "path").lstrip("/")
+        stream["grpcSettings"] = grpc
+    elif stream["network"] not in {"tcp", "raw", "none"}:
+        raise UnsupportedProtocol(f"unsupported Xray transport: {stream['network']}")
+
+    return {
+        "log": {"loglevel": "warning"},
+        "inbounds": [{"listen": "127.0.0.1", "port": socks_port, "protocol": "socks",
+                      "settings": {"udp": True}}],
+        "outbounds": [{
+            "protocol": "vless",
+            "settings": {"vnext": [{"address": host, "port": port, "users": [user]}]},
+            "streamSettings": stream,
+        }],
+    }
+
+
 def _free_local_port():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(("127.0.0.1", 0))
@@ -353,10 +459,20 @@ def _run_protocol_test(config_line):
         raise UnsupportedProtocol(f"{scheme.upper()} is unsupported by protocol validation")
     if not SING_BOX_BINARY:
         raise RuntimeError("sing-box is not available")
-    binary, engine = SING_BOX_BINARY, "sing-box"
-    outbound = _singbox_outbound(config_line)
-    socks_port = _free_local_port()
-    config = _singbox_config(outbound, socks_port)
+    query = _query(urllib.parse.urlsplit(config_line))
+    transport = (_first(query, "type") or _first(query, "network") or "tcp").lower()
+    security = (_first(query, "security") or "").lower()
+    if transport == "xhttp" or security == "reality":
+        if not XRAY_BINARY:
+            raise RuntimeError("xray is required to validate XHTTP/REALITY configs")
+        binary, engine = XRAY_BINARY, "xray"
+        socks_port = _free_local_port()
+        config = _xray_outbound(config_line, socks_port)
+    else:
+        binary, engine = SING_BOX_BINARY, "sing-box"
+        outbound = _singbox_outbound(config_line)
+        socks_port = _free_local_port()
+        config = _singbox_config(outbound, socks_port)
     with tempfile.TemporaryDirectory(prefix="protocol-test-") as temp_dir:
         config_path = Path(temp_dir) / "config.json"
         config_path.write_text(json.dumps(config, ensure_ascii=False), encoding="utf-8")
@@ -388,8 +504,8 @@ def _run_protocol_test(config_line):
                 return None
             return {
                 "config": config_line,
-                "host": outbound["server"],
-                "port": outbound["server_port"],
+                "host": urllib.parse.urlsplit(config_line).hostname,
+                "port": urllib.parse.urlsplit(config_line).port,
                 "latency_ms": latency_ms,
                 "test_method": "protocol-https",
                 "engine": engine,
@@ -671,7 +787,7 @@ def main():
         raise RuntimeError("No valid configurations were obtained from any source. Refusing to publish empty output files.")
 
     if HEALTH_CHECK_ENABLED:
-        print("Testing configs with protocol-level sing-box validation...")
+        print("Testing configs with protocol-level engine validation...")
         healthy = validate_configs(real_configs)
         if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
             raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")

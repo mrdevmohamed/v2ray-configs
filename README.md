@@ -34,7 +34,7 @@ The protocol files are generated automatically. A protocol file may be empty whe
 
 ## Server Validation, Speed, and Countries
 
-Before publishing the final dataset, the pipeline validates configurations at the protocol level. GitHub Actions installs the pinned official [sing-box](https://github.com/SagerNet/sing-box/releases/tag/v1.14.2) v1.14.2 release. The validator converts each supported URI into a temporary sing-box client, starts a local SOCKS proxy, and checks the proxy path itself. This exercises authentication, transport, TLS or other configured protocol parameters instead of treating an open TCP port as proof that the configuration works.
+Before publishing the final dataset, the pipeline validates configurations at the protocol level. GitHub Actions installs the pinned official [sing-box](https://github.com/SagerNet/sing-box/releases/tag/v1.14.2) v1.14.2 release and the [Xray-core](https://github.com/XTLS/Xray-core/releases/tag/v26.6.27) v26.6.27 release. sing-box validates the transports it implements, while Xray-core validates VLESS XHTTP and REALITY because those transports require Xray's engine-specific implementation. Each validator starts a local SOCKS proxy and checks the proxy path itself. This exercises authentication, transport, TLS, REALITY, XHTTP, or other configured protocol parameters instead of treating an open TCP port as proof that the configuration works.
 
 Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, test method, and configuration URI.
 
