@@ -3,7 +3,7 @@ import json
 import unittest
 
 import app
-from app import filter_for_protocols, rename_remark
+from app import country_emoji, filter_for_protocols, rename_remark, server_remark
 from sort import classify, split_configs
 
 
@@ -80,6 +80,18 @@ class HealthTests(unittest.TestCase):
 
 
 class RenameTests(unittest.TestCase):
+    def test_country_emoji(self):
+        self.assertEqual(country_emoji("DE"), "🇩🇪")
+        self.assertEqual(country_emoji("US"), "🇺🇸")
+        self.assertEqual(country_emoji("XX"), "🌐")
+        self.assertEqual(country_emoji(""), "🌐")
+
+    def test_server_remark(self):
+        self.assertEqual(
+            server_remark("Germany", "DE", 42.5),
+            "🇩🇪 Germany • 42.5ms • mrdevmohamed",
+        )
+
     def test_vmess_remark(self):
         payload = {"v": "2", "ps": "old", "add": "example.com"}
         encoded = base64.b64encode(json.dumps(payload).encode()).decode()

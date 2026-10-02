@@ -12,6 +12,7 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Live reachability checks** that remove servers whose TCP endpoint cannot be reached within the configured timeout.
 - **Latency measurement and ranking** so reachable servers are ordered by measured TCP connection latency.
 - **Country classification** with separate country-specific subscription files.
+- **Readable server names** that include the country flag, country name, measured latency, and project brand.
 - **Base64 subscription output** for clients that support Base64 subscriptions.
 - **Protocol-specific subscriptions** for clients that need a single protocol.
 - **Dynamic 1000-config packs** generated according to the current dataset size.
@@ -37,6 +38,8 @@ The protocol files are generated automatically. A protocol file may be empty whe
 Before publishing the final dataset, the pipeline performs a concurrent TCP health check against extracted server endpoints. Unreachable endpoints are removed, while reachable endpoints receive a measured connection latency in milliseconds.
 
 Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, and configuration URI.
+
+Each published server URI receives a readable remark such as `🇩🇪 Germany • 42.5ms • mrdevmohamed`, making the country and measured TCP latency visible directly inside compatible clients.
 
 > **Important:** TCP reachability is not the same as successful proxy authentication or end-to-end protocol functionality. A server can accept a TCP connection and still reject a client, require valid credentials, be rate-limited, or fail during TLS/protocol negotiation. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device.
 

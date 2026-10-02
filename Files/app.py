@@ -239,6 +239,22 @@ def lookup_countries(hosts):
     return results
 
 
+def country_emoji(country_code):
+    """Convert an ISO 3166-1 alpha-2 country code to its flag emoji."""
+    code = (country_code or "").upper()
+    if len(code) != 2 or not code.isalpha() or code == "XX":
+        return "🌐"
+    return "".join(chr(127397 + ord(char)) for char in code)
+
+
+def server_remark(country, country_code, latency_ms):
+    """Build a readable server name containing country, flag, latency, and brand."""
+    country_name = country or "Unknown"
+    flag = country_emoji(country_code)
+    latency = f"{latency_ms:g}ms" if isinstance(latency_ms, (int, float)) else "N/A"
+    return f"{flag} {country_name} • {latency} • {BRAND}"
+
+
 def write_country_files(healthy_configs, output_folder):
     """Write healthy configurations grouped by server country."""
     country_dir = output_folder / "By-Country"
@@ -252,6 +268,12 @@ def write_country_files(healthy_configs, output_folder):
         location = geo.get(item["host"], {"country": "Unknown", "country_code": "XX"})
         item["country"] = location["country"]
         item["country_code"] = location["country_code"]
+        item["config"] = rename_remark(
+            item["config"],
+            new_remark=server_remark(
+                item["country"], item["country_code"], item["latency_ms"]
+            ),
+        )
         grouped.setdefault(location["country_code"], []).append(item)
 
     for country_code, items in sorted(grouped.items()):
@@ -400,8 +422,6 @@ def main():
         healthy = health_check_configs(real_configs)
         if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
             raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")
-        for item in healthy:
-            item["config"] = rename_remark(item["config"], new_remark=BRAND)
         country_groups = write_country_files(healthy, output_folder)
         write_server_metrics(healthy, output_folder)
         healthy.sort(key=lambda item: (item.get("country_code", "XX"), item["latency_ms"]))
@@ -419,9 +439,10 @@ def main():
         for stale in base64_folder.glob(pattern):
             stale.unlink()
 
-    print(f"Renaming remarks to {BRAND}...")
-    merged_configs = rename_all_remarks(merged_configs, new_remark=BRAND)
-    print("Remarks renamed successfully")
+    if not HEALTH_CHECK_ENABLED:
+        print(f"Renaming remarks to {BRAND}...")
+        merged_configs = rename_all_remarks(merged_configs, new_remark=BRAND)
+        print("Remarks renamed successfully")
 
     print("Writing main config file...")
     output_filename = output_folder / "All_Configs_Sub.txt"
