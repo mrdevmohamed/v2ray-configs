@@ -9,7 +9,7 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Automatic refresh** every 5 minutes via GitHub Actions.
 - **Multi-protocol support** for VMess, VLESS, Trojan, Shadowsocks, ShadowsocksR, Hysteria2, and TUIC.
 - **Deduplication and filtering** of collected configuration URIs.
-- **Protocol-level validation and latency measurement** using official Xray and sing-box cores, with the actual proxy protocol exercised for supported URI schemes.
+- **Protocol-level validation and latency measurement** using the official sing-box core, with the actual proxy protocol exercised for supported URI schemes.
 - **Country classification** with separate country-specific subscription files.
 - **Readable server names** that include the country flag, country name, measured latency, and project brand.
 - **Base64 subscription output** for clients that support Base64 subscriptions.
@@ -34,7 +34,7 @@ The protocol files are generated automatically. A protocol file may be empty whe
 
 ## Server Validation, Speed, and Countries
 
-Before publishing the final dataset, the pipeline validates configurations at the protocol level. GitHub Actions installs pinned official releases of [Xray-core](https://github.com/XTLS/Xray-core/releases/tag/v26.3.27) v26.3.27 and [sing-box](https://github.com/SagerNet/sing-box/releases/tag/v1.14.2) v1.14.2. The validator selects the appropriate core for each supported URI scheme, starts a temporary local client, and checks the proxy path itself. This exercises authentication, transport, TLS or other configured protocol parameters instead of treating an open TCP port as proof that the configuration works.
+Before publishing the final dataset, the pipeline validates configurations at the protocol level. GitHub Actions installs the pinned official [sing-box](https://github.com/SagerNet/sing-box/releases/tag/v1.14.2) v1.14.2 release. The validator converts each supported URI into a temporary sing-box client, starts a local SOCKS proxy, and checks the proxy path itself. This exercises authentication, transport, TLS or other configured protocol parameters instead of treating an open TCP port as proof that the configuration works.
 
 Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, test method, and configuration URI.
 
@@ -205,7 +205,7 @@ This project performs automated data hygiene, including:
 - Base64 decoding validation;
 - URL/config remark normalization;
 - protocol-specific classification;
-- protocol-level reachability and latency measurement through Xray or sing-box;
+- protocol-level reachability and latency measurement through sing-box;
 - country classification;
 - split-file count validation through tests.
 

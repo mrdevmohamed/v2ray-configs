@@ -11,7 +11,7 @@ import os
 import subprocess
 import tempfile
 import shutil
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 
 # Define a fixed timeout for HTTP requests
@@ -24,7 +24,6 @@ PROTOCOL_TEST_WORKERS = int(os.environ.get("PROTOCOL_VALIDATION_WORKERS", os.env
 PROTOCOL_VALIDATION_MAX_RUNTIME = int(os.environ.get("PROTOCOL_VALIDATION_MAX_RUNTIME", "900"))
 PROTOCOL_TEST_URL = os.environ.get("PROTOCOL_TEST_URL", "https://www.gstatic.com/generate_204")
 SING_BOX_BINARY = os.environ.get("SING_BOX_BINARY") or shutil.which("sing-box") or ""
-XRAY_BINARY = os.environ.get("XRAY_BINARY") or shutil.which("xray") or ""
 GEOIP_BATCH_SIZE = 100
 MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
@@ -344,113 +343,16 @@ def _singbox_config(outbound, socks_port):
     }
 
 
-def _xray_stream_settings(query):
-    network = (_first(query, "type") or _first(query, "network") or "tcp").lower()
-    stream = {"network": network}
-    security = _first(query, "security", "none")
-    if security in {"tls", "reality"}:
-        stream["security"] = security
-        if security == "reality":
-            stream["realitySettings"] = {"serverName": _first(query, "sni", ""), "fingerprint": _first(query, "fp", "chrome"), "publicKey": _first(query, "pbk", ""), "shortId": _first(query, "sid", "")}
-        else:
-            tls = {}
-            if _first(query, "sni"):
-                tls["serverName"] = _first(query, "sni")
-            if _first(query, "alpn"):
-                tls["alpn"] = [x for x in _first(query, "alpn").split(",") if x]
-            if _first(query, "fp"):
-                tls["fingerprint"] = _first(query, "fp")
-            if _first(query, "insecure") == "1" or _first(query, "allowInsecure") == "1":
-                tls["allowInsecure"] = True
-            stream["tlsSettings"] = tls
-    if network == "ws":
-        stream["wsSettings"] = {"path": _first(query, "path", "/"), "headers": {"Host": _first(query, "host")}} if _first(query, "host") else {"path": _first(query, "path", "/")}
-    elif network in {"grpc", "gun"}:
-        stream["network"] = "grpc"
-        stream["grpcSettings"] = {"serviceName": _first(query, "serviceName", "")}
-    elif network in {"httpupgrade", "http-upgrade"}:
-        stream["network"] = "httpupgrade"
-        stream["httpupgradeSettings"] = {"path": _first(query, "path", "/"), "host": _first(query, "host", "")}
-    elif network == "xhttp":
-        stream["network"] = "xhttp"
-        stream["xhttpSettings"] = {"path": _first(query, "path", "/"), "host": _first(query, "host", "")}
-    return stream
-
-
-def _xray_outbound(config_line):
-    line = config_line.strip()
-    scheme = line.split("://", 1)[0].lower() if "://" in line else ""
-    if scheme in {"ssr", "warp", "hy2", "hysteria2", "tuic"}:
-        raise UnsupportedProtocol(f"{scheme.upper()} requires sing-box")
-    parsed = urllib.parse.urlsplit(line)
-    query = _query(parsed)
-    host, port = parsed.hostname, parsed.port
-    if scheme == "vmess":
-        obj = _decode_vmess(line)
-        host, port = obj.get("add") or obj.get("host"), int(obj.get("port"))
-        q = {k: [str(v)] for k, v in obj.items() if v is not None}
-        if obj.get("tls") in {"tls", True, "1"}:
-            q["security"] = ["tls"]
-        for key in ("sni", "alpn", "fp", "pbk", "sid"):
-            if obj.get(key) is not None:
-                q[key] = [str(obj[key])]
-        for key in ("net", "path", "host", "serviceName"):
-            if obj.get(key) is not None:
-                q["type" if key == "net" else key] = [str(obj[key])]
-        user = {"id": obj.get("id"), "alterId": int(obj.get("aid", 0)), "security": obj.get("scy", "auto")}
-        return {"protocol": "vmess", "settings": {"vnext": [{"address": host, "port": port, "users": [user]}]}, "streamSettings": _xray_stream_settings(q)}
-    if scheme in {"vless", "trojan"}:
-        if not host or not port or not parsed.username:
-            raise ValueError("missing server, port, or credentials")
-        credential = urllib.parse.unquote(parsed.username)
-        if scheme == "vless":
-            user = {"id": credential, "encryption": "none"}
-            if _first(query, "flow"):
-                user["flow"] = _first(query, "flow")
-            settings = {"vnext": [{"address": host, "port": port, "users": [user]}]}
-        else:
-            settings = {"servers": [{"address": host, "port": port, "password": credential}]}
-        return {"protocol": scheme, "settings": settings, "streamSettings": _xray_stream_settings(query)}
-    if scheme == "ss":
-        if parsed.username and parsed.password:
-            method, password = urllib.parse.unquote(parsed.username), urllib.parse.unquote(parsed.password)
-        else:
-            payload = parsed.netloc.split("@", 1)[0]
-            decoded = base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8")
-            method, password = decoded.split(":", 1)
-        if not host or not port:
-            raise ValueError("missing server or port")
-        return {"protocol": "shadowsocks", "settings": {"servers": [{"address": host, "port": port, "method": method, "password": password}]}}
-    raise UnsupportedProtocol(f"unsupported protocol: {scheme or 'unknown'}")
-
-
-def _xray_config(outbound, socks_port):
-    return {"log": {"loglevel": "none"}, "inbounds": [{"tag": "validator-in", "listen": "127.0.0.1", "port": socks_port, "protocol": "socks", "settings": {"udp": True}}], "outbounds": [{"tag": "proxy", **outbound}], "routing": {"domainStrategy": "AsIs", "rules": [{"type": "field", "inboundTag": ["validator-in"], "outboundTag": ["proxy"]}]}}
-
-
 def _run_protocol_test(config_line):
     scheme = config_line.split("://", 1)[0].lower() if "://" in config_line else ""
     if scheme in {"ssr", "warp"}:
         raise UnsupportedProtocol(f"{scheme.upper()} is unsupported by protocol validation")
-    if scheme in {"hy2", "hysteria2", "tuic"}:
-        if not SING_BOX_BINARY:
-            raise RuntimeError("sing-box is not available")
-        binary, engine = SING_BOX_BINARY, "sing-box"
-        outbound = _singbox_outbound(config_line)
-        socks_port = _free_local_port()
-        config = _singbox_config(outbound, socks_port)
-    elif XRAY_BINARY:
-        binary, engine = XRAY_BINARY, "xray"
-        outbound = _xray_outbound(config_line)
-        socks_port = _free_local_port()
-        config = _xray_config(outbound, socks_port)
-    elif SING_BOX_BINARY:
-        binary, engine = SING_BOX_BINARY, "sing-box"
-        outbound = _singbox_outbound(config_line)
-        socks_port = _free_local_port()
-        config = _singbox_config(outbound, socks_port)
-    else:
-        raise RuntimeError("Neither Xray nor sing-box is available")
+    if not SING_BOX_BINARY:
+        raise RuntimeError("sing-box is not available")
+    binary, engine = SING_BOX_BINARY, "sing-box"
+    outbound = _singbox_outbound(config_line)
+    socks_port = _free_local_port()
+    config = _singbox_config(outbound, socks_port)
     with tempfile.TemporaryDirectory(prefix="protocol-test-") as temp_dir:
         config_path = Path(temp_dir) / "config.json"
         config_path.write_text(json.dumps(config, ensure_ascii=False), encoding="utf-8")
@@ -496,23 +398,37 @@ def validate_configs(configs):
     """Validate configs through a real proxy connection and HTTPS request."""
     healthy = []
     unsupported = {"ssr": 0, "warp": 0}
-    with ThreadPoolExecutor(max_workers=PROTOCOL_TEST_WORKERS) as executor:
+    deadline = time.monotonic() + PROTOCOL_VALIDATION_MAX_RUNTIME
+    executor = ThreadPoolExecutor(max_workers=PROTOCOL_TEST_WORKERS)
+    pending = set()
+    try:
         futures = {executor.submit(_run_protocol_test, config): config for config in configs}
-        for future in as_completed(futures):
-            config = futures[future]
-            try:
-                result = future.result()
-            except UnsupportedProtocol:
-                scheme = config.split("://", 1)[0].lower()
-                unsupported[scheme] = unsupported.get(scheme, 0) + 1
-                continue
-            except (OSError, RuntimeError, ValueError, json.JSONDecodeError, binascii.Error, subprocess.TimeoutExpired) as exc:
-                print(f"Protocol validation failed for {config[:80]}: {exc}")
-                continue
-            if result:
-                healthy.append(result)
+        pending = set(futures)
+        while pending and time.monotonic() < deadline:
+            remaining = deadline - time.monotonic()
+            completed, pending = wait(pending, timeout=remaining, return_when=FIRST_COMPLETED)
+            for future in completed:
+                config = futures[future]
+                try:
+                    result = future.result()
+                except UnsupportedProtocol:
+                    scheme = config.split("://", 1)[0].lower()
+                    unsupported[scheme] = unsupported.get(scheme, 0) + 1
+                    continue
+                except (OSError, RuntimeError, ValueError, json.JSONDecodeError, binascii.Error, subprocess.TimeoutExpired) as exc:
+                    print(f"Protocol validation failed for {config[:80]}: {exc}")
+                    continue
+                if result:
+                    healthy.append(result)
+    finally:
+        for future in pending:
+            future.cancel()
+        executor.shutdown(wait=False, cancel_futures=True)
     healthy.sort(key=lambda item: item["latency_ms"])
-    print(f"Protocol validation: {len(healthy)}/{len(configs)} configs passed real HTTPS tests")
+    validated = len(configs) - len(pending)
+    print(f"Protocol validation: {len(healthy)}/{validated} completed configs passed real HTTPS tests")
+    if pending:
+        print(f"Protocol validation stopped at the {PROTOCOL_VALIDATION_MAX_RUNTIME}s runtime limit; {len(pending)} configs were not started/completed.")
     print(f"Unsupported by protocol validator: SSR={unsupported['ssr']}, WARP={unsupported['warp']}")
     return healthy
 
@@ -744,7 +660,7 @@ def main():
         raise RuntimeError("No valid configurations were obtained from any source. Refusing to publish empty output files.")
 
     if HEALTH_CHECK_ENABLED:
-        print("Testing configs with protocol-level Xray/sing-box validation...")
+        print("Testing configs with protocol-level sing-box validation...")
         healthy = validate_configs(real_configs)
         if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
             raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")

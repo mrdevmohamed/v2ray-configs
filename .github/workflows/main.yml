@@ -38,18 +38,10 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r Files/requirements.txt
 
-      - name: Install Xray and sing-box
+      - name: Install sing-box
         run: |
           set -euo pipefail
-          XRAY_VERSION="v26.3.27"
           SING_BOX_VERSION="v1.14.2"
-
-          curl -fsSL --retry 3 \
-            -o /tmp/xray.zip \
-            "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-linux-64.zip"
-          unzip -q /tmp/xray.zip -d /tmp/xray-release
-          install -m 0755 /tmp/xray-release/xray /tmp/xray
-          /tmp/xray version
 
           curl -fsSL --retry 3 \
             -o /tmp/sing-box.tar.gz \
@@ -85,7 +77,6 @@ jobs:
             server-metrics.json
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      XRAY_BINARY: /tmp/xray
       SING_BOX_BINARY: /tmp/sing-box
       PROTOCOL_VALIDATION_TIMEOUT: "8"
       PROTOCOL_VALIDATION_WORKERS: "64"

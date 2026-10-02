@@ -77,7 +77,7 @@ class HealthTests(unittest.TestCase):
                 with self.assertRaises(app.UnsupportedProtocol):
                     app._run_protocol_test(f"{scheme}://example")
 
-    def test_xray_outbound_parsing(self):
+    def test_singbox_outbound_parsing(self):
         cases = (
             ("vless://uuid@example.com:443?security=tls&sni=example.com&type=ws&path=%2Fws", "vless"),
             ("trojan://password@example.com:443?security=tls&sni=example.com", "trojan"),
@@ -85,8 +85,8 @@ class HealthTests(unittest.TestCase):
         )
         for value, expected in cases:
             with self.subTest(value=value):
-                outbound = app._xray_outbound(value)
-                self.assertEqual(outbound["protocol"], expected)
+                outbound = app._singbox_outbound(value)
+                self.assertEqual(outbound["type"], expected)
 
     def test_singbox_hysteria2_outbound_parsing(self):
         outbound = app._singbox_outbound(
