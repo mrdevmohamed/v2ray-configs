@@ -5,12 +5,20 @@ import binascii
 import json
 import re
 import urllib.parse
+import socket
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 # Define a fixed timeout for HTTP requests
 TIMEOUT = 15  # seconds
 MAX_SOURCE_BYTES = 10 * 1024 * 1024
 MIN_CONFIGS_EXPECTED = 1
+HEALTH_CHECK_ENABLED = True
+HEALTH_CHECK_TIMEOUT = 4
+HEALTH_CHECK_WORKERS = 128
+GEOIP_BATCH_SIZE = 100
+MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
 # Unifed branding
 BRAND = "mrdevmohamed"
@@ -115,10 +123,163 @@ def filter_for_protocols(data, protocols):
             if not any(lowered.startswith(prefix) for prefix in prefixes):
                 garbage_count += 1
                 continue
-            if line not in seen_configs:
+            dedupe_key = canonical_config_key(line)
+            if dedupe_key not in seen_configs:
                 filtered_data.append(line)
-                seen_configs.add(line)
+                seen_configs.add(dedupe_key)
     return filtered_data, garbage_count
+
+
+def canonical_config_key(config_line):
+    """Return a config identity without the human-readable remark."""
+    line = config_line.strip()
+    if line.startswith("#") or "://" not in line:
+        return line
+
+    try:
+        scheme = line.split("://", 1)[0].lower()
+        if scheme == "vmess":
+            encoded = line.split("://", 1)[1].split("#", 1)[0]
+            decoded = base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
+            obj = json.loads(decoded)
+            obj.pop("ps", None)
+            return "vmess://" + json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        if scheme == "ssr":
+            encoded = line.split("://", 1)[1].split("#", 1)[0]
+            decoded = base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
+            decoded = re.sub(r"([?&]remarks=)[^&]*", r"\1", decoded)
+            return "ssr://" + decoded
+
+        parsed = urllib.parse.urlsplit(line)
+        return urllib.parse.urlunsplit((parsed.scheme.lower(), parsed.netloc, parsed.path, parsed.query, ""))
+    except (ValueError, UnicodeError, binascii.Error, json.JSONDecodeError):
+        return line.split("#", 1)[0]
+
+
+def extract_endpoint(config_line):
+    """Extract (host, port) from supported URI formats for a TCP health check."""
+    line = config_line.strip()
+    try:
+        scheme, payload = line.split("://", 1)
+        scheme = scheme.lower()
+
+        if scheme == "vmess":
+            encoded = payload.split("#", 1)[0]
+            obj = json.loads(base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8"))
+            host = obj.get("add") or obj.get("host")
+            port = int(obj.get("port"))
+            return host, port
+
+        if scheme == "ssr":
+            encoded = payload.split("#", 1)[0]
+            decoded = base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
+            parts = decoded.split(":")
+            host, port = parts[0], int(parts[1])
+            return host, port
+
+        parsed = urllib.parse.urlsplit(line)
+        if parsed.hostname and parsed.port:
+            return parsed.hostname, parsed.port
+    except (ValueError, TypeError, KeyError, UnicodeError, binascii.Error, json.JSONDecodeError):
+        pass
+    return None
+
+
+def check_endpoint(config_line):
+    endpoint = extract_endpoint(config_line)
+    if not endpoint:
+        return None
+    host, port = endpoint
+    started = time.perf_counter()
+    try:
+        with socket.create_connection((host, port), timeout=HEALTH_CHECK_TIMEOUT):
+            latency_ms = round((time.perf_counter() - started) * 1000, 1)
+            return {"config": config_line, "host": host, "port": port, "latency_ms": latency_ms}
+    except (OSError, socket.gaierror):
+        return None
+
+
+def health_check_configs(configs):
+    """Keep only configs whose server accepts a TCP connection."""
+    healthy = []
+    checked = 0
+    with ThreadPoolExecutor(max_workers=HEALTH_CHECK_WORKERS) as executor:
+        futures = [executor.submit(check_endpoint, config) for config in configs]
+        for future in as_completed(futures):
+            checked += 1
+            result = future.result()
+            if result:
+                healthy.append(result)
+    healthy.sort(key=lambda item: item["latency_ms"])
+    print(f"Health check: {len(healthy)}/{checked} endpoints reachable")
+    return healthy
+
+
+def lookup_countries(hosts):
+    """Resolve public IP geolocation in batches using ip-api.com."""
+    unique_hosts = list(dict.fromkeys(hosts))
+    results = {}
+    for start in range(0, len(unique_hosts), GEOIP_BATCH_SIZE):
+        batch = unique_hosts[start:start + GEOIP_BATCH_SIZE]
+        try:
+            response = requests.post(
+                "http://ip-api.com/batch",
+                json=[{"query": host, "fields": "status,message,country,countryCode,query"} for host in batch],
+                timeout=TIMEOUT,
+            )
+            response.raise_for_status()
+            for item in response.json():
+                if item.get("status") == "success":
+                    results[item.get("query")] = {
+                        "country": item.get("country") or "Unknown",
+                        "country_code": item.get("countryCode") or "XX",
+                    }
+        except (requests.RequestException, ValueError) as exc:
+            print(f"WARNING: GeoIP lookup failed: {exc}")
+    return results
+
+
+def write_country_files(healthy_configs, output_folder):
+    """Write healthy configurations grouped by server country."""
+    country_dir = output_folder / "By-Country"
+    country_dir.mkdir(parents=True, exist_ok=True)
+    for stale in country_dir.glob("*.txt"):
+        stale.unlink()
+
+    geo = lookup_countries([item["host"] for item in healthy_configs])
+    grouped = {}
+    for item in healthy_configs:
+        location = geo.get(item["host"], {"country": "Unknown", "country_code": "XX"})
+        item["country"] = location["country"]
+        item["country_code"] = location["country_code"]
+        grouped.setdefault(location["country_code"], []).append(item)
+
+    for country_code, items in sorted(grouped.items()):
+        path = country_dir / f"{country_code}.txt"
+        items.sort(key=lambda item: item["latency_ms"])
+        with open(path, "w", encoding="utf-8") as f:
+            for item in items:
+                f.write(item["config"] + "\n")
+
+    print(f"Country classification: {len(grouped)} countries")
+    return grouped
+
+
+def write_server_metrics(healthy_configs, output_folder):
+    """Write machine-readable health/latency metadata."""
+    metrics = [
+        {
+            "host": item["host"],
+            "port": item["port"],
+            "latency_ms": item["latency_ms"],
+            "country": item.get("country", "Unknown"),
+            "country_code": item.get("country_code", "XX"),
+            "config": item["config"],
+        }
+        for item in healthy_configs
+    ]
+    with open(output_folder / "server-metrics.json", "w", encoding="utf-8") as f:
+        json.dump(metrics, f, ensure_ascii=False, indent=2)
 
 # Rename the remark of a single v2ray config line to new_remark
 def rename_remark(config_line, new_remark=BRAND):
@@ -193,24 +354,8 @@ def main():
     output_folder = Path(output_folder)
     base64_folder = Path(base64_folder)
 
-    print("Cleaning existing files...")
     output_filename = output_folder / "All_Configs_Sub.txt"
     main_base64_filename = output_folder / "All_Configs_base64_Sub.txt"
-
-    if output_filename.exists():
-        output_filename.unlink()
-        print(f"Removed: {output_filename}")
-    if main_base64_filename.exists():
-        main_base64_filename.unlink()
-        print(f"Removed: {main_base64_filename}")
-
-    for stale in output_folder.glob("Sub*.txt"):
-        stale.unlink()
-        print(f"Removed: {stale}")
-    for pattern in ("Sub*_base64.txt", "Config list*_base64.txt"):
-        for stale in base64_folder.glob(pattern):
-            stale.unlink()
-            print(f"Removed: {stale}")
 
     print("Starting to fetch and process configs...")
 
@@ -249,6 +394,30 @@ def main():
     real_configs = [c for c in merged_configs if not c.startswith('#')]
     if len(real_configs) < MIN_CONFIGS_EXPECTED:
         raise RuntimeError("No valid configurations were obtained from any source. Refusing to publish empty output files.")
+
+    if HEALTH_CHECK_ENABLED:
+        print("Checking server reachability and measuring TCP latency...")
+        healthy = health_check_configs(real_configs)
+        if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
+            raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")
+        for item in healthy:
+            item["config"] = rename_remark(item["config"], new_remark=BRAND)
+        country_groups = write_country_files(healthy, output_folder)
+        write_server_metrics(healthy, output_folder)
+        healthy.sort(key=lambda item: (item.get("country_code", "XX"), item["latency_ms"]))
+        merged_configs = [item["config"] for item in healthy]
+        print(f"Keeping {len(merged_configs)} reachable configs")
+        print(f"Countries found: {', '.join(sorted(country_groups))}")
+
+    print("Cleaning old generated files after successful validation...")
+    for stale in (output_filename, main_base64_filename):
+        if stale.exists():
+            stale.unlink()
+    for stale in output_folder.glob("Sub*.txt"):
+        stale.unlink()
+    for pattern in ("Sub*_base64.txt", "Config list*_base64.txt"):
+        for stale in base64_folder.glob(pattern):
+            stale.unlink()
 
     print(f"Renaming remarks to {BRAND}...")
     merged_configs = rename_all_remarks(merged_configs, new_remark=BRAND)

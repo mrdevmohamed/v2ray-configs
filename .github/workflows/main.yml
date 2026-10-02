@@ -51,5 +51,7 @@ jobs:
             Sub*.txt
             Base64/Sub*_base64.txt
             Splitted-By-Protocol/*.txt
+            By-Country/*.txt
+            server-metrics.json
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

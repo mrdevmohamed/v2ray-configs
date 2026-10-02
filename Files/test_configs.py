@@ -2,6 +2,7 @@ import base64
 import json
 import unittest
 
+import app
 from app import filter_for_protocols, rename_remark
 from sort import classify, split_configs
 
@@ -52,6 +53,30 @@ class FilteringTests(unittest.TestCase):
         )
         self.assertEqual(result, ["#clean", "vless://ok"])
         self.assertEqual(garbage, 1)
+
+    def test_duplicate_remarks_are_deduplicated(self):
+        result, _ = filter_for_protocols(
+            [
+                "vless://token@example.com:443?security=tls#one",
+                "vless://token@example.com:443?security=tls#two",
+            ],
+            ["vless"],
+        )
+        self.assertEqual(len(result), 1)
+
+
+class HealthTests(unittest.TestCase):
+    def test_vless_endpoint_extraction(self):
+        self.assertEqual(
+            app.extract_endpoint("vless://uuid@example.com:443?security=tls#test"),
+            ("example.com", 443),
+        )
+
+    def test_hysteria2_endpoint_extraction(self):
+        self.assertEqual(
+            app.extract_endpoint("hysteria2://password@example.com:443/?sni=example.com"),
+            ("example.com", 443),
+        )
 
 
 class RenameTests(unittest.TestCase):

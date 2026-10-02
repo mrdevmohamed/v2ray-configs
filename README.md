@@ -9,6 +9,9 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Automatic refresh** every 5 minutes via GitHub Actions.
 - **Multi-protocol support** for VMess, VLESS, Trojan, Shadowsocks, ShadowsocksR, Hysteria2, and TUIC.
 - **Deduplication and filtering** of collected configuration URIs.
+- **Live reachability checks** that remove servers whose TCP endpoint cannot be reached within the configured timeout.
+- **Latency measurement and ranking** so reachable servers are ordered by measured TCP connection latency.
+- **Country classification** with separate country-specific subscription files.
 - **Base64 subscription output** for clients that support Base64 subscriptions.
 - **Protocol-specific subscriptions** for clients that need a single protocol.
 - **Dynamic 1000-config packs** generated according to the current dataset size.
@@ -28,6 +31,16 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 | TUIC | `tuic.txt` |
 
 The protocol files are generated automatically. A protocol file may be empty when no valid configurations for that protocol are available from the current upstream sources.
+
+## Server Health, Speed, and Countries
+
+Before publishing the final dataset, the pipeline performs a concurrent TCP health check against extracted server endpoints. Unreachable endpoints are removed, while reachable endpoints receive a measured connection latency in milliseconds.
+
+Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, and configuration URI.
+
+> **Important:** TCP reachability is not the same as successful proxy authentication or end-to-end protocol functionality. A server can accept a TCP connection and still reject a client, require valid credentials, be rate-limited, or fail during TLS/protocol negotiation. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device.
+
+Country classification uses public IP geolocation and may be unavailable or inaccurate for domains, CDNs, proxies, or frequently changing IP addresses.
 
 ## Subscription Links
 
@@ -85,6 +98,10 @@ Validate and filter
         ↓
 Deduplicate
         ↓
+Health check + latency
+        ↓
+Country classification
+        ↓
 Generate combined subscriptions
         ↓
 Generate Base64 subscriptions
@@ -124,6 +141,9 @@ The workflow runs the tests before generating and publishing the updated files. 
     ├── hy2.txt
     ├── tuic.txt
     └── extra.txt
+├── By-Country/
+│   └── <COUNTRY_CODE>.txt
+└── server-metrics.json
 ```
 
 ## Development
@@ -183,9 +203,11 @@ This project performs automated data hygiene, including:
 - Base64 decoding validation;
 - URL/config remark normalization;
 - protocol-specific classification;
+- TCP reachability and latency measurement;
+- country classification;
 - split-file count validation through tests.
 
-These checks are **format and data-quality checks**, not live endpoint health checks. A syntactically valid URI can still be expired, unreachable, rate-limited, or otherwise unusable.
+The live check validates TCP reachability only. It does not authenticate against the proxy or guarantee end-to-end protocol functionality.
 
 ## Disclaimer
 
