@@ -102,6 +102,17 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(app._tls_options(query)["alpn"], ["h2", "http/1.1"])
         self.assertEqual(app._transport_options(query), {"type": "ws", "path": "/proxy", "headers": {"Host": "cdn.example.com"}})
 
+    def test_reality_gets_default_utls(self):
+        query = {"security": ["reality"], "sni": ["example.com"], "pbk": ["public-key"], "sid": ["1234"]}
+        tls = app._tls_options(query)
+        self.assertEqual(tls["utls"]["fingerprint"], "chrome")
+        self.assertEqual(tls["reality"]["public_key"], "public-key")
+
+    def test_unsupported_xray_vision_udp_flow_is_skipped(self):
+        value = "vless://uuid@example.com:443?security=tls&flow=xtls-rprx-vision-udp443"
+        with self.assertRaises(app.UnsupportedProtocol):
+            app._singbox_outbound(value)
+
 
 class RenameTests(unittest.TestCase):
     def test_country_emoji(self):

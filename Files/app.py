@@ -189,6 +189,7 @@ def _tls_options(query):
     if _first(query, "fp"):
         tls["utls"] = {"enabled": True, "fingerprint": _first(query, "fp")}
     if security == "reality" or _first(query, "pbk"):
+        tls["utls"] = tls.get("utls") or {"enabled": True, "fingerprint": "chrome"}
         reality = {"enabled": True}
         if _first(query, "pbk"):
             reality["public_key"] = _first(query, "pbk")
@@ -283,7 +284,10 @@ def _singbox_outbound(config_line):
         outbound = {"type": scheme, "server": host, "server_port": port,
                     key: urllib.parse.unquote(parsed.username)}
         if scheme == "vless" and _first(query, "flow"):
-            outbound["flow"] = _first(query, "flow")
+            flow = _first(query, "flow")
+            if flow == "xtls-rprx-vision-udp443":
+                raise UnsupportedProtocol("sing-box does not support xtls-rprx-vision-udp443")
+            outbound["flow"] = flow
         tls = _tls_options(query)
         if tls:
             outbound["tls"] = tls
@@ -382,8 +386,15 @@ def _run_protocol_test(config_line):
                 return None
             if not 200 <= status < 400:
                 return None
-            parsed = urllib.parse.urlsplit(config_line)
-            return {"config": config_line, "host": parsed.hostname or "", "port": parsed.port or 0, "latency_ms": latency_ms, "test_method": "protocol-https", "engine": engine, "http_status": status}
+            return {
+                "config": config_line,
+                "host": outbound["server"],
+                "port": outbound["server_port"],
+                "latency_ms": latency_ms,
+                "test_method": "protocol-https",
+                "engine": engine,
+                "http_status": status,
+            }
         finally:
             if process is not None and process.poll() is None:
                 process.terminate()
