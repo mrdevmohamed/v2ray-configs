@@ -43,7 +43,7 @@ jobs:
         uses: EndBug/add-and-commit@v11.1.1
         with:
           author_name: "mrdevmohamed"
-          author_email: "eng.mohamed.abdalhamed@gmail.com"
+          author_email: "mrdevmohamed@gmail.com"
           message: "Fresh🔥❤️‍🔥"
           add: |
             All_Configs_Sub.txt
