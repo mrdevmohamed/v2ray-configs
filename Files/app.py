@@ -10,6 +10,7 @@ import time
 import os
 import subprocess
 import tempfile
+import shutil
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -18,13 +19,12 @@ TIMEOUT = 15  # seconds
 MAX_SOURCE_BYTES = 10 * 1024 * 1024
 MIN_CONFIGS_EXPECTED = 1
 HEALTH_CHECK_ENABLED = True
-HEALTH_CHECK_TIMEOUT = int(os.environ.get("HEALTH_CHECK_TIMEOUT", "2"))
-HEALTH_CHECK_WORKERS = int(os.environ.get("HEALTH_CHECK_WORKERS", "256"))
-LITESPEEDTEST_BINARY = os.environ.get("LITESPEEDTEST_BINARY", "")
-LITESPEEDTEST_TIMEOUT = int(os.environ.get("LITESPEEDTEST_TIMEOUT", "8"))
-LITESPEEDTEST_CONCURRENCY = int(os.environ.get("LITESPEEDTEST_CONCURRENCY", "64"))
-LITESPEEDTEST_MAX_RUNTIME = int(os.environ.get("LITESPEEDTEST_MAX_RUNTIME", "600"))
-LITESPEEDTEST_BATCH_SIZE = int(os.environ.get("LITESPEEDTEST_BATCH_SIZE", "500"))
+PROTOCOL_TEST_TIMEOUT = int(os.environ.get("PROTOCOL_VALIDATION_TIMEOUT", os.environ.get("PROTOCOL_TEST_TIMEOUT", "8")))
+PROTOCOL_TEST_WORKERS = int(os.environ.get("PROTOCOL_VALIDATION_WORKERS", os.environ.get("PROTOCOL_TEST_WORKERS", "32")))
+PROTOCOL_VALIDATION_MAX_RUNTIME = int(os.environ.get("PROTOCOL_VALIDATION_MAX_RUNTIME", "900"))
+PROTOCOL_TEST_URL = os.environ.get("PROTOCOL_TEST_URL", "https://www.gstatic.com/generate_204")
+SING_BOX_BINARY = os.environ.get("SING_BOX_BINARY") or shutil.which("sing-box") or ""
+XRAY_BINARY = os.environ.get("XRAY_BINARY") or shutil.which("xray") or ""
 GEOIP_BATCH_SIZE = 100
 MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
@@ -164,214 +164,357 @@ def canonical_config_key(config_line):
         return line.split("#", 1)[0]
 
 
-def extract_endpoint(config_line):
-    """Extract (host, port) from supported URI formats for a TCP health check."""
+class UnsupportedProtocol(ValueError):
+    """A config URI is intentionally outside the protocol validator's scope."""
+
+
+def _query(parsed):
+    return urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
+
+
+def _first(query, key, default=None):
+    values = query.get(key)
+    return values[0] if values else default
+
+
+def _tls_options(query):
+    security = _first(query, "security", "")
+    if security not in {"tls", "reality"} and not _first(query, "sni"):
+        return None
+    tls = {"enabled": True}
+    server_name = _first(query, "sni") or _first(query, "serverName")
+    if server_name:
+        tls["server_name"] = server_name
+    if _first(query, "alpn"):
+        tls["alpn"] = [x for x in _first(query, "alpn").split(",") if x]
+    if _first(query, "fp"):
+        tls["utls"] = {"enabled": True, "fingerprint": _first(query, "fp")}
+    if security == "reality" or _first(query, "pbk"):
+        reality = {"enabled": True}
+        if _first(query, "pbk"):
+            reality["public_key"] = _first(query, "pbk")
+        if _first(query, "sid"):
+            reality["short_id"] = _first(query, "sid")
+        tls["reality"] = reality
+    if _first(query, "insecure") == "1" or _first(query, "allowInsecure") == "1":
+        tls["insecure"] = True
+    return tls
+
+
+def _transport_options(query):
+    transport = (_first(query, "type") or _first(query, "network") or "tcp").lower()
+    if transport in {"tcp", "raw", "none"}:
+        return None
+    if transport == "ws":
+        result = {"type": "ws"}
+        if _first(query, "path"):
+            result["path"] = _first(query, "path")
+        if _first(query, "host"):
+            result["headers"] = {"Host": _first(query, "host")}
+        return result
+    if transport in {"grpc", "gun"}:
+        result = {"type": "grpc"}
+        if _first(query, "serviceName"):
+            result["service_name"] = _first(query, "serviceName")
+        return result
+    if transport in {"httpupgrade", "http-upgrade"}:
+        result = {"type": "httpupgrade"}
+        if _first(query, "path"):
+            result["path"] = _first(query, "path")
+        if _first(query, "host"):
+            result["host"] = _first(query, "host")
+        return result
+    if transport == "xhttp":
+        raise ValueError("xhttp requires an engine-specific transport implementation")
+    raise ValueError(f"unsupported transport: {transport}")
+
+
+def _decode_vmess(line):
+    payload = line.split("://", 1)[1].split("#", 1)[0]
+    return json.loads(base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8"))
+
+
+def _singbox_outbound(config_line):
     line = config_line.strip()
+    scheme = line.split("://", 1)[0].lower() if "://" in line else ""
+    if scheme in {"ssr", "warp"}:
+        raise UnsupportedProtocol(f"{scheme.upper()} is unsupported by protocol validation")
+    parsed = urllib.parse.urlsplit(line)
+    query = _query(parsed)
+    host = parsed.hostname
     try:
-        scheme, payload = line.split("://", 1)
-        scheme = scheme.lower()
+        port = parsed.port
+    except ValueError as exc:
+        raise ValueError("invalid server port") from exc
+    if scheme == "vmess":
+        obj = _decode_vmess(line)
+        host = obj.get("add") or obj.get("host")
+        port = int(obj.get("port"))
+        outbound = {"type": "vmess", "server": host, "server_port": port,
+                    "uuid": obj.get("id"), "security": obj.get("scy", "auto")}
+        q = {k: [str(v)] for k, v in obj.items() if v is not None}
+        if obj.get("tls") in {"tls", True, "1"}:
+            q["security"] = ["tls"]
+        if obj.get("sni"):
+            q["sni"] = [str(obj["sni"])]
+        if obj.get("alpn"):
+            q["alpn"] = [str(obj["alpn"])]
+        if obj.get("fp"):
+            q["fp"] = [str(obj["fp"])]
+        transport = obj.get("net", "tcp")
+        if transport != "tcp":
+            q["type"] = [transport]
+            if obj.get("path"):
+                q["path"] = [str(obj["path"])]
+            if obj.get("host"):
+                q["host"] = [str(obj["host"])]
+            if transport == "grpc" and obj.get("path"):
+                q["serviceName"] = [str(obj["path"]).lstrip("/")]
+        tls = _tls_options(q)
+        if tls:
+            outbound["tls"] = tls
+        transport_options = _transport_options(q)
+        if transport_options:
+            outbound["transport"] = transport_options
+        return outbound
+    if scheme in {"vless", "trojan"}:
+        if not host or not port or not parsed.username:
+            raise ValueError("missing server, port, or credentials")
+        key = "uuid" if scheme == "vless" else "password"
+        outbound = {"type": scheme, "server": host, "server_port": port,
+                    key: urllib.parse.unquote(parsed.username)}
+        if scheme == "vless" and _first(query, "flow"):
+            outbound["flow"] = _first(query, "flow")
+        tls = _tls_options(query)
+        if tls:
+            outbound["tls"] = tls
+        transport = _transport_options(query)
+        if transport:
+            outbound["transport"] = transport
+        return outbound
+    if scheme == "ss":
+        if parsed.username and parsed.password:
+            method = urllib.parse.unquote(parsed.username)
+            password = urllib.parse.unquote(parsed.password)
+        else:
+            payload = parsed.netloc.split("@", 1)[0]
+            decoded = base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8")
+            method, password = decoded.split(":", 1)
+        if not host or not port:
+            raise ValueError("missing server or port")
+        return {"type": "shadowsocks", "server": host, "server_port": port,
+                "method": method, "password": password}
+    if scheme in {"hy2", "hysteria2"}:
+        if not host or not port or not parsed.username:
+            raise ValueError("missing server, port, or password")
+        outbound = {"type": "hysteria2", "server": host, "server_port": port,
+                    "password": urllib.parse.unquote(parsed.username)}
+        outbound["tls"] = _tls_options(query) or {"enabled": True}
+        if _first(query, "obfs") == "salamander":
+            outbound["obfs"] = {"type": "salamander", "password": _first(query, "obfs-password", "")}
+        return outbound
+    if scheme == "tuic":
+        if not host or not port or not parsed.username:
+            raise ValueError("missing server, port, or credentials")
+        outbound = {"type": "tuic", "server": host, "server_port": port,
+                    "uuid": urllib.parse.unquote(parsed.username),
+                    "password": urllib.parse.unquote(parsed.password or "")}
+        for key in ("congestion_control", "udp_relay_mode"):
+            if _first(query, key):
+                outbound[key] = _first(query, key)
+        outbound["tls"] = _tls_options(query) or {"enabled": True}
+        return outbound
+    raise UnsupportedProtocol(f"unsupported protocol: {scheme or 'unknown'}")
 
-        if scheme == "vmess":
-            encoded = payload.split("#", 1)[0]
-            obj = json.loads(base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8"))
-            host = obj.get("add") or obj.get("host")
-            port = int(obj.get("port"))
-            return host, port
 
-        if scheme == "ssr":
-            encoded = payload.split("#", 1)[0]
-            decoded = base64.b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
-            parts = decoded.split(":")
-            host, port = parts[0], int(parts[1])
-            return host, port
-
-        parsed = urllib.parse.urlsplit(line)
-        if parsed.hostname and parsed.port:
-            return parsed.hostname, parsed.port
-    except (ValueError, TypeError, KeyError, UnicodeError, binascii.Error, json.JSONDecodeError):
-        pass
-    return None
+def _free_local_port():
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return sock.getsockname()[1]
 
 
-def check_endpoint(config_line):
-    endpoint = extract_endpoint(config_line)
-    if not endpoint:
-        return None
-    host, port = endpoint
-    started = time.perf_counter()
-    try:
-        with socket.create_connection((host, port), timeout=HEALTH_CHECK_TIMEOUT):
+def _singbox_config(outbound, socks_port):
+    outbound = dict(outbound)
+    outbound["tag"] = "proxy"
+    return {
+        "log": {"disabled": True},
+        "inbounds": [{"type": "socks", "tag": "validator-in", "listen": "127.0.0.1", "listen_port": socks_port}],
+        "outbounds": [outbound],
+        "route": {"final": "proxy"},
+    }
+
+
+def _xray_stream_settings(query):
+    network = (_first(query, "type") or _first(query, "network") or "tcp").lower()
+    stream = {"network": network}
+    security = _first(query, "security", "none")
+    if security in {"tls", "reality"}:
+        stream["security"] = security
+        if security == "reality":
+            stream["realitySettings"] = {"serverName": _first(query, "sni", ""), "fingerprint": _first(query, "fp", "chrome"), "publicKey": _first(query, "pbk", ""), "shortId": _first(query, "sid", "")}
+        else:
+            tls = {}
+            if _first(query, "sni"):
+                tls["serverName"] = _first(query, "sni")
+            if _first(query, "alpn"):
+                tls["alpn"] = [x for x in _first(query, "alpn").split(",") if x]
+            if _first(query, "fp"):
+                tls["fingerprint"] = _first(query, "fp")
+            if _first(query, "insecure") == "1" or _first(query, "allowInsecure") == "1":
+                tls["allowInsecure"] = True
+            stream["tlsSettings"] = tls
+    if network == "ws":
+        stream["wsSettings"] = {"path": _first(query, "path", "/"), "headers": {"Host": _first(query, "host")}} if _first(query, "host") else {"path": _first(query, "path", "/")}
+    elif network in {"grpc", "gun"}:
+        stream["network"] = "grpc"
+        stream["grpcSettings"] = {"serviceName": _first(query, "serviceName", "")}
+    elif network in {"httpupgrade", "http-upgrade"}:
+        stream["network"] = "httpupgrade"
+        stream["httpupgradeSettings"] = {"path": _first(query, "path", "/"), "host": _first(query, "host", "")}
+    elif network == "xhttp":
+        stream["network"] = "xhttp"
+        stream["xhttpSettings"] = {"path": _first(query, "path", "/"), "host": _first(query, "host", "")}
+    return stream
+
+
+def _xray_outbound(config_line):
+    line = config_line.strip()
+    scheme = line.split("://", 1)[0].lower() if "://" in line else ""
+    if scheme in {"ssr", "warp", "hy2", "hysteria2", "tuic"}:
+        raise UnsupportedProtocol(f"{scheme.upper()} requires sing-box")
+    parsed = urllib.parse.urlsplit(line)
+    query = _query(parsed)
+    host, port = parsed.hostname, parsed.port
+    if scheme == "vmess":
+        obj = _decode_vmess(line)
+        host, port = obj.get("add") or obj.get("host"), int(obj.get("port"))
+        q = {k: [str(v)] for k, v in obj.items() if v is not None}
+        if obj.get("tls") in {"tls", True, "1"}:
+            q["security"] = ["tls"]
+        for key in ("sni", "alpn", "fp", "pbk", "sid"):
+            if obj.get(key) is not None:
+                q[key] = [str(obj[key])]
+        for key in ("net", "path", "host", "serviceName"):
+            if obj.get(key) is not None:
+                q["type" if key == "net" else key] = [str(obj[key])]
+        user = {"id": obj.get("id"), "alterId": int(obj.get("aid", 0)), "security": obj.get("scy", "auto")}
+        return {"protocol": "vmess", "settings": {"vnext": [{"address": host, "port": port, "users": [user]}]}, "streamSettings": _xray_stream_settings(q)}
+    if scheme in {"vless", "trojan"}:
+        if not host or not port or not parsed.username:
+            raise ValueError("missing server, port, or credentials")
+        credential = urllib.parse.unquote(parsed.username)
+        if scheme == "vless":
+            user = {"id": credential, "encryption": "none"}
+            if _first(query, "flow"):
+                user["flow"] = _first(query, "flow")
+            settings = {"vnext": [{"address": host, "port": port, "users": [user]}]}
+        else:
+            settings = {"servers": [{"address": host, "port": port, "password": credential}]}
+        return {"protocol": scheme, "settings": settings, "streamSettings": _xray_stream_settings(query)}
+    if scheme == "ss":
+        if parsed.username and parsed.password:
+            method, password = urllib.parse.unquote(parsed.username), urllib.parse.unquote(parsed.password)
+        else:
+            payload = parsed.netloc.split("@", 1)[0]
+            decoded = base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8")
+            method, password = decoded.split(":", 1)
+        if not host or not port:
+            raise ValueError("missing server or port")
+        return {"protocol": "shadowsocks", "settings": {"servers": [{"address": host, "port": port, "method": method, "password": password}]}}
+    raise UnsupportedProtocol(f"unsupported protocol: {scheme or 'unknown'}")
+
+
+def _xray_config(outbound, socks_port):
+    return {"log": {"loglevel": "none"}, "inbounds": [{"tag": "validator-in", "listen": "127.0.0.1", "port": socks_port, "protocol": "socks", "settings": {"udp": True}}], "outbounds": [{"tag": "proxy", **outbound}], "routing": {"domainStrategy": "AsIs", "rules": [{"type": "field", "inboundTag": ["validator-in"], "outboundTag": ["proxy"]}]}}
+
+
+def _run_protocol_test(config_line):
+    scheme = config_line.split("://", 1)[0].lower() if "://" in config_line else ""
+    if scheme in {"ssr", "warp"}:
+        raise UnsupportedProtocol(f"{scheme.upper()} is unsupported by protocol validation")
+    if scheme in {"hy2", "hysteria2", "tuic"}:
+        if not SING_BOX_BINARY:
+            raise RuntimeError("sing-box is not available")
+        binary, engine = SING_BOX_BINARY, "sing-box"
+        outbound = _singbox_outbound(config_line)
+        socks_port = _free_local_port()
+        config = _singbox_config(outbound, socks_port)
+    elif XRAY_BINARY:
+        binary, engine = XRAY_BINARY, "xray"
+        outbound = _xray_outbound(config_line)
+        socks_port = _free_local_port()
+        config = _xray_config(outbound, socks_port)
+    elif SING_BOX_BINARY:
+        binary, engine = SING_BOX_BINARY, "sing-box"
+        outbound = _singbox_outbound(config_line)
+        socks_port = _free_local_port()
+        config = _singbox_config(outbound, socks_port)
+    else:
+        raise RuntimeError("Neither Xray nor sing-box is available")
+    with tempfile.TemporaryDirectory(prefix="protocol-test-") as temp_dir:
+        config_path = Path(temp_dir) / "config.json"
+        config_path.write_text(json.dumps(config, ensure_ascii=False), encoding="utf-8")
+        process = None
+        try:
+            process = subprocess.Popen([binary, "run", "-c", str(config_path)], cwd=temp_dir, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True, start_new_session=True)
+            deadline = time.monotonic() + min(3, PROTOCOL_TEST_TIMEOUT)
+            while time.monotonic() < deadline:
+                if process.poll() is not None:
+                    stderr = (process.stderr.read() if process.stderr else "")[-1000:]
+                    raise RuntimeError(f"{engine} exited during startup: {stderr}")
+                try:
+                    with socket.create_connection(("127.0.0.1", socks_port), timeout=0.1):
+                        break
+                except OSError:
+                    time.sleep(0.05)
+            else:
+                raise RuntimeError(f"{engine} local SOCKS inbound did not start")
+            started = time.perf_counter()
+            curl = subprocess.run(["curl", "--silent", "--show-error", "--fail", "--socks5-hostname", f"127.0.0.1:{socks_port}", "--connect-timeout", str(PROTOCOL_TEST_TIMEOUT), "--max-time", str(PROTOCOL_TEST_TIMEOUT), "-o", "/dev/null", "-w", "%{http_code}", PROTOCOL_TEST_URL], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=PROTOCOL_TEST_TIMEOUT + 2, check=False)
             latency_ms = round((time.perf_counter() - started) * 1000, 1)
-            return {"config": config_line, "host": host, "port": port, "latency_ms": latency_ms}
-    except (OSError, socket.gaierror):
-        return None
-
-
-def health_check_configs(configs):
-    """Keep only configs whose server accepts a TCP connection."""
-    healthy = []
-    checked = 0
-    with ThreadPoolExecutor(max_workers=HEALTH_CHECK_WORKERS) as executor:
-        futures = [executor.submit(check_endpoint, config) for config in configs]
-        for future in as_completed(futures):
-            checked += 1
-            result = future.result()
-            if result:
-                healthy.append(result)
-    healthy.sort(key=lambda item: item["latency_ms"])
-    print(f"Health check: {len(healthy)}/{checked} endpoints reachable")
-    return healthy
+            if curl.returncode != 0:
+                return None
+            try:
+                status = int(curl.stdout.strip())
+            except ValueError:
+                return None
+            if not 200 <= status < 400:
+                return None
+            parsed = urllib.parse.urlsplit(config_line)
+            return {"config": config_line, "host": parsed.hostname or "", "port": parsed.port or 0, "latency_ms": latency_ms, "test_method": "protocol-https", "engine": engine, "http_status": status}
+        finally:
+            if process is not None and process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=2)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=1)
 
 
 def validate_configs(configs):
-    """Validate every config, using LiteSpeedTest where supported.
-
-    Protocols not understood by LiteSpeedTest are retained in a separate
-    fallback set and validated with the existing TCP endpoint check.
-    """
-    if not LITESPEEDTEST_BINARY:
-        print("WARNING: LiteSpeedTest binary is not configured; using TCP health checks")
-        return health_check_configs(configs)
-
-    print("Running fast TCP preflight before LiteSpeedTest...")
-    reachable = health_check_configs(configs)
-    supported_reachable = [item["config"] for item in reachable if litespeedtest_supported(item["config"])]
-    unsupported_reachable = {item["config"] for item in reachable if not litespeedtest_supported(item["config"])}
-
-    litespeed_healthy = []
-    for start in range(0, len(supported_reachable), LITESPEEDTEST_BATCH_SIZE):
-        batch = supported_reachable[start:start + LITESPEEDTEST_BATCH_SIZE]
-        batch_no = start // LITESPEEDTEST_BATCH_SIZE + 1
-        batch_count = (len(supported_reachable) + LITESPEEDTEST_BATCH_SIZE - 1) // LITESPEEDTEST_BATCH_SIZE
-        print(f"LiteSpeedTest batch {batch_no}/{batch_count}: {len(batch)} configs")
-        try:
-            batch_healthy, _ = run_litespeedtest(batch)
-            litespeed_healthy.extend(batch_healthy)
-        except subprocess.TimeoutExpired:
-            print(f"WARNING: LiteSpeedTest batch {batch_no} exceeded {LITESPEEDTEST_MAX_RUNTIME}s; skipping this batch")
-        except (RuntimeError, OSError, json.JSONDecodeError) as exc:
-            print(f"WARNING: LiteSpeedTest batch {batch_no} failed: {exc}")
-    fallback_healthy = [item for item in reachable if item["config"] in unsupported_reachable]
-
+    """Validate configs through a real proxy connection and HTTPS request."""
     healthy = []
-    for item in litespeed_healthy + fallback_healthy:
-        endpoint = extract_endpoint(item["config"])
-        if not endpoint:
-            continue
-        item["host"], item["port"] = endpoint
-        item.setdefault("test_method", "tcp-preflight")
-        healthy.append(item)
-
-    healthy.sort(key=lambda item: item["latency_ms"])
-    print(
-        f"Validation: {len(healthy)}/{len(configs)} configs passed; "
-        f"{len(reachable)} passed TCP preflight; "
-        f"{len(supported_reachable)} entered LiteSpeedTest in batches of {LITESPEEDTEST_BATCH_SIZE}"
-    )
-    return healthy
-
-
-LITESPEEDTEST_SUPPORTED_SCHEMES = {"vmess", "vless", "trojan", "ss", "ssr"}
-
-
-def litespeedtest_supported(config_line):
-    """Return whether LiteSpeedTest can parse this config URI."""
-    if "://" not in config_line:
-        return False
-    scheme = config_line.split("://", 1)[0].lower()
-    return scheme in LITESPEEDTEST_SUPPORTED_SCHEMES
-
-
-def run_litespeedtest(configs, binary_path=None):
-    """Validate supported configs with LiteSpeedTest and return its metrics.
-
-    LiteSpeedTest v0.15.0 parses VMess, VLESS, Trojan, SS and SSR links.
-    The repository also contains HY2/TUIC/WARP, so those are deliberately
-    left for the existing TCP fallback instead of being silently dropped.
-    """
-    binary = binary_path or LITESPEEDTEST_BINARY
-    if not binary:
-        raise RuntimeError("LITESPEEDTEST_BINARY is not configured")
-
-    supported = [config for config in configs if litespeedtest_supported(config)]
-    unsupported = [config for config in configs if not litespeedtest_supported(config)]
-    if not supported:
-        return [], unsupported
-
-    with tempfile.TemporaryDirectory(prefix="litespeedtest-") as temp_dir:
-        temp_path = Path(temp_dir)
-        input_path = temp_path / "configs.txt"
-        config_path = temp_path / "config.json"
-        output_path = temp_path / "output.json"
-
-        input_path.write_text("\n".join(supported) + "\n", encoding="utf-8")
-        config_path.write_text(
-            json.dumps(
-                {
-                    "group": BRAND,
-                    "speedtestMode": "pingonly",
-                    "pingMethod": "googleping",
-                    "sortMethod": "ping",
-                    "concurrency": LITESPEEDTEST_CONCURRENCY,
-                    "testMode": 2,
-                    "subscription": str(input_path),
-                    "timeout": LITESPEEDTEST_TIMEOUT,
-                    "language": "en",
-                    "unique": True,
-                    "outputMode": 3,
-                }
-            ),
-            encoding="utf-8",
-        )
-
-        completed = subprocess.run(
-            [binary, "--config", str(config_path), "--test", str(input_path)],
-            cwd=temp_dir,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            timeout=LITESPEEDTEST_MAX_RUNTIME,
-            check=False,
-        )
-        if not output_path.exists():
-            raise RuntimeError(
-                "LiteSpeedTest did not produce output.json. "
-                f"exit={completed.returncode}; output={completed.stdout[-2000:]}"
-            )
-
-        payload = json.loads(output_path.read_text(encoding="utf-8"))
-        nodes = payload.get("nodes", []) if isinstance(payload, dict) else []
-        by_config = {}
-        for node in nodes:
-            link = node.get("Link") or node.get("link")
-            if not link:
-                continue
-            ping_raw = node.get("Ping") or node.get("ping") or "0"
+    unsupported = {"ssr": 0, "warp": 0}
+    with ThreadPoolExecutor(max_workers=PROTOCOL_TEST_WORKERS) as executor:
+        futures = {executor.submit(_run_protocol_test, config): config for config in configs}
+        for future in as_completed(futures):
+            config = futures[future]
             try:
-                latency_ms = float(str(ping_raw).replace("ms", ""))
-            except ValueError:
-                latency_ms = 0.0
-            by_config[link] = {
-                "config": link,
-                "latency_ms": round(latency_ms, 1),
-                "litespeedtest_ok": bool(node.get("IsOk", node.get("isOk", False))) and latency_ms > 0,
-                "speed_avg": node.get("AvgSpeed", node.get("avgSpeed", 0)),
-                "speed_max": node.get("MaxSpeed", node.get("maxSpeed", 0)),
-                "test_method": "litespeedtest",
-            }
-
-        healthy = [
-            by_config[config]
-            for config in supported
-            if config in by_config and by_config[config]["litespeedtest_ok"]
-        ]
-        healthy.sort(key=lambda item: item["latency_ms"])
-        print(
-            f"LiteSpeedTest: {len(healthy)}/{len(supported)} supported configs passed; "
-            f"{len(unsupported)} configs require TCP fallback"
-        )
-        return healthy, unsupported
-
+                result = future.result()
+            except UnsupportedProtocol:
+                scheme = config.split("://", 1)[0].lower()
+                unsupported[scheme] = unsupported.get(scheme, 0) + 1
+                continue
+            except (OSError, RuntimeError, ValueError, json.JSONDecodeError, binascii.Error, subprocess.TimeoutExpired) as exc:
+                print(f"Protocol validation failed for {config[:80]}: {exc}")
+                continue
+            if result:
+                healthy.append(result)
+    healthy.sort(key=lambda item: item["latency_ms"])
+    print(f"Protocol validation: {len(healthy)}/{len(configs)} configs passed real HTTPS tests")
+    print(f"Unsupported by protocol validator: SSR={unsupported['ssr']}, WARP={unsupported['warp']}")
+    return healthy
 
 def lookup_countries(hosts):
     """Resolve public IPs/hosts to country metadata in batches."""
@@ -601,7 +744,7 @@ def main():
         raise RuntimeError("No valid configurations were obtained from any source. Refusing to publish empty output files.")
 
     if HEALTH_CHECK_ENABLED:
-        print("Testing configs with LiteSpeedTest where supported...")
+        print("Testing configs with protocol-level Xray/sing-box validation...")
         healthy = validate_configs(real_configs)
         if len(healthy) < MIN_HEALTHY_CONFIGS_EXPECTED:
             raise RuntimeError("No reachable servers were found. Refusing to publish an empty health-filtered dataset.")

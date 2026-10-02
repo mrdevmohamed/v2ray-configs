@@ -9,8 +9,7 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Automatic refresh** every 5 minutes via GitHub Actions.
 - **Multi-protocol support** for VMess, VLESS, Trojan, Shadowsocks, ShadowsocksR, Hysteria2, and TUIC.
 - **Deduplication and filtering** of collected configuration URIs.
-- **Live reachability checks** that remove servers whose TCP endpoint cannot be reached within the configured timeout.
-- **Protocol-aware validation and latency measurement** using LiteSpeedTest for VMess, VLESS, Trojan, Shadowsocks, and ShadowsocksR, with a TCP fallback for protocols LiteSpeedTest does not parse.
+- **Protocol-level validation and latency measurement** using official Xray and sing-box cores, with the actual proxy protocol exercised for supported URI schemes.
 - **Country classification** with separate country-specific subscription files.
 - **Readable server names** that include the country flag, country name, measured latency, and project brand.
 - **Base64 subscription output** for clients that support Base64 subscriptions.
@@ -35,13 +34,13 @@ The protocol files are generated automatically. A protocol file may be empty whe
 
 ## Server Validation, Speed, and Countries
 
-Before publishing the final dataset, the pipeline validates configs with [LiteSpeedTest](https://github.com/xxf098/LiteSpeedTest). The GitHub Actions runner uses LiteSpeedTest v0.15.0 in command-line JSON-output mode with concurrent testing. VMess, VLESS, Trojan, Shadowsocks, and ShadowsocksR are tested through the proxy implementation rather than only checking whether a TCP socket accepts a connection. Hysteria2, TUIC, and WARP are currently validated with the project's TCP fallback because LiteSpeedTest does not parse those URI schemes.
+Before publishing the final dataset, the pipeline validates configurations at the protocol level. GitHub Actions installs pinned official releases of [Xray-core](https://github.com/XTLS/Xray-core/releases/tag/v26.3.27) v26.3.27 and [sing-box](https://github.com/SagerNet/sing-box/releases/tag/v1.14.2) v1.14.2. The validator selects the appropriate core for each supported URI scheme, starts a temporary local client, and checks the proxy path itself. This exercises authentication, transport, TLS or other configured protocol parameters instead of treating an open TCP port as proof that the configuration works.
 
 Healthy servers are also grouped by country under `By-Country/`, using ISO country codes such as `DE.txt`, `US.txt`, or `NL.txt` when geolocation succeeds. `server-metrics.json` contains the endpoint, measured latency, country, test method, and configuration URI.
 
-Each published server URI receives a readable remark such as `🇩🇪 Germany • 42.5ms • mrdevmohamed`, making the country and measured TCP latency visible directly inside compatible clients.
+Each published server URI receives a readable remark such as `🇩🇪 Germany • 42.5ms • mrdevmohamed`, making the country and measured validation latency visible directly inside compatible clients.
 
-> **Important:** LiteSpeedTest validation is stronger than a raw TCP check for the protocols it supports, but a passing test still does not guarantee long-term availability, account validity, or identical performance from your device. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device. Unsupported protocols use the TCP fallback and therefore do not receive the same end-to-end validation.
+> **Important:** A passing protocol test does not guarantee long-term availability, account validity, or identical performance from your device. Latency is measured from the GitHub Actions runner, so it can differ significantly from latency experienced by your device. A configuration is retained only when its selected protocol client completes the validation exchange successfully.
 
 Country classification uses public IP geolocation and may be unavailable or inaccurate for domains, CDNs, proxies, or frequently changing IP addresses.
 
@@ -101,7 +100,7 @@ Validate and filter
         ↓
 Deduplicate
         ↓
-Health check + latency
+Protocol validation + latency
         ↓
 Country classification
         ↓
@@ -206,11 +205,11 @@ This project performs automated data hygiene, including:
 - Base64 decoding validation;
 - URL/config remark normalization;
 - protocol-specific classification;
-- TCP reachability and latency measurement;
+- protocol-level reachability and latency measurement through Xray or sing-box;
 - country classification;
 - split-file count validation through tests.
 
-The live check validates TCP reachability only. It does not authenticate against the proxy or guarantee end-to-end protocol functionality.
+The live validation exercises the configured proxy protocol. It does not guarantee long-term availability, account validity, or the same performance from another network or client.
 
 ## Disclaimer
 

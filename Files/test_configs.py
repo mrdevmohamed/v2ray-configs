@@ -67,34 +67,40 @@ class FilteringTests(unittest.TestCase):
 
 class HealthTests(unittest.TestCase):
     def test_validation_limits_are_bounded(self):
-        self.assertLessEqual(app.HEALTH_CHECK_TIMEOUT, 2)
-        self.assertGreaterEqual(app.HEALTH_CHECK_WORKERS, 128)
-        self.assertLessEqual(app.LITESPEEDTEST_TIMEOUT, 8)
-        self.assertGreaterEqual(app.LITESPEEDTEST_CONCURRENCY, 32)
-        self.assertLessEqual(app.LITESPEEDTEST_MAX_RUNTIME, 600)
-        self.assertGreaterEqual(app.LITESPEEDTEST_BATCH_SIZE, 100)
+        self.assertLessEqual(app.PROTOCOL_TEST_TIMEOUT, 8)
+        self.assertGreaterEqual(app.PROTOCOL_TEST_WORKERS, 16)
+        self.assertLessEqual(app.PROTOCOL_VALIDATION_MAX_RUNTIME, 900)
 
-    def test_litespeedtest_supported_protocols(self):
-        for scheme in ("vmess", "vless", "trojan", "ss", "ssr"):
+    def test_protocol_validator_rejects_unsupported_schemes(self):
+        for scheme in ("ssr", "warp"):
             with self.subTest(scheme=scheme):
-                self.assertTrue(app.litespeedtest_supported(f"{scheme}://example"))
+                with self.assertRaises(app.UnsupportedProtocol):
+                    app._run_protocol_test(f"{scheme}://example")
 
-    def test_litespeedtest_unsupported_protocols_use_fallback(self):
-        for scheme in ("hysteria2", "hy2", "tuic", "warp"):
-            with self.subTest(scheme=scheme):
-                self.assertFalse(app.litespeedtest_supported(f"{scheme}://example"))
-
-    def test_vless_endpoint_extraction(self):
-        self.assertEqual(
-            app.extract_endpoint("vless://uuid@example.com:443?security=tls#test"),
-            ("example.com", 443),
+    def test_xray_outbound_parsing(self):
+        cases = (
+            ("vless://uuid@example.com:443?security=tls&sni=example.com&type=ws&path=%2Fws", "vless"),
+            ("trojan://password@example.com:443?security=tls&sni=example.com", "trojan"),
+            ("ss://YWVzLTI1Ni1nY206cGFzc3dvcmQ@example.com:443", "shadowsocks"),
         )
+        for value, expected in cases:
+            with self.subTest(value=value):
+                outbound = app._xray_outbound(value)
+                self.assertEqual(outbound["protocol"], expected)
 
-    def test_hysteria2_endpoint_extraction(self):
-        self.assertEqual(
-            app.extract_endpoint("hysteria2://password@example.com:443/?sni=example.com"),
-            ("example.com", 443),
+    def test_singbox_hysteria2_outbound_parsing(self):
+        outbound = app._singbox_outbound(
+            "hysteria2://password@example.com:443/?sni=example.com"
         )
+        self.assertEqual(outbound["type"], "hysteria2")
+        self.assertEqual(outbound["server"], "example.com")
+        self.assertEqual(outbound["server_port"], 443)
+
+    def test_transport_and_tls_options(self):
+        query = {"security": ["tls"], "sni": ["example.com"], "alpn": ["h2,http/1.1"], "type": ["ws"], "path": ["/proxy"], "host": ["cdn.example.com"]}
+        self.assertEqual(app._tls_options(query)["server_name"], "example.com")
+        self.assertEqual(app._tls_options(query)["alpn"], ["h2", "http/1.1"])
+        self.assertEqual(app._transport_options(query), {"type": "ws", "path": "/proxy", "headers": {"Host": "cdn.example.com"}})
 
 
 class RenameTests(unittest.TestCase):
