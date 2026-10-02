@@ -1,1 +1,0 @@
-trojan://humanity@212.183.88.136:443?path=/assignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%208.8ms%20%E2%80%A2%20mrdevmohamed
