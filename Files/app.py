@@ -177,6 +177,10 @@ def _first(query, key, default=None):
     return values[0] if values else default
 
 
+def _has_invalid_percent_escape(value):
+    return bool(re.search(r"%(?![0-9A-Fa-f]{2})", value or ""))
+
+
 def _tls_options(query):
     security = _first(query, "security", "")
     if security not in {"tls", "reality"} and not _first(query, "sni"):
@@ -302,10 +306,15 @@ def _singbox_outbound(config_line):
             password = urllib.parse.unquote(parsed.password)
         else:
             payload = parsed.netloc.split("@", 1)[0]
-            decoded = base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8")
-            method, password = decoded.split(":", 1)
+            try:
+                decoded = base64.b64decode(payload + "=" * (-len(payload) % 4)).decode("utf-8")
+                method, password = decoded.split(":", 1)
+            except (UnicodeDecodeError, ValueError, binascii.Error) as exc:
+                raise ValueError("invalid Shadowsocks credentials encoding") from exc
         if not host or not port:
             raise ValueError("missing server or port")
+        if method == "chacha20-poly1305":
+            raise UnsupportedProtocol("legacy chacha20-poly1305 is not supported by sing-box; use chacha20-ietf-poly1305")
         return {"type": "shadowsocks", "server": host, "server_port": port,
                 "method": method, "password": password}
     if scheme in {"hy2", "hysteria2"}:
@@ -357,8 +366,9 @@ def _xray_xhttp_settings(query):
 
 
 def _xray_outbound(config_line, socks_port):
-    """Build an Xray VLESS outbound for transports unsupported by sing-box."""
+    """Build an Xray outbound for transports/security unsupported by sing-box."""
     parsed = urllib.parse.urlsplit(config_line)
+    scheme = parsed.scheme.lower()
     query = _query(parsed)
     host = parsed.hostname
     try:
@@ -368,10 +378,20 @@ def _xray_outbound(config_line, socks_port):
     if not host or not port or not parsed.username:
         raise ValueError("missing server, port, or credentials")
 
+    if scheme not in {"vless", "trojan"}:
+        raise UnsupportedProtocol(f"Xray engine is only used for VLESS/Trojan, got {scheme or 'unknown'}")
+
     flow = _first(query, "flow")
-    user = {"id": urllib.parse.unquote(parsed.username), "encryption": "none"}
-    if flow:
-        user["flow"] = flow
+    if scheme == "vless":
+        user = {"id": urllib.parse.unquote(parsed.username), "encryption": "none"}
+        if flow:
+            user["flow"] = flow
+        settings = {"vnext": [{"address": host, "port": port, "users": [user]}]}
+        protocol = "vless"
+    else:
+        settings = {"servers": [{"address": host, "port": port,
+                                  "password": urllib.parse.unquote(parsed.username)}]}
+        protocol = "trojan"
 
     stream = {
         "network": (_first(query, "type") or _first(query, "network") or "tcp").lower(),
@@ -401,8 +421,6 @@ def _xray_outbound(config_line, socks_port):
             reality["shortId"] = _first(query, "sid")
         if _first(query, "spiderX"):
             reality["spiderX"] = _first(query, "spiderX")
-        if alpn:
-            reality["alpn"] = [x for x in alpn.split(",") if x]
         stream["realitySettings"] = reality
 
     if stream["network"] == "xhttp":
@@ -424,13 +442,16 @@ def _xray_outbound(config_line, socks_port):
     elif stream["network"] not in {"tcp", "raw", "none"}:
         raise UnsupportedProtocol(f"unsupported Xray transport: {stream['network']}")
 
+    if security == "reality" and stream["network"] not in {"tcp", "raw", "grpc", "xhttp"}:
+        raise UnsupportedProtocol("Xray REALITY supports only raw, grpc, or xhttp transports")
+
     return {
         "log": {"loglevel": "warning"},
         "inbounds": [{"listen": "127.0.0.1", "port": socks_port, "protocol": "socks",
                       "settings": {"udp": True}}],
         "outbounds": [{
-            "protocol": "vless",
-            "settings": {"vnext": [{"address": host, "port": port, "users": [user]}]},
+            "protocol": protocol,
+            "settings": settings,
             "streamSettings": stream,
         }],
     }
@@ -460,8 +481,28 @@ def _run_protocol_test(config_line):
     if not SING_BOX_BINARY:
         raise RuntimeError("sing-box is not available")
     query = _query(urllib.parse.urlsplit(config_line))
+    parsed = urllib.parse.urlsplit(config_line)
+    if _has_invalid_percent_escape(parsed.path) or _has_invalid_percent_escape(parsed.query):
+        raise ValueError("invalid percent-escape in URI")
+    if not parsed.hostname:
+        raise ValueError("missing server host")
+    try:
+        parsed_port = parsed.port
+    except ValueError as exc:
+        raise ValueError("invalid server port") from exc
+    if not parsed_port or not 1 <= parsed_port <= 65535:
+        raise ValueError("invalid server port")
     transport = (_first(query, "type") or _first(query, "network") or "tcp").lower()
     security = (_first(query, "security") or "").lower()
+    fingerprint = (_first(query, "fp") or "").lower()
+    if fingerprint == "unsafe":
+        raise UnsupportedProtocol("unsafe uTLS fingerprint is not supported by protocol validation")
+    if transport == "http":
+        raise UnsupportedProtocol("HTTP transport is not supported by the protocol validator")
+    if transport == "tcp@soskeynets":
+        raise UnsupportedProtocol("invalid tcp transport variant")
+    if security == "reality" and not _first(query, "pbk"):
+        raise UnsupportedProtocol("REALITY public key (pbk) is required")
     if transport == "xhttp" or security == "reality":
         if not XRAY_BINARY:
             raise RuntimeError("xray is required to validate XHTTP/REALITY configs")

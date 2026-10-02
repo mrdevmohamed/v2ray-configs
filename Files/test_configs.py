@@ -131,6 +131,37 @@ class HealthTests(unittest.TestCase):
         self.assertEqual(stream["realitySettings"]["publicKey"], "public-key")
         self.assertEqual(stream["realitySettings"]["shortId"], "1234")
 
+    def test_xray_trojan_reality_outbound(self):
+        value = "trojan://password@example.com:443?security=reality&sni=example.com&fp=chrome&pbk=public-key&sid=1234&type=grpc&serviceName=proxy"
+        outbound = app._xray_outbound(value, 10882)
+        proxy = outbound["outbounds"][0]
+        self.assertEqual(proxy["protocol"], "trojan")
+        self.assertEqual(proxy["settings"]["servers"][0]["password"], "password")
+        self.assertEqual(proxy["streamSettings"]["network"], "grpc")
+
+    def test_xray_reality_rejects_websocket(self):
+        value = "trojan://password@example.com:443?security=reality&type=ws&path=%2F"
+        with self.assertRaises(app.UnsupportedProtocol):
+            app._xray_outbound(value, 10883)
+
+    def test_invalid_engine_inputs_are_skipped_early(self):
+        with self.assertRaises(app.UnsupportedProtocol):
+            app._run_protocol_test("trojan://password@example.com:443?security=tls&fp=unsafe")
+        with self.assertRaises(ValueError):
+            app._run_protocol_test("ss://bad@example.com:not-a-port")
+
+    def test_invalid_shadowsocks_methods_are_rejected(self):
+        with self.assertRaises(app.UnsupportedProtocol):
+            app._singbox_outbound("ss://chacha20-poly1305:password@example.com:443")
+
+    def test_reality_requires_public_key(self):
+        with self.assertRaises(app.UnsupportedProtocol):
+            app._run_protocol_test("vless://uuid@example.com:443?security=reality&sni=example.com&fp=chrome")
+
+    def test_invalid_percent_escape_is_rejected(self):
+        with self.assertRaises(ValueError):
+            app._run_protocol_test("trojan://password@example.com:443?security=tls&path=%")
+
 
 class RenameTests(unittest.TestCase):
     def test_country_emoji(self):
