@@ -1,1 +1,1 @@
-vless://Channel:telegram:TurboConfigs@61.245.11.28:9090?encryption=none&headerType=http&host=play-apps-features.googleusercontent.com&path=/&security=none&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%20186.7ms%20%E2%80%A2%20mrdevmohamed
+vless://Channel:telegram:TurboConfigs@61.245.11.28:9090?encryption=none&headerType=http&host=play-apps-features.googleusercontent.com&path=/&security=none&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%20196.6ms%20%E2%80%A2%20mrdevmohamed
