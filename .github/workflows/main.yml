@@ -6,9 +6,17 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "All_Configs_Sub.txt"
+      - "All_Configs_base64_Sub.txt"
+      - "Sub*.txt"
+      - "Base64/**"
+      - "Splitted-By-Protocol/**"
+      - "By-Country/**"
+      - "server-metrics.json"
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/30 * * * *"
 
 concurrency:
   group: update-configs-${{ github.ref }}
@@ -65,5 +73,9 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       LITESPEEDTEST_BINARY: /tmp/lite
-      LITESPEEDTEST_TIMEOUT: "5"
-      LITESPEEDTEST_CONCURRENCY: "32"
+      HEALTH_CHECK_TIMEOUT: "2"
+      HEALTH_CHECK_WORKERS: "256"
+      LITESPEEDTEST_TIMEOUT: "8"
+      LITESPEEDTEST_CONCURRENCY: "64"
+      LITESPEEDTEST_MAX_RUNTIME: "600"
+      LITESPEEDTEST_BATCH_SIZE: "500"

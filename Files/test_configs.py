@@ -66,6 +66,14 @@ class FilteringTests(unittest.TestCase):
 
 
 class HealthTests(unittest.TestCase):
+    def test_validation_limits_are_bounded(self):
+        self.assertLessEqual(app.HEALTH_CHECK_TIMEOUT, 2)
+        self.assertGreaterEqual(app.HEALTH_CHECK_WORKERS, 128)
+        self.assertLessEqual(app.LITESPEEDTEST_TIMEOUT, 8)
+        self.assertGreaterEqual(app.LITESPEEDTEST_CONCURRENCY, 32)
+        self.assertLessEqual(app.LITESPEEDTEST_MAX_RUNTIME, 600)
+        self.assertGreaterEqual(app.LITESPEEDTEST_BATCH_SIZE, 100)
+
     def test_litespeedtest_supported_protocols(self):
         for scheme in ("vmess", "vless", "trojan", "ss", "ssr"):
             with self.subTest(scheme=scheme):

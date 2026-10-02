@@ -18,11 +18,13 @@ TIMEOUT = 15  # seconds
 MAX_SOURCE_BYTES = 10 * 1024 * 1024
 MIN_CONFIGS_EXPECTED = 1
 HEALTH_CHECK_ENABLED = True
-HEALTH_CHECK_TIMEOUT = 4
-HEALTH_CHECK_WORKERS = 128
+HEALTH_CHECK_TIMEOUT = int(os.environ.get("HEALTH_CHECK_TIMEOUT", "2"))
+HEALTH_CHECK_WORKERS = int(os.environ.get("HEALTH_CHECK_WORKERS", "256"))
 LITESPEEDTEST_BINARY = os.environ.get("LITESPEEDTEST_BINARY", "")
-LITESPEEDTEST_TIMEOUT = int(os.environ.get("LITESPEEDTEST_TIMEOUT", "20"))
-LITESPEEDTEST_CONCURRENCY = int(os.environ.get("LITESPEEDTEST_CONCURRENCY", "16"))
+LITESPEEDTEST_TIMEOUT = int(os.environ.get("LITESPEEDTEST_TIMEOUT", "8"))
+LITESPEEDTEST_CONCURRENCY = int(os.environ.get("LITESPEEDTEST_CONCURRENCY", "64"))
+LITESPEEDTEST_MAX_RUNTIME = int(os.environ.get("LITESPEEDTEST_MAX_RUNTIME", "600"))
+LITESPEEDTEST_BATCH_SIZE = int(os.environ.get("LITESPEEDTEST_BATCH_SIZE", "500"))
 GEOIP_BATCH_SIZE = 100
 MIN_HEALTHY_CONFIGS_EXPECTED = 1
 
@@ -231,8 +233,25 @@ def validate_configs(configs):
         print("WARNING: LiteSpeedTest binary is not configured; using TCP health checks")
         return health_check_configs(configs)
 
-    litespeed_healthy, unsupported = run_litespeedtest(configs)
-    fallback_healthy = health_check_configs(unsupported) if unsupported else []
+    print("Running fast TCP preflight before LiteSpeedTest...")
+    reachable = health_check_configs(configs)
+    supported_reachable = [item["config"] for item in reachable if litespeedtest_supported(item["config"])]
+    unsupported_reachable = {item["config"] for item in reachable if not litespeedtest_supported(item["config"])}
+
+    litespeed_healthy = []
+    for start in range(0, len(supported_reachable), LITESPEEDTEST_BATCH_SIZE):
+        batch = supported_reachable[start:start + LITESPEEDTEST_BATCH_SIZE]
+        batch_no = start // LITESPEEDTEST_BATCH_SIZE + 1
+        batch_count = (len(supported_reachable) + LITESPEEDTEST_BATCH_SIZE - 1) // LITESPEEDTEST_BATCH_SIZE
+        print(f"LiteSpeedTest batch {batch_no}/{batch_count}: {len(batch)} configs")
+        try:
+            batch_healthy, _ = run_litespeedtest(batch)
+            litespeed_healthy.extend(batch_healthy)
+        except subprocess.TimeoutExpired:
+            print(f"WARNING: LiteSpeedTest batch {batch_no} exceeded {LITESPEEDTEST_MAX_RUNTIME}s; skipping this batch")
+        except (RuntimeError, OSError, json.JSONDecodeError) as exc:
+            print(f"WARNING: LiteSpeedTest batch {batch_no} failed: {exc}")
+    fallback_healthy = [item for item in reachable if item["config"] in unsupported_reachable]
 
     healthy = []
     for item in litespeed_healthy + fallback_healthy:
@@ -240,11 +259,15 @@ def validate_configs(configs):
         if not endpoint:
             continue
         item["host"], item["port"] = endpoint
-        item.setdefault("test_method", "tcp")
+        item.setdefault("test_method", "tcp-preflight")
         healthy.append(item)
 
     healthy.sort(key=lambda item: item["latency_ms"])
-    print(f"Validation: {len(healthy)}/{len(configs)} configs passed")
+    print(
+        f"Validation: {len(healthy)}/{len(configs)} configs passed; "
+        f"{len(reachable)} passed TCP preflight; "
+        f"{len(supported_reachable)} entered LiteSpeedTest in batches of {LITESPEEDTEST_BATCH_SIZE}"
+    )
     return healthy
 
 
@@ -307,7 +330,7 @@ def run_litespeedtest(configs, binary_path=None):
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
-            timeout=max(LITESPEEDTEST_TIMEOUT * 2, 60) * max(1, len(supported) // max(LITESPEEDTEST_CONCURRENCY, 1) + 1),
+            timeout=LITESPEEDTEST_MAX_RUNTIME,
             check=False,
         )
         if not output_path.exists():
