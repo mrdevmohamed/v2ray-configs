@@ -1,2 +1,1 @@
-vless://9ef61079-6f7d-4911-9608-943da85d8e6f@test.keoplentuio.xyz:2053?encryption=none&security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201032.4ms%20%E2%80%A2%20mrdevmohamed
-vless://6bceb548-d9b6-461f-8e37-a5a7fbcdc2c8@milo.rubinaz.xyz:8080?encryption=none&security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201175.4ms%20%E2%80%A2%20mrdevmohamed
+vless://6bceb548-d9b6-461f-8e37-a5a7fbcdc2c8@milo.rubinaz.xyz:8080?encryption=none&security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201101.3ms%20%E2%80%A2%20mrdevmohamed
