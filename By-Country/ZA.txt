@@ -1,5 +1,5 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpEM1FaeUtBOWp0TGVrdFRO@20.87.209.138:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20942.2ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20958ms%20%E2%80%A2%20mrdevmohamed
-vless://51f43f39-bb49-4be2-9ab1-9dd1ef9968e6@165.231.99.45:8443?security=tls&alpn=h2&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=file-6ac21b76.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20960.1ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0ZkFjUmlrYXdoTm9aQWh1@139.84.247.164:8388#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201191.6ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%204698.6ms%20%E2%80%A2%20mrdevmohamed
+vless://51f43f39-bb49-4be2-9ab1-9dd1ef9968e6@165.231.99.45:8443?security=tls&alpn=h2&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=file-6ac21b76.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20797.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpEM1FaeUtBOWp0TGVrdFRO@20.87.209.138:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20886.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20893.4ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0ZkFjUmlrYXdoTm9aQWh1@139.84.247.164:8388#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201106.1ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201132.9ms%20%E2%80%A2%20mrdevmohamed
