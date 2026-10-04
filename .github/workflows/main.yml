@@ -1,0 +1,153 @@
+name: Update Configs
+
+on:
+  push:
+    branches:
+      - main
+    # Commits made by this workflow with GITHUB_TOKEN do not trigger new runs anyway;
+    # this just keeps manual edits of generated files from rebuilding everything.
+    paths-ignore:
+      - "All_Configs_Sub.txt"
+      - "All_Configs_base64_Sub.txt"
+      - "Sub*.txt"
+      - "Base64/**"
+      - "Splitted-By-Protocol/**"
+      - "By-Country/**"
+      - "server-metrics.json"
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *" # GitHub may delay scheduled runs by several minutes
+
+# One run at a time. A run that is already in progress is allowed to finish
+# (it may be in the middle of committing); at most one newer run waits.
+concurrency:
+  group: update-configs-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SING_BOX_VERSION: "v1.14.2"
+  XRAY_VERSION: "v26.6.27"
+  SING_BOX_BINARY: /tmp/sing-box
+  XRAY_BINARY: /tmp/xray-bin
+  PROTOCOL_VALIDATION_TIMEOUT: "8"
+  PROTOCOL_VALIDATION_WORKERS: "64"
+  PROTOCOL_VALIDATION_MAX_RUNTIME: "900"
+  PYTHONDONTWRITEBYTECODE: "1" # keep __pycache__ out of the working tree
+  PYTHONUNBUFFERED: "1" # stream app.py logs live
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30 # validation budget is 15 min; never hang for 6 hours
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: Files/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r Files/requirements.txt
+
+      # Tests need no proxy engines, so run them first and fail fast.
+      - name: Run tests
+        run: python -m unittest discover -s Files -p 'test_*.py' -v
+
+      - name: Restore proxy engines from cache
+        id: engines
+        uses: actions/cache@v4
+        with:
+          path: |
+            /tmp/sing-box
+            /tmp/xray-bin
+          key: engines-${{ runner.os }}-sing-box-${{ env.SING_BOX_VERSION }}-xray-${{ env.XRAY_VERSION }}
+
+      - name: Install sing-box
+        if: steps.engines.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 \
+            -o /tmp/sing-box.tar.gz \
+            "https://github.com/SagerNet/sing-box/releases/download/${SING_BOX_VERSION}/sing-box-${SING_BOX_VERSION#v}-linux-amd64.tar.gz"
+          tar -xzf /tmp/sing-box.tar.gz -C /tmp
+          install -m 0755 \
+            "/tmp/sing-box-${SING_BOX_VERSION#v}-linux-amd64/sing-box" \
+            "$SING_BOX_BINARY"
+
+      - name: Install Xray
+        if: steps.engines.outputs.cache-hit != 'true'
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 \
+            -o /tmp/xray.zip \
+            "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-linux-64.zip"
+          rm -rf /tmp/xray
+          mkdir -p /tmp/xray
+          unzip -q /tmp/xray.zip -d /tmp/xray
+          install -m 0755 /tmp/xray/xray "$XRAY_BINARY"
+
+      - name: Check engines
+        run: |
+          "$SING_BOX_BINARY" version
+          "$XRAY_BINARY" version
+          curl --version | head -n 1
+
+      - name: Build configs
+        run: python Files/app.py
+
+      - name: Split by protocol
+        run: python Files/sort.py
+
+      - name: Summary
+        run: |
+          {
+            echo "### Update Configs"
+            echo "- Configs in All_Configs_Sub.txt: $(grep -vc '^#' All_Configs_Sub.txt)"
+            echo "- Split files: $(ls Sub*.txt 2>/dev/null | wc -l)"
+            echo "- Countries: $(ls By-Country/*.txt 2>/dev/null | wc -l)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push files
+        run: |
+          set -euo pipefail
+          git config user.name "mrdevmohamed"
+          git config user.email "mrdevmohamed@gmail.com"
+
+          # -A also stages the deletion of stale Sub<N> files. Patterns that match
+          # nothing are skipped instead of failing the step.
+          for path in \
+            All_Configs_Sub.txt \
+            All_Configs_base64_Sub.txt \
+            'Sub*.txt' \
+            'Base64/Sub*_base64.txt' \
+            'Splitted-By-Protocol/*.txt' \
+            'By-Country/*.txt' \
+            server-metrics.json; do
+            git add -A -- "$path" 2>/dev/null || true
+          done
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Fresh🔥❤️‍🔥"
+
+          # Someone may have pushed while this run was validating. Generated files
+          # are owned by this job, so on conflict keep our version.
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            echo "Push rejected (attempt ${attempt}/3); rebasing and retrying..."
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}"
+          done
+          echo "::error::Could not push after 3 attempts"
+          exit 1

@@ -1,0 +1,4 @@
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform118.golnamakcert.top:80?&type=ws&headerType=none&host=platform118.halalkhor.info&path=/platform118#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20581.4ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform113.golnamakcert.top:80?encryption=none&host=platform113.halalkhor.info&path=/platform113&security=none&type=ws#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20582.7ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform108.golnamakcert.top:80?type=ws&encryption=none&flow=&host=platform108.halalkhor.info&path=/platform108#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20605.8ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform117.golnamakcert.top:80?encryption=none&host=platform117.halalkhor.info&path=/platform117&security=none&type=ws#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20614.4ms%20%E2%80%A2%20mrdevmohamed

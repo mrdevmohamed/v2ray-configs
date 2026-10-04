@@ -1,0 +1,5 @@
+pybase64>=1.4,<2
+requests>=2.32,<3
+# Not installable with pip - needed on PATH for the health check (app.py):
+#   sing-box, xray (XHTTP/REALITY only), curl
+# Python 3.10+ is required. Set HEALTH_CHECK=0 to run without those binaries.
