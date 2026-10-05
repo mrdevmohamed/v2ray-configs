@@ -1,1 +1,1 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880?encryption=none&host=vms.lifetime04.workers.dev&security=none&type=ws#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20171.1ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880?encryption=none&host=vms.lifetime04.workers.dev&security=none&type=ws#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%2094.1ms%20%E2%80%A2%20mrdevmohamed

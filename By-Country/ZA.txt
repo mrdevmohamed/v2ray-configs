@@ -1,6 +1,6 @@
-vless://51f43f39-bb49-4be2-9ab1-9dd1ef9968e6@165.231.99.45:8443?security=tls&alpn=h2&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=file-6ac21b76.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20754.4ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20938.9ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUYkhCSHpPd1VDSGFkTHd0@20.164.42.112:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20956.3ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxUnJhRTF5TEM4TFJxbWVi@20.164.42.112:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20969.6ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201204.3ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0ZkFjUmlrYXdoTm9aQWh1@139.84.247.164:8388#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201284.2ms%20%E2%80%A2%20mrdevmohamed
+vless://51f43f39-bb49-4be2-9ab1-9dd1ef9968e6@165.231.99.45:8443?security=tls&alpn=h2&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=file-6ac21b76.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20515.3ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNToxUnJhRTF5TEM4TFJxbWVi@20.164.42.112:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20828.8ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20857.8ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUYkhCSHpPd1VDSGFkTHd0@20.164.42.112:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20863.4ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0ZkFjUmlrYXdoTm9aQWh1@139.84.247.164:8388#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201412.8ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%204524.2ms%20%E2%80%A2%20mrdevmohamed

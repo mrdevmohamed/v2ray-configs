@@ -1,1 +1,0 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@89.116.180.30:8880?encryption=none&host=vms.lifetime09.workers.dev&path=/&security=none&type=ws#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20241.9ms%20%E2%80%A2%20mrdevmohamed
