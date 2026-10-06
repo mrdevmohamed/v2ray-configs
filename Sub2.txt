@@ -1,0 +1,8 @@
+#profile-title: base64:8J+GkyBHaXQ6bXJkZXZtb2hhbWVkIHwgU3ViMiDwn5Sl
+#profile-update-interval: 1
+#subscription-userinfo: upload=29; download=12; total=10737418240000000; expire=2546249531
+#support-url: https://github.com/mrdevmohamed/v2ray-configs
+#profile-web-page-url: https://github.com/mrdevmohamed/v2ray-configs
+vless://20ef7310-0b50-4943-98a6-3d0856b383b1@196.240.125.3:8443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=vusr-6ac431f4.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201451.8ms%20%E2%80%A2%20mrdevmohamed
+vless://20ef7310-0b50-4943-98a6-3d0856b383b1@196.240.125.3:8443?security=tls&encryption=none&insecure=0&headerType=&type=tcp&allowInsecure=0&flow=xtls-rprx-vision&sni=vusr-6ac431f4.adhil.uk#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%204363.7ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%204672ms%20%E2%80%A2%20mrdevmohamed
