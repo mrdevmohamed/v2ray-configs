@@ -1,3 +1,3 @@
-ss://YWVzLTI1Ni1jZmI6cnBnYk5uVTlyRERVNGFXWg@185.135.86.175:9094#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20627ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1jZmI6WWc0TWJkWEZROUhGRlZZNg==@185.135.86.175:9034#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20749.4ms%20%E2%80%A2%20mrdevmohamed
-vless://ee18d188-14cc-417e-beb1-70e4add6d023@216.173.71.43:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=miDhSALrcCvSfc38VjCDYlzNh5M61NMR5IkUli7IN08&security=reality&sid=0da7e14db353e7d0&sni=lv.nztvpn.com&type=tcp#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%206364ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1jZmI6cnBnYk5uVTlyRERVNGFXWg@185.135.86.175:9094#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20658.9ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1jZmI6WWc0TWJkWEZROUhGRlZZNg==@185.135.86.175:9034#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20725.4ms%20%E2%80%A2%20mrdevmohamed
+vless://ee18d188-14cc-417e-beb1-70e4add6d023@216.173.71.43:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=lv.nztvpn.com&fp=safari&pbk=miDhSALrcCvSfc38VjCDYlzNh5M61NMR5IkUli7IN08&sid=0da7e14db353e7d0&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%206863.5ms%20%E2%80%A2%20mrdevmohamed
