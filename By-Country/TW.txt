@@ -1,4 +1,4 @@
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@103.115.109.49:443/?insecure=1&sni=https%3A%2F%2Ft.me%2Foneclickvpnkeys#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20717.6ms%20%E2%80%A2%20mrdevmohamed
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=127.0.0.1#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20747.6ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=vpn-tw-002.fastervpn.world#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20851.6ms%20%E2%80%A2%20mrdevmohamed
-vless://19d5a678-8396-4e3b-93da-ece618d0e83a@hinet1.2yly.com:24215?security=reality&encryption=none&pbk=mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE&headerType=none&fp=chrome&type=tcp&sni=addons.mozilla.org#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%201136.4ms%20%E2%80%A2%20mrdevmohamed
+hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@103.115.109.49:443/?insecure=1&sni=https%3A%2F%2Ft.me%2Foneclickvpnkeys#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20587.5ms%20%E2%80%A2%20mrdevmohamed
+hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=127.0.0.1#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20600.1ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=vpn-tw-002.fastervpn.world#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20617ms%20%E2%80%A2%20mrdevmohamed
+vless://19d5a678-8396-4e3b-93da-ece618d0e83a@hinet1.2yly.com:24215?security=reality&encryption=none&pbk=mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE&headerType=none&fp=chrome&type=tcp&sni=addons.mozilla.org#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%205421.5ms%20%E2%80%A2%20mrdevmohamed

@@ -1,1 +1,2 @@
-vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform101.golnamakcert.top:80?&type=ws&headerType=none&host=platform101.halalkhor.info&path=/platform101#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20618.7ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206eEJTdEJFVnF2R3dIUG9jYw@64.176.2.21:8388#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20616.7ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform101.golnamakcert.top:80?type=ws&host=platform101.halalkhor.info&path=/platform101#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20617ms%20%E2%80%A2%20mrdevmohamed
