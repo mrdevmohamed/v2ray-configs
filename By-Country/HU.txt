@@ -1,1 +1,1 @@
-trojan://humanity@185.225.68.232:443?path=/assignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#%F0%9F%87%AD%F0%9F%87%BA%20Hungary%20%E2%80%A2%206305.7ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@185.225.68.232:443?allowInsecure=0&sni=www.calmlunch.com&type=ws&host=www.calmlunch.com&path=/assignment#%F0%9F%87%AD%F0%9F%87%BA%20Hungary%20%E2%80%A2%203886.4ms%20%E2%80%A2%20mrdevmohamed

@@ -1,2 +1,3 @@
-hysteria2://Jz40_mIJ934vK0_k9D3jz92_Vx48q_GHa1_sz0@103.126.51.51:8443?insecure=1&sni=ocober-romania-new.yyuyy.com#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%20581.9ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://Jz40_mIJ934vK0_k9D3jz92_Vx48q_GHa1_sz0@103.126.51.46:8443?insecure=1&sni=ocober-romania-new.yyuyy.com#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%20676ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://Jz40_mIJ934vK0_k9D3jz92_Vx48q_GHa1_sz0@103.126.51.51:8443?insecure=1&sni=ocober-romania-new.yyuyy.com#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%20763ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://Jz40_mIJ934vK0_k9D3jz92_Vx48q_GHa1_sz0@103.126.51.46:8443?insecure=1&sni=ocober-romania-new.yyuyy.com#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%20801.7ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://Jz40_mIJ934vK0_k9D3jz92_Vx48q_GHa1_sz0@103.126.51.53:8443?sni=ocober-romania-new.yyuyy.com#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%20868.7ms%20%E2%80%A2%20mrdevmohamed
