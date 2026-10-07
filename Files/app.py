@@ -97,7 +97,8 @@ SOURCES = [
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/Eternity.txt",
    "https://raw.githubusercontent.com/barry-far/V2ray-config/main/All_Configs_base64_Sub.txt",
    "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha-All-Type.txt",
-   "https://github.com/Delta-Kronecker/V2ray-Config/raw/refs/heads/main/config/all_configs.txt"
+   "https://github.com/Delta-Kronecker/V2ray-Config/raw/refs/heads/main/config/all_configs.txt",
+   "https://www.v2nodes.com/subscriptions/country/all/?key=F1A7C70D56FEB84"
 ]
 
 _URI_LINE = re.compile(r"^\s*(?:vmess|vless|trojan|ssr?|tuic|hy2|hysteria2?|warp)://", re.IGNORECASE | re.MULTILINE)
