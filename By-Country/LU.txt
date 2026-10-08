@@ -1,1 +1,1 @@
-vless://d9fbf9a7-1f88-428b-bb3e-3074681e44c9@87.120.106.133:443?security=tls&encryption=none&insecure=0&host=/?Telegram---PLANB_NET---PLANB_NET---PLANB_NET---PLANB_NET&headerType=none&type=tcp&allowInsecure=0&sni=es3siwxee705.dx4x.com#%F0%9F%87%B1%F0%9F%87%BA%20Luxembourg%20%E2%80%A2%20730.7ms%20%E2%80%A2%20mrdevmohamed
+vless://d9fbf9a7-1f88-428b-bb3e-3074681e44c9@87.120.106.133:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=es3siwxee705.dx4x.com#%F0%9F%87%B1%F0%9F%87%BA%20Luxembourg%20%E2%80%A2%20962.8ms%20%E2%80%A2%20mrdevmohamed
