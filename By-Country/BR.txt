@@ -1,0 +1,1 @@
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@45.194.53.30:8880?security=none&type=ws&path=/?ed=2560&host=vms.lifetime19.workers.dev&packetEncoding=xudp&encryption=none#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%20632ms%20%E2%80%A2%20mrdevmohamed
