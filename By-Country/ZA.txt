@@ -1,3 +1,5 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp6bEhNcEk3TjVka1pPSGRI@20.87.212.24:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20949.3ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20979ms%20%E2%80%A2%20mrdevmohamed
-vless://4758aee6-6d1a-4306-b460-2398b5af4e35@34.35.189.111:443?&security=reality&pbk=dcox8XXfkOCmKn3kgrloj6wY5o1_0brJOi2mczYmAT4&sid=5ced03e42cc31aab&fp=chrome&sni=www.cloudflare.com&type=tcp&headerType=none&host=www.cloudflare.com&path=%2F#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201282.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20895.9ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp6bEhNcEk3TjVka1pPSGRI@20.87.212.24:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20930.7ms%20%E2%80%A2%20mrdevmohamed
+ss://chacha20-ietf-poly1305:Xsy8Ox4yOV3xLlpxtjzs3X@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201025.9ms%20%E2%80%A2%20mrdevmohamed
+vless://4758aee6-6d1a-4306-b460-2398b5af4e35@34.35.189.111:443?&security=reality&pbk=dcox8XXfkOCmKn3kgrloj6wY5o1_0brJOi2mczYmAT4&sid=5ced03e42cc31aab&fp=chrome&sni=www.cloudflare.com&type=tcp&headerType=none&host=www.cloudflare.com&path=%2F#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201256.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%203483.1ms%20%E2%80%A2%20mrdevmohamed
