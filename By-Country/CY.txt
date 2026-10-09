@@ -1,1 +1,2 @@
-hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20923.4ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20835ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.178:8080?sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20896.8ms%20%E2%80%A2%20mrdevmohamed

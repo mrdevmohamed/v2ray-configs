@@ -1,0 +1,2 @@
+hysteria2://8bd04756-3beb-4348-82c9-d35453df50ce@157.22.240.206:28152?sni=alb1337.zaebalsanoproxyklinus.lol#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%20830.4ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://8bd04756-3beb-4348-82c9-d35453df50ce@alb1337.zaebalsanoproxyklinus.lol:28152?alpn=h3&sni=alb1337.zaebalsanoproxyklinus.lol#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%201079.1ms%20%E2%80%A2%20mrdevmohamed

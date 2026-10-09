@@ -1,0 +1,1 @@
+vless://4f51ca84-43ea-4087-b8a2-938e0ccbe27a@94.183.167.34:443?type=tcp&headerType=none&security=reality&encryption=none&sni=google.com&fp=firefox&pbk=mDDDyruO33nuqcTS7pZOjd9oOpDHUf0aEv2TQ1DFGV4&flow=xtls-rprx-vision#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%20674.2ms%20%E2%80%A2%20mrdevmohamed
