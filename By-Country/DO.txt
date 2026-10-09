@@ -1,1 +1,1 @@
-vless://489f1717-d3c7-4940-ad68-bdbdbab857f4@181.36.229.212:443?encryption=none&fp=firefox&host=x.m-90.xyz&path=t.me/TEAMNETGRATISCOL&security=tls&sni=x.m-90.xyz&type=ws#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%203372.4ms%20%E2%80%A2%20mrdevmohamed
+vless://489f1717-d3c7-4940-ad68-bdbdbab857f4@181.36.229.212:443?encryption=none&fp=firefox&host=x.m-90.xyz&path=t.me/TEAMNETGRATISCOL&security=tls&sni=x.m-90.xyz&type=ws#%F0%9F%87%A9%F0%9F%87%B4%20Dominican%20Republic%20%E2%80%A2%201179.1ms%20%E2%80%A2%20mrdevmohamed
