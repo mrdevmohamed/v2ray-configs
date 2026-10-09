@@ -1,2 +1,2 @@
-vless://d342d11e-d224-4463-b982-532309285094@185.253.75.119:443?&security=tls&fp=chrome&sni=ccc.010304.xyz&type=ws&headerType=none&host=ccc.010304.xyz&path=/#%F0%9F%87%AE%F0%9F%87%B1%20Israel%20%E2%80%A2%20975.8ms%20%E2%80%A2%20mrdevmohamed
-vless://d342d11e-d224-4463-b982-532309285094@185.253.75.119:443?&security=tls&fp=chrome&sni=ccc.010304.xyz&type=ws&headerType=none&host=ccc.010304.xyz&path=%2F#%F0%9F%87%AE%F0%9F%87%B1%20Israel%20%E2%80%A2%201232.8ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@185.253.75.119:443?&security=tls&fp=chrome&sni=ccc.010304.xyz&type=ws&headerType=none&host=ccc.010304.xyz&path=/#%F0%9F%87%AE%F0%9F%87%B1%20Israel%20%E2%80%A2%201306.6ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@185.253.75.119:443?&security=tls&fp=chrome&sni=ccc.010304.xyz&type=ws&headerType=none&host=ccc.010304.xyz&path=%2F#%F0%9F%87%AE%F0%9F%87%B1%20Israel%20%E2%80%A2%201421.9ms%20%E2%80%A2%20mrdevmohamed
