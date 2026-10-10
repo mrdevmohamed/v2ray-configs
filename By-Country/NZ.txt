@@ -1,2 +1,2 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880/?type=ws&encryption=none&flow=&host=vms.lifetime04.workers.dev&path=%2F#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20149.3ms%20%E2%80%A2%20mrdevmohamed
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880?security=none&type=ws&path=/&host=vms.lifetime04.workers.dev&packetEncoding=xudp#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20858ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880/?type=ws&encryption=none&flow=&host=vms.lifetime04.workers.dev&path=%2F#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20439.4ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880?security=none&type=ws&path=/&host=vms.lifetime04.workers.dev&packetEncoding=xudp#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20701.7ms%20%E2%80%A2%20mrdevmohamed

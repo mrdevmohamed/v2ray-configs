@@ -1,1 +1,2 @@
-vless://b83faafc-cbb7-4655-99d4-2c4c39a49d1b@150.95.109.109:2086?encryption=none&security=none&type=tcp&headerType=none#%F0%9F%87%BB%F0%9F%87%B3%20Vietnam%20%E2%80%A2%20970.3ms%20%E2%80%A2%20mrdevmohamed
+vless://b83faafc-cbb7-4655-99d4-2c4c39a49d1b@150.95.109.109:2086?encryption=none&security=none&type=tcp&headerType=none#%F0%9F%87%BB%F0%9F%87%B3%20Vietnam%20%E2%80%A2%20718.6ms%20%E2%80%A2%20mrdevmohamed
+vless://30e52776-55ac-3cb4-8d36-e2910f07e2c3@160.25.74.91:443?encryption=none&security=tls&type=tcp&host=e79dbcd4s783.gogocs.xyz&sni=u695098ue79dbcd4s783.gogocs.xyz&flow=xtls-rprx-vision#%F0%9F%87%BB%F0%9F%87%B3%20Vietnam%20%E2%80%A2%202543.9ms%20%E2%80%A2%20mrdevmohamed
