@@ -1,3 +1,2 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@77.75.199.30:8880?security=none&type=ws&path=/&host=vms.lifetime59.workers.dev&packetEncoding=none#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20592.2ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.178:8080?security=tls&sni=hopp-transit.1cooldns.com&alpn=h3&insecure=0#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201126.8ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201540.6ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20992.1ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.178:8080?security=tls&sni=hopp-transit.1cooldns.com&alpn=h3&insecure=0#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201102.1ms%20%E2%80%A2%20mrdevmohamed
