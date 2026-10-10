@@ -1,2 +1,6 @@
-hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20835ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.178:8080?sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20896.8ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@195.85.59.30:8880?&packet-encoding=xudp&type=ws&headerType=none&host=vms.lifetime58.workers.dev&path=%2F#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20342.4ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.178:8080?sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20724.1ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://dsmO0439gj_nX942GJRE_9j39fbcxv52_R@85.209.157.177:8080?insecure=0&sni=hopp-transit.1cooldns.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20765.1ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@77.75.199.30:8880?security=none&type=ws&path=/&host=vms.lifetime59.workers.dev&packetEncoding=none#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20791.3ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@195.85.59.30:8880?security=none&type=ws&path=/&host=vms.lifetime58.workers.dev&packetEncoding=xudp#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20948.6ms%20%E2%80%A2%20mrdevmohamed
+vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@194.55.166.65:2087?&security=tls&fp=chrome&sni=free.cndyw.ggff.net&type=ws&headerType=none&host=free.cndyw.ggff.net&path=pyip=bpb.yousef.isegaro.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201491.4ms%20%E2%80%A2%20mrdevmohamed
