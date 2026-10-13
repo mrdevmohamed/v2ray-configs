@@ -1,1 +1,2 @@
-ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0=@185.164.175.81:19999#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20607.2ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0=@185.164.175.81:19999#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20494.3ms%20%E2%80%A2%20mrdevmohamed
+vless://c6e3c24c-ce20-4ad5-8c8c-68cb05890ea8@ee-1-1.unturned-rust-dead.lol:443?type=grpc&security=reality&fp=random&pbk=aYz4_13W8gtAXGBrWeqJXtExahAJ9kUPDapqeyAlYCk&sni=ee-1-1.unturned-rust-dead.lol&serviceName=ee-grpc#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%201078.8ms%20%E2%80%A2%20mrdevmohamed
