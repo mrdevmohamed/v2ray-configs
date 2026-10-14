@@ -1,2 +1,1 @@
-trojan://humanity@131.196.254.151:443?path=/assignment&security=tls&fm=tlshello-0-len&insecure=0&host=www.pleadcourt.org&fp=chrome&type=ws&allowInsecure=0&sni=www.pleadcourt.org#%F0%9F%87%B2%F0%9F%87%BD%20Mexico%20%E2%80%A2%203331.3ms%20%E2%80%A2%20mrdevmohamed
-trojan://humanity@131.196.254.151:443?host=www.volumeroot.com&path=%2Fassignment&security=tls&sni=www.volumeroot.com&type=ws#%F0%9F%87%B2%F0%9F%87%BD%20Mexico%20%E2%80%A2%204155.9ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@131.196.254.151:443?host=www.volumeroot.com&path=%2Fassignment&security=tls&sni=www.volumeroot.com&type=ws#%F0%9F%87%B2%F0%9F%87%BD%20Mexico%20%E2%80%A2%201707.3ms%20%E2%80%A2%20mrdevmohamed
