@@ -1,6 +1,0 @@
-#profile-title: base64:8J+GkyBHaXQ6bXJkZXZtb2hhbWVkIHwgU3ViNSDwn5Sl
-#profile-update-interval: 1
-#subscription-userinfo: upload=29; download=12; total=10737418240000000; expire=2546249531
-#support-url: https://github.com/mrdevmohamed/v2ray-configs
-#profile-web-page-url: https://github.com/mrdevmohamed/v2ray-configs
-vless://4758aee6-6d1a-4306-b460-2398b5af4e35@34.35.189.111:443?encryption=none&type=raw&headerType=none&security=reality&fp=chrome&pbk=dcox8XXfkOCmKn3kgrloj6wY5o1_0brJOi2mczYmAT4&sni=www.cloudflare.com&sid=5ced03e42cc31aab#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201244ms%20%E2%80%A2%20mrdevmohamed
