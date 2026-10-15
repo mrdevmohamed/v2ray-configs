@@ -1,1 +1,1 @@
-trojan://humanity@131.196.254.151:443?host=www.volumeroot.com&path=%2Fassignment&security=tls&sni=www.volumeroot.com&type=ws#%F0%9F%87%B2%F0%9F%87%BD%20Mexico%20%E2%80%A2%201707.3ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@131.196.254.151:443?host=www.volumeroot.com&path=%2Fassignment&security=tls&sni=www.volumeroot.com&type=ws#%F0%9F%87%B2%F0%9F%87%BD%20Mexico%20%E2%80%A2%202379.3ms%20%E2%80%A2%20mrdevmohamed
