@@ -1,0 +1,2 @@
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpqM1BLT0NqN3dIbDVQazZ0aEk5SHlYdENhNkpVMTgwSWxCcFdBTmdGamtZPQ@130.49.189.158:43558?#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%201152.6ms%20%E2%80%A2%20mrdevmohamed
+vless://2ffa91fe-e1cc-4c44-a90a-45002feae978@aelix-al.safire-soleiman.ir:6311?security=reality&encryption=none&pbk=lQbgwNDYw6Zbjdim0JtXUarzb-3GSjDvtX6FJYZD9Qo&headerType=none&fp=qq&type=tcp&sni=play.google.com#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%202562.6ms%20%E2%80%A2%20mrdevmohamed
