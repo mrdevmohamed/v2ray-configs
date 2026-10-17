@@ -1,1 +1,1 @@
-vless://fb5c43f4-bd23-453d-a3cf-45ad5b9c020b@85.133.244.214:443?path=/&security=none&encryption=none&type=ws#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%206915.2ms%20%E2%80%A2%20mrdevmohamed
+vless://fb5c43f4-bd23-453d-a3cf-45ad5b9c020b@85.133.244.214:443?encryption=none&type=ws&path=%2F#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%203194.3ms%20%E2%80%A2%20mrdevmohamed

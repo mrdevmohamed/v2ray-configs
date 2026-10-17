@@ -1,1 +1,2 @@
-vless://6fab89df-d5c3-4d73-8df5-897ca352bfe8@87.120.106.130:443?encryption=none&security=tls&sni=pqro5mlb4c88.dopwiz.com&type=tcp#%F0%9F%87%B1%F0%9F%87%BA%20Luxembourg%20%E2%80%A2%202868.9ms%20%E2%80%A2%20mrdevmohamed
+vless://6fab89df-d5c3-4d73-8df5-897ca352bfe8@87.120.106.130:443?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=pqro5mlb4c88.dopwiz.com#%F0%9F%87%B1%F0%9F%87%BA%20Luxembourg%20%E2%80%A2%201383.3ms%20%E2%80%A2%20mrdevmohamed
+vless://6fab89df-d5c3-4d73-8df5-897ca352bfe8@87.120.106.130:443?encryption=none&security=tls&sni=pqro5mlb4c88.dopwiz.com&type=tcp&headerType=none#%F0%9F%87%B1%F0%9F%87%BA%20Luxembourg%20%E2%80%A2%201452.5ms%20%E2%80%A2%20mrdevmohamed
