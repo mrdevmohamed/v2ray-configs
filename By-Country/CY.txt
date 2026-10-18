@@ -1,1 +1,1 @@
-vless://04c808e2-0b59-47b0-a54b-32fc7ef1c902@194.55.166.65:2087?&security=tls&fp=chrome&sni=free.cndyw.ggff.net&type=ws&headerType=none&host=free.cndyw.ggff.net&path=pyip=bpb.yousef.isegaro.com#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201741.8ms%20%E2%80%A2%20mrdevmohamed
+vless://86c50e3a-5b87-49dd-bd20-03c7f2735e40@www.csgo.net:2095?security=none&type=ws&path=%2F&host=openapi.pure-ai.us.ci#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20818ms%20%E2%80%A2%20mrdevmohamed

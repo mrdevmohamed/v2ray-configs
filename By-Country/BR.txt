@@ -1,1 +1,1 @@
-hysteria2://CyG0RFxMjzs41uQD4OLuHQ%3D%3D@137.131.171.249:20000?insecure=1&obfs=salamander&obfs-password=CyG0RFxMjzs41uQD4OLuHQ%3D%3D&sni=rmgyvpn.rest#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%20946.7ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://CyG0RFxMjzs41uQD4OLuHQ%3D%3D@137.131.171.249:20000?insecure=1&obfs=salamander&obfs-password=CyG0RFxMjzs41uQD4OLuHQ%3D%3D&sni=rmgyvpn.rest#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%203004.5ms%20%E2%80%A2%20mrdevmohamed

@@ -1,2 +1,2 @@
-ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0=@185.164.175.81:19999#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20545.4ms%20%E2%80%A2%20mrdevmohamed
-vless://36c3dcc2-17b6-4478-b8a7-3978e6d5afe9@185.243.99.100:1222?encryption=none&type=tcp&security=reality&sni=play.google.com&fp=chrome&pbk=zpLKK8HuwXJDH9D0O3t5Z_tO3ajkj7VRtXdr6UGy1zE&sid=a25d0f&allowInsecure=0#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20883.8ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0=@185.164.175.81:19999#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20434.2ms%20%E2%80%A2%20mrdevmohamed
+vless://36c3dcc2-17b6-4478-b8a7-3978e6d5afe9@185.243.99.100:1222?encryption=none&type=tcp&security=reality&sni=play.google.com&fp=chrome&pbk=zpLKK8HuwXJDH9D0O3t5Z_tO3ajkj7VRtXdr6UGy1zE&sid=a25d0f&allowInsecure=0#%F0%9F%87%BA%F0%9F%87%A6%20Ukraine%20%E2%80%A2%20697.4ms%20%E2%80%A2%20mrdevmohamed
