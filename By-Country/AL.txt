@@ -1,2 +1,0 @@
-vless://2ffa91fe-e1cc-4c44-a90a-45002feae978@130.49.189.146:6311?security=reality&sni=play.google.com&type=tcp&fp=qq&pbk=lQbgwNDYw6Zbjdim0JtXUarzb-3GSjDvtX6FJYZD9Qo#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%203604.8ms%20%E2%80%A2%20mrdevmohamed
-vless://2ffa91fe-e1cc-4c44-a90a-45002feae978@aelix-al.safire-soleiman.ir:6311?encryption=none&type=tcp&security=reality&sni=play.google.com&fp=qq&pbk=lQbgwNDYw6Zbjdim0JtXUarzb-3GSjDvtX6FJYZD9Qo#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%205153.4ms%20%E2%80%A2%20mrdevmohamed

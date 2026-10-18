@@ -1,1 +1,1 @@
-vless://d342d11e-d224-4463-b982-532309285094@216.173.67.59:443?path=/&security=tls&encryption=none&insecure=0&host=ccc.010304.xyz&fp=chrome&type=ws&allowInsecure=0&sni=ccc.010304.xyz#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%201740.3ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@216.173.67.59:443?allowInsecure=0&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=/fp=chrome&security=tls#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%201046.7ms%20%E2%80%A2%20mrdevmohamed
