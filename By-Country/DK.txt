@@ -1,7 +1,1 @@
-vless://a05ecf37-c661-4247-ab09-4432cf0f3cc1@connect.wecantos.site:10000?encryption=none&security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%20665.6ms%20%E2%80%A2%20mrdevmohamed
-vless://a05ecf37-c661-4247-ab09-4432cf0f3cc1@connect.wecantos.site:10000?type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%20678.7ms%20%E2%80%A2%20mrdevmohamed
-vless://1a8ecc41-6e62-431b-8eca-87c2fa4dc286@edge10.cyrionflare.com:2052?security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201048.2ms%20%E2%80%A2%20mrdevmohamed
-vless://6bceb548-d9b6-461f-8e37-a5a7fbcdc2c8@milo.rubinaz.xyz:8080?type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201283.3ms%20%E2%80%A2%20mrdevmohamed
-vless://6bceb548-d9b6-461f-8e37-a5a7fbcdc2c8@milo.rubinaz.xyz:8080/?type=tcp&encryption=none#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201335.6ms%20%E2%80%A2%20mrdevmohamed
-vless://9ef61079-6f7d-4911-9608-943da85d8e6f@test.keoplentuio.xyz:2053#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%201496.6ms%20%E2%80%A2%20mrdevmohamed
-vless://9ef61079-6f7d-4911-9608-943da85d8e6f@test.keoplentuio.xyz:2053?encryption=none&security=none&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%202479.1ms%20%E2%80%A2%20mrdevmohamed
+vless://301d514e-4aa0-47b0-ba44-a0cb891cd52f@2.59.183.167:443?fp=chrome&pbk=OZVjfQBboTDTBw0baMFqzVPsVUI4FNQmspTEb0b0zW4&security=reality&sid=a1b2c3d4&sni=www.samsung.com&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%20583.1ms%20%E2%80%A2%20mrdevmohamed
