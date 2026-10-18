@@ -1,1 +1,1 @@
-vless://b83faafc-cbb7-4655-99d4-2c4c39a49d1b@150.95.109.109:2086?security=none&type=raw&encryption=none#%F0%9F%87%BB%F0%9F%87%B3%20Vietnam%20%E2%80%A2%203985ms%20%E2%80%A2%20mrdevmohamed
+vless://b83faafc-cbb7-4655-99d4-2c4c39a49d1b@150.95.109.109:2086?security=none&type=raw&encryption=none#%F0%9F%87%BB%F0%9F%87%B3%20Vietnam%20%E2%80%A2%201511.4ms%20%E2%80%A2%20mrdevmohamed
