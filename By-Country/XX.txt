@@ -1,1 +1,1 @@
-trojan://lzi0ooaq8vgy1536@86.54.42.16:27613?security=tls&alpn=h2,http/1.1&headerType=none&fp=chrome&type=tcp&allowInsecure=0#%F0%9F%8C%90%20Unknown%20%E2%80%A2%20818ms%20%E2%80%A2%20mrdevmohamed
+trojan://lzi0ooaq8vgy1536@86.54.42.16:27613?security=tls&alpn=h2,http/1.1&headerType=none&fp=chrome&type=tcp&allowInsecure=0#%F0%9F%8C%90%20Unknown%20%E2%80%A2%20850ms%20%E2%80%A2%20mrdevmohamed

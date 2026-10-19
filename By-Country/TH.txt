@@ -1,7 +1,5 @@
-vless://3c52e091-6714-4915-949f-2149fe69951b@103.86.49.57:80?path=/ws&security=&encryption=none&host=aIs.SpEeDtEsT.nEt&type=ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%20838.3ms%20%E2%80%A2%20mrdevmohamed
-vless://3c52e091-6714-4915-949f-2149fe69951b@103.86.49.57:80?encryption=none&security=none&type=ws&host=aIs.SpEeDtEsT.nEt&path=/ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%20898.4ms%20%E2%80%A2%20mrdevmohamed
-vless://3c52e091-6714-4915-949f-2149fe69951b@103.86.49.57:80?path=/ws&security=none&encryption=none&host=aIs.SpEeDtEsT.nEt&type=ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%20932.4ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@pphfree2.mvpnpvpn.de5.net:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%202690ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0=@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203116.7ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203389ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0=@pphfree2.mvpnpvpn.de5.net:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203641.4ms%20%E2%80%A2%20mrdevmohamed
+vless://3c52e091-6714-4915-949f-2149fe69951b@103.86.49.57:80?path=/ws&security=none&encryption=none&host=aIs.SpEeDtEsT.nEt&type=ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%202218.2ms%20%E2%80%A2%20mrdevmohamed
+vless://3c52e091-6714-4915-949f-2149fe69951b@103.86.49.57:80?path=/ws&security=&encryption=none&host=aIs.SpEeDtEsT.nEt&type=ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%202228.9ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203181.7ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0=@pphfree2.mvpnpvpn.de5.net:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203916.8ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@pphfree2.mvpnpvpn.de5.net:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%205103.4ms%20%E2%80%A2%20mrdevmohamed
