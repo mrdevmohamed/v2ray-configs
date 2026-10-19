@@ -1,4 +1,5 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201049.1ms%20%E2%80%A2%20mrdevmohamed
-vless://c379d8e4-c67d-42ec-a3ed-ca99d1ad0546@es2.h1cloud.net:25535?encryption=none&security=reality&sni=www.microsoft.com&fp=firefox&pbk=Jh7CocBJSA55VZcLfXwXwoQ_Hi5pV-L1vv1SY-IrSh4&sid=7642ce57308852e7&type=tcp&headerType=none#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201049.3ms%20%E2%80%A2%20mrdevmohamed
-ss://chacha20-ietf-poly1305:Xsy8Ox4yOV3xLlpxtjzs3X@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201302.1ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201317.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpYc3k4T3g0eU9WM3hMbHB4dGp6czNY@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20963.1ms%20%E2%80%A2%20mrdevmohamed
+vless://c379d8e4-c67d-42ec-a3ed-ca99d1ad0546@es2.h1cloud.net:25535?encryption=none&security=reality&sni=www.microsoft.com&fp=firefox&pbk=Jh7CocBJSA55VZcLfXwXwoQ_Hi5pV-L1vv1SY-IrSh4&sid=7642ce57308852e7&type=tcp&headerType=none#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%20977.5ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTphZHVCOUhHeFFIakEyU0JNUmprSFg2@102.37.156.224:443#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201143ms%20%E2%80%A2%20mrdevmohamed
+ss://chacha20-ietf-poly1305:Xsy8Ox4yOV3xLlpxtjzs3X@102.133.165.160:16233#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201298.4ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp0ZkFjUmlrYXdoTm9aQWh1@139.84.247.164:8388#%F0%9F%87%BF%F0%9F%87%A6%20South%20Africa%20%E2%80%A2%201307.2ms%20%E2%80%A2%20mrdevmohamed
