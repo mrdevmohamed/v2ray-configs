@@ -1,0 +1,2 @@
+ss://YWVzLTI1Ni1nY206NjJtbmdydjZyY3E4aWY4YQ==@45.89.223.16:443#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%20933.6ms%20%E2%80%A2%20mrdevmohamed
+vless://65c91ab7-a503-4b73-9f8e-e1c0b6377dc2@irnamh.g44mozgh.ir:2035?security=reality&encryption=none&pbk=tjlpmcWwDiXnVu2Wc8v8wxwmiYWtnoUNeHmXPtL5vyk&headerType=none&type=tcp&sni=play.google.com&sid=75faac3a588f5160#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%204509.3ms%20%E2%80%A2%20mrdevmohamed
