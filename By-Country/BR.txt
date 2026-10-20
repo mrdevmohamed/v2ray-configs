@@ -1,0 +1,1 @@
+vless://817b61c8-9bf0-4365-8a52-e43dfad274a6@146.235.59.153:2053?type=ws&security=tls&fp=firefox&sni=shin-ra.ccwu.cc&host=shin-ra.ccwu.cc#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%201054.3ms%20%E2%80%A2%20mrdevmohamed

@@ -1,0 +1,3 @@
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@77.75.199.30:8880?security=none&type=ws&path=/&host=vms.lifetime59.workers.dev&packetEncoding=none#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20402ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@195.85.59.30:8880?security=none&type=ws&path=/&host=vms.lifetime58.workers.dev&packetEncoding=xudp#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20491.6ms%20%E2%80%A2%20mrdevmohamed
+vless://b8df3f50-ffef-4c7e-9ef3-d5b156a47c02@88.218.95.88:443?encryption=none&security=reality&sni=www.google.com&fp=random&pbk=rRg3JiP2006ldJYh2TDPAn7dtlXLcSHdgHgkGI_HZTE&sid=43adea0ec9f97a0a&type=grpc&authority=&serviceName=grpc&mode=gun#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201851.8ms%20%E2%80%A2%20mrdevmohamed
