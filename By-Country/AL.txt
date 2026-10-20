@@ -1,3 +1,2 @@
-vless://d91783af-69e5-4293-9e68-8aad10f29080@wpbkgi5ov.vpvr4ib84nuv6hdkt.ru:3392?security=reality&encryption=none&pbk=wPF9d5XUn72iK3bLARPtWvjsJAxf8zrnxjxVKok7Zwg&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=wpbkgi5ov.vpvr4ib84nuv6hdkt.ru&sid=8ed58148fe8b10a7#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%20494.2ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNWWtNL2I1d3c2S2h5SGpCS0I2T1ppZnF6Y1hFbkRUMmpESUJXeXdZQXdzPQ==@130.49.189.158:43558#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%20836.7ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNWWtNL2I1d3c2S2h5SGpCS0I2T1ppZnF6Y1hFbkRUMmpESUJXeXdZQXdzPQ@130.49.189.158:43558?#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%20890.6ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNWWtNL2I1d3c2S2h5SGpCS0I2T1ppZnF6Y1hFbkRUMmpESUJXeXdZQXdzPQ@130.49.189.158:43558?#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%204014.8ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpNWWtNL2I1d3c2S2h5SGpCS0I2T1ppZnF6Y1hFbkRUMmpESUJXeXdZQXdzPQ==@130.49.189.158:43558#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%204089.8ms%20%E2%80%A2%20mrdevmohamed
