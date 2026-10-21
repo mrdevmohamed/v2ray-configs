@@ -1,1 +1,11 @@
-ss://YWVzLTI1Ni1nY206eEJTdEJFVnF2R3dIUG9jYw@64.176.2.21:8388#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20549.6ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform102.golnamakcert.top:80?&type=ws&headerType=none&host=platform102.halalkhor.info&path=/platform102#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20718.8ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform101.golnamakcert.top:80?&type=ws&headerType=none&host=platform101.halalkhor.info&path=%2Fplatform101#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20731.8ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform101.golnamakcert.top:80?type=ws&host=platform101.halalkhor.info&path=/platform101#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20736.7ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform101.golnamakcert.top:80?&type=ws&headerType=none&host=platform101.halalkhor.info&path=/platform101#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20739.9ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform107.golnamakcert.top:80?type=ws&path=/platform107#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20770.2ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform106.golnamakcert.top:80?type=ws&host=platform106.halalkhor.info&path=/platform106#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20797.5ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform108.golnamakcert.top:80?type=ws&encryption=none&flow=&host=platform108.halalkhor.info&path=/platform108#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20849ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform106.golnamakcert.top:80?&type=ws&headerType=none&host=platform106.halalkhor.info&path=/platform106#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20877.6ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206eEJTdEJFVnF2R3dIUG9jYw==@64.176.2.21:8388#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20899.3ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206eEJTdEJFVnF2R3dIUG9jYw@64.176.2.21:8388#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20936.9ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform102.golnamakcert.top:80?&type=ws&headerType=none&host=platform102.halalkhor.info&path=%2Fplatform102#%F0%9F%87%A8%F0%9F%87%B1%20Chile%20%E2%80%A2%20965.1ms%20%E2%80%A2%20mrdevmohamed
