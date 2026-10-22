@@ -1,1 +1,0 @@
-vless://4dc8093e-4eff-410b-bc14-b69f78209414@80.243.228.130:2085?encryption=none&mode=multi&security=none&serviceName=vless&type=grpc#%F0%9F%87%B8%F0%9F%87%B0%20Slovakia%20%E2%80%A2%20451.1ms%20%E2%80%A2%20mrdevmohamed

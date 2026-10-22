@@ -1,6 +1,7 @@
-trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?allowInsecure=1&sni=lv1.dedushka.top&alpn=http/1.1#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20675.4ms%20%E2%80%A2%20mrdevmohamed
-trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?alpn=http/1.1&fp=chrome#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20719.2ms%20%E2%80%A2%20mrdevmohamed
-trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?security=tls&sni=lv1.dedushka.top#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20733.9ms%20%E2%80%A2%20mrdevmohamed
-trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?allowInsecure=1#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20777.1ms%20%E2%80%A2%20mrdevmohamed
-trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?security=tls&sni=lv1.dedushka.top&alpn=http%2F1.1&fp=firefox#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201700.7ms%20%E2%80%A2%20mrdevmohamed
-trojan://humanity@85.31.102.163:443?sni=www.calmlunch.com&type=ws&path=%2Fassignment&host=www.calmlunch.com#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201881.5ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?allowInsecure=1&sni=lv1.dedushka.top&alpn=http/1.1#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20542.1ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?security=tls&sni=lv1.dedushka.top#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20552.5ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?allowInsecure=1#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20718.7ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?alpn=http/1.1&fp=chrome#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%20737.9ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@94.140.112.22:443?security=tls&sni=lv1.dedushka.top#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201180.7ms%20%E2%80%A2%20mrdevmohamed
+trojan://4_VfP9fKaM-3LpSVvoZuc_WUzLoCdHaA@lv1.dedushka.top:443?security=tls&sni=lv1.dedushka.top&alpn=http%2F1.1&fp=firefox#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201547.9ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@85.31.102.163:443?sni=www.calmlunch.com&type=ws&path=%2Fassignment&host=www.calmlunch.com#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201610.1ms%20%E2%80%A2%20mrdevmohamed
