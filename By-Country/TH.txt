@@ -1,6 +1,2 @@
-vless://3c52e091-6714-4915-949f-2149fe69951b@support.zoom.us.v2ray.simspeedup.com:80?type=ws&host=support.zoom.us.v2ray.simspeedup.com&path=/ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%201066ms%20%E2%80%A2%20mrdevmohamed
-vless://3c52e091-6714-4915-949f-2149fe69951b@V2rAy.SiMsPeEdUp.CoM:80?path=%2Fws&security=&encryption=none&host=aIs.SpEeDtEsT.nEt&type=ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%201112.2ms%20%E2%80%A2%20mrdevmohamed
-vless://3c52e091-6714-4915-949f-2149fe69951b@v2ray.simspeedup.com:80?security=none&type=ws&path=%2Fws&host=v2ray.simspeedup.com&packetEncoding=xudp#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%201191.2ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0=@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203641.4ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0=@pphfree2.mvpnpvpn.de5.net:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%203641.8ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%204440.4ms%20%E2%80%A2%20mrdevmohamed
+vless://3c52e091-6714-4915-949f-2149fe69951b@support.zoom.us.v2ray.simspeedup.com:80?type=ws&host=support.zoom.us.v2ray.simspeedup.com&path=/ws#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%201173.4ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206c3hhakNUd3JsSzB6bCt6bUhwWDBwMGpYSWZhdG56bEx6V2xTUTk1MEwxYz0@103.107.52.106:52351#%F0%9F%87%B9%F0%9F%87%AD%20Thailand%20%E2%80%A2%202615.4ms%20%E2%80%A2%20mrdevmohamed

@@ -1,3 +1,2 @@
-trojan://humanity@212.183.88.136:443?path=//assignment&security=tls&host=www.calmlunch.com&type=ws&sni=www.calmlunch.com#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%20965.1ms%20%E2%80%A2%20mrdevmohamed
-trojan://humanity@212.183.88.136:443?path=//assignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%201045.5ms%20%E2%80%A2%20mrdevmohamed
-trojan://humanity@212.183.88.136:443?host=www.calmlunch.com&path=//assignment&sni=www.calmlunch.com&type=ws#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%201091.1ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@212.183.88.136:443?path=//assignment&security=tls&insecure=0&host=www.calmlunch.com&type=ws&allowInsecure=0&sni=www.calmlunch.com#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%20961.7ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@212.183.88.136:443?host=www.calmlunch.com&path=//assignment&sni=www.calmlunch.com&type=ws#%F0%9F%87%A6%F0%9F%87%B9%20Austria%20%E2%80%A2%20975.4ms%20%E2%80%A2%20mrdevmohamed
