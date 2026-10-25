@@ -1,1 +1,3 @@
-vless://f7376394-cd54-11f1-bb6a-bff6d0326f6a@194.36.37.59:10004?path=/vpnjantit&security=none&encryption=none&type=ws#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201646.6ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@195.85.59.30:8880?security=none&type=ws&path=/&host=vms.lifetime58.workers.dev&packetEncoding=xudp#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%20132.6ms%20%E2%80%A2%20mrdevmohamed
+vless://a1de0630-5786-48a0-84f6-dc6f2de10d6d@213.111.177.107:443?encryption=none&security=tls&sni=vlso5.1d.mom&fp=chrome&type=ws&host=vlso5.1d.mom&path=/socks5=888:888@hkip.1d.mom:1080#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201182.2ms%20%E2%80%A2%20mrdevmohamed
+vless://f7376394-cd54-11f1-bb6a-bff6d0326f6a@194.36.37.59:10004?path=/vpnjantit&security=none&encryption=none&type=ws#%F0%9F%87%A8%F0%9F%87%BE%20Cyprus%20%E2%80%A2%201663.5ms%20%E2%80%A2%20mrdevmohamed
