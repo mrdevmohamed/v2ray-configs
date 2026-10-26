@@ -1,1 +1,0 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@45.142.120.40:8880?security=none&type=ws&path=/?ed=2560&host=vms.lifetime08.workers.dev&packetEncoding=xudp#%F0%9F%87%BB%F0%9F%87%AC%20Virgin%20Islands%20%28British%29%20%E2%80%A2%20291.3ms%20%E2%80%A2%20mrdevmohamed
