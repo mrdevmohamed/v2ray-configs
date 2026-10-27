@@ -1,2 +1,2 @@
-vless://d342d11e-d224-4463-b982-532309285094@141.11.139.215:443?encryption=none&security=tls&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=%2Ffp#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%201299.6ms%20%E2%80%A2%20mrdevmohamed
-vless://d342d11e-d224-4463-b982-532309285094@141.11.139.215:443?security=tls&type=ws&path=/&host=ccc.010304.xyz&packetEncoding=xudp&sni=ccc.010304.xyz&fp=chrome#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%201373.9ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@141.11.139.215:443?security=tls&type=ws&path=/&host=ccc.010304.xyz&packetEncoding=xudp&sni=ccc.010304.xyz&fp=chrome#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%20765.3ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@141.11.139.215:443?encryption=none&security=tls&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=%2Ffp#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%20899.4ms%20%E2%80%A2%20mrdevmohamed

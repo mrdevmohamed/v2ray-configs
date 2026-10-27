@@ -1,0 +1,1 @@
+hysteria2://146d567c-6335-4e63-a8aa-7ec068642440@nl1.obxodvpn.us:4443?security=tls&alpn=h3&insecure=0&sni=nl1.obxodvpn.us#%F0%9F%87%A7%F0%9F%87%BB%20Bouvet%20Island%20%E2%80%A2%207007.7ms%20%E2%80%A2%20mrdevmohamed
