@@ -1,6 +1,6 @@
-ss://2022-blake3-aes-128-gcm:NzJlOTQ5NWYtM2ZkYi00Cg%3D%3D@103.11.76.248:28679#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20372.6ms%20%E2%80%A2%20mrdevmohamed
-ss://MjAyMi1ibGFrZTMtYWVzLTEyOC1nY206TnpKbE9UUTVOV1l0TTJaa1lpMDBDZz09@103.11.76.248:28679#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20673.3ms%20%E2%80%A2%20mrdevmohamed
-trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?security=tls&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20793.1ms%20%E2%80%A2%20mrdevmohamed
-trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?allowInsecure=1&type=tcp&security=tls&fp=chrome&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20827.1ms%20%E2%80%A2%20mrdevmohamed
-vless://e9a8144e-5237-488a-afb1-9ca3d8d54c80@au001.zestapp778.com:35652?type=tcp&security=tls&fp=chrome&sni=au001.zestapp778.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20857.1ms%20%E2%80%A2%20mrdevmohamed
-trojan://Trojan@82164024@au.tronsg.com:443?type=tcp&security=tls&fp=chrome&sni=au.tronsg.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201416ms%20%E2%80%A2%20mrdevmohamed
+ss://MjAyMi1ibGFrZTMtYWVzLTEyOC1nY206TnpKbE9UUTVOV1l0TTJaa1lpMDBDZz09@103.11.76.248:28679#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20279.1ms%20%E2%80%A2%20mrdevmohamed
+ss://2022-blake3-aes-128-gcm:NzJlOTQ5NWYtM2ZkYi00Cg%3D%3D@103.11.76.248:28679#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20401.2ms%20%E2%80%A2%20mrdevmohamed
+trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?allowInsecure=1&type=tcp&security=tls&fp=chrome&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20773.3ms%20%E2%80%A2%20mrdevmohamed
+trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?security=tls&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20801.6ms%20%E2%80%A2%20mrdevmohamed
+vless://e9a8144e-5237-488a-afb1-9ca3d8d54c80@au001.zestapp778.com:35652?type=tcp&security=tls&fp=chrome&sni=au001.zestapp778.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20843.3ms%20%E2%80%A2%20mrdevmohamed
+trojan://Trojan@82164024@au.tronsg.com:443?type=tcp&security=tls&fp=chrome&sni=au.tronsg.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201197.7ms%20%E2%80%A2%20mrdevmohamed
