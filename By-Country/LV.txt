@@ -1,1 +1,1 @@
-trojan://humanity@185.22.172.249:443?security=tls&type=ws&host=www.pleadcourt.org&path=%2Fassignment&sni=www.pleadcourt.org#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201185ms%20%E2%80%A2%20mrdevmohamed
+trojan://humanity@185.22.172.249:443?security=tls&type=ws&host=www.pleadcourt.org&path=%2Fassignment&sni=www.pleadcourt.org#%F0%9F%87%B1%F0%9F%87%BB%20Latvia%20%E2%80%A2%201447.3ms%20%E2%80%A2%20mrdevmohamed
