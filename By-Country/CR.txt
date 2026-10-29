@@ -1,0 +1,1 @@
+trojan://humanity@190.93.245.148:443?path=/assignment&security=tls&insecure=0&host=www.pleadcourt.org&type=ws&allowInsecure=0&sni=www.pleadcourt.org#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%201312ms%20%E2%80%A2%20mrdevmohamed
