@@ -1,1 +1,2 @@
-vless://a1962f23-f8f8-412d-f2ce-3361e7b72889@169.128.83.4:57259?encryption=none&type=none#%F0%9F%8C%90%20Unknown%20%E2%80%A2%204752.5ms%20%E2%80%A2%20mrdevmohamed
+vless://0a302734-fe85-4636-b929-74d4108b078d@goold.zovip2.ir:443?path=/api/v3/pulse&security=tls&alpn=http/1.1&encryption=none&host=goold.zovip2.ir&fp=chrome&type=ws&sni=goold.zovip2.ir#%F0%9F%8C%90%20Unknown%20%E2%80%A2%201769.3ms%20%E2%80%A2%20mrdevmohamed
+vless://0a302734-fe85-4636-b929-74d4108b078d@goold.zovip2.ir:443?path=/api/v3/pulse&security=tls&alpn=http/1.1&encryption=none&insecure=0&host=goold.zovip2.ir&fp=chrome&type=ws&allowInsecure=0&sni=goold.zovip2.ir#%F0%9F%8C%90%20Unknown%20%E2%80%A2%201841.2ms%20%E2%80%A2%20mrdevmohamed
