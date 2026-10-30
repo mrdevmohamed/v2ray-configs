@@ -1,2 +1,1 @@
-vless://7b22dce8-7ebd-425b-8ca4-7b6190321985@82.22.2.225:443?fp=qq&security=tls&serviceName=grpc&sni=b-wl.fr-2.bnc-gt.co.uk&type=grpc#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%20515.4ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsc3Uxdi8zaU5FUndERFZ3eEN1NTAzM0tDVXFRT29FbFlRdWw2M2ttcUo4PQ@130.49.189.158:43558#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%201569.1ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpsc3Uxdi8zaU5FUndERFZ3eEN1NTAzM0tDVXFRT29FbFlRdWw2M2ttcUo4PQ@130.49.189.158:43558#%F0%9F%87%A6%F0%9F%87%B1%20Albania%20%E2%80%A2%201024.1ms%20%E2%80%A2%20mrdevmohamed

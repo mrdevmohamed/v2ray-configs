@@ -1,0 +1,1 @@
+vless://8fa83828-9777-4a5b-a951-60a4523f3e3d@2.27.71.20:443?fp=chrome&path=%2Fws&security=tls&sni=q5vt8.syncpointbase.online&type=ws#%F0%9F%87%A7%F0%9F%87%BB%20Bouvet%20Island%20%E2%80%A2%201114.8ms%20%E2%80%A2%20mrdevmohamed
