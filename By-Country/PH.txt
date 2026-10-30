@@ -1,4 +1,0 @@
-vless://e9a8144e-5237-488a-afb1-9ca3d8d54c80@ph001.zestapp778.com:15656?security=tls&encryption=none&insecure=0&headerType=none&fp=chrome&type=tcp&allowInsecure=0&sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201374.9ms%20%E2%80%A2%20mrdevmohamed
-vless://e9a8144e-5237-488a-afb1-9ca3d8d54c80@ph001.zestapp778.com:15656?security=tls&encryption=none&insecure=0&headerType=none&type=tcp&allowInsecure=0&sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201397.4ms%20%E2%80%A2%20mrdevmohamed
-vless://e9a8144e-5237-488a-afb1-9ca3d8d54c80@ph001.zestapp778.com:15656?fp=chrome&security=tls&sni=ph001.zestapp778.com&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201726.9ms%20%E2%80%A2%20mrdevmohamed
-trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46293?type=tcp&security=tls&fp=chrome&sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201780.3ms%20%E2%80%A2%20mrdevmohamed
