@@ -1,5 +1,5 @@
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@103.115.109.49:443/?insecure=1&sni=https%3A%2F%2Ft.me%2Foneclickvpnkeys#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20594ms%20%E2%80%A2%20mrdevmohamed
-hysteria2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=vpn-tw-002.fastervpn.world#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20606.8ms%20%E2%80%A2%20mrdevmohamed
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=127.0.0.1#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20637.5ms%20%E2%80%A2%20mrdevmohamed
-trojan://0a9f1f5a397bd427@125.227.86.45:443?allowInsecure=1&sni=TG.freecodes&alpn=h2&type=grpc&serviceName=db#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20653.7ms%20%E2%80%A2%20mrdevmohamed
-vless://91ad30e9-ab06-4b4c-9fb9-1c2aa97d8b3a@152.32.167.33:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.amazon.com&fp=firefox&security=reality&pbk=Q8QwBSGN6J-FqgDV1pYNm0VThS_xNRyQ3DPPa9YZ3j4&sid=cff998a4#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20750.8ms%20%E2%80%A2%20mrdevmohamed
+hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@103.115.109.49:443/?insecure=1&sni=https%3A%2F%2Ft.me%2Foneclickvpnkeys#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20694.5ms%20%E2%80%A2%20mrdevmohamed
+hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=127.0.0.1#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20727.9ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://H7mP2xY9kJ4nQ8wR5tF6vB3z@vpn-tw-002.fastervpn.world:443/?insecure=1&sni=vpn-tw-002.fastervpn.world#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20740.8ms%20%E2%80%A2%20mrdevmohamed
+trojan://0a9f1f5a397bd427@125.227.86.45:443?allowInsecure=1&sni=TG.freecodes&alpn=h2&type=grpc&serviceName=db#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20763ms%20%E2%80%A2%20mrdevmohamed
+vless://91ad30e9-ab06-4b4c-9fb9-1c2aa97d8b3a@152.32.167.33:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.amazon.com&fp=firefox&security=reality&pbk=Q8QwBSGN6J-FqgDV1pYNm0VThS_xNRyQ3DPPa9YZ3j4&sid=cff998a4#%F0%9F%87%B9%F0%9F%87%BC%20Taiwan%20%E2%80%A2%20880.7ms%20%E2%80%A2%20mrdevmohamed
