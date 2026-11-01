@@ -1,2 +1,3 @@
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@185.213.23.63:990#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%E2%80%A2%20465.2ms%20%E2%80%A2%20mrdevmohamed
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@185.213.23.63:990#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%E2%80%A2%20570ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ==@185.213.23.63:990#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%E2%80%A2%20538.1ms%20%E2%80%A2%20mrdevmohamed
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBUmd2R1p5d0ErZ2FjZ0dWMjZCdm11MDUrd1ptUlcvaitBZFUrWjhCdDQ0PQ@185.213.23.63:990#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%E2%80%A2%20909.7ms%20%E2%80%A2%20mrdevmohamed
+vless://f07b2e36-b533-4cdd-9a70-58d5e0e6eeee@dl6.6at.ir:2157?encryption=none&security=reality&type=tcp&headerType=none&flow=xtls-rprx-vision&sni=in.tradingview.com&fp=chrome&pbk=pzcfnv7AdzlRSwJFlo4JHhNNVVIjKiYBlwvR9QumLHo&sid=a88e66a27d5a9921#%F0%9F%87%B3%F0%9F%87%B4%20Norway%20%E2%80%A2%201049.9ms%20%E2%80%A2%20mrdevmohamed

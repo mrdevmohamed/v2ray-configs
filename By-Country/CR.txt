@@ -1,1 +1,1 @@
-trojan://humanity@190.93.245.148:443?path=/assignment&security=tls&insecure=0&host=www.pleadcourt.org&type=ws&allowInsecure=0&sni=www.pleadcourt.org#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%203233.2ms%20%E2%80%A2%20mrdevmohamed
+vless://1fc13329-ad0b-4848-85e7-29f9bb553556@190.93.247.200:443?path=%2Fstream%2FDEVCOP%2F29f9bb553556%2Floc-3&security=tls&encryption=none&insecure=0&host=vidag-xqtz.mml007.workers.dev&fp=chrome&type=ws&allowInsecure=0&sni=vidag-xqtz.mml007.workers.dev#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%203681ms%20%E2%80%A2%20mrdevmohamed
