@@ -1,2 +1,2 @@
-vless://d342d11e-d224-4463-b982-532309285094@216.173.67.59:443?allowInsecure=0&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=/fp=chrome&security=tls#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%202112.7ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@130.94.69.15:7001?#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%202317.7ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@130.94.69.15:7001?#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%201602.8ms%20%E2%80%A2%20mrdevmohamed
+vless://d342d11e-d224-4463-b982-532309285094@216.173.67.59:443?allowInsecure=0&sni=ccc.010304.xyz&type=ws&host=ccc.010304.xyz&path=/fp=chrome&security=tls#%F0%9F%87%B2%F0%9F%87%BE%20Malaysia%20%E2%80%A2%202051.3ms%20%E2%80%A2%20mrdevmohamed
