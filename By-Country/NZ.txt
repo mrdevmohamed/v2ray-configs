@@ -1,1 +1,2 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@114.129.43.30:8880/?type=ws&encryption=none&flow=&host=vms.lifetime04.workers.dev&path=%2F#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20865ms%20%E2%80%A2%20mrdevmohamed
+vless://254f28cb-d0c1-41e9-a06b-f2155213ff04@ams2.shtil.io:444?encryption=none&flow=xtls-rprx-vision&security=tls&sni=ams2.shtil.io&alpn=h2%2Chttp%2F1.1&fp=firefox&type=tcp#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20678.5ms%20%E2%80%A2%20mrdevmohamed
+vless://254f28cb-d0c1-41e9-a06b-f2155213ff04@177.177.215.45:444?encryption=none&flow=xtls-rprx-vision&security=tls&sni=ams2.shtil.io&type=tcp&fp=chrome#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%20704ms%20%E2%80%A2%20mrdevmohamed
