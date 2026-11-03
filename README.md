@@ -204,7 +204,7 @@ The update workflow can send Telegram messages when it discovers new, protocol-v
 - Transport is **WebSocket** (`type=ws` for VLESS or `net=ws` for VMess).
 - The actual server port is **80**.
 
-Servers are grouped by protocol and sorted by ascending measured latency. Each message contains the country, endpoint, latency, and complete importable configuration URI. Long result sets are split into Telegram-safe messages.
+Servers are grouped by protocol and sorted by ascending measured latency. Messages use Telegram HTML formatting with clear protocol headings, bold country/latency labels, and each complete importable configuration URI in a monospaced code field for easier copying. Dynamic metadata and URI characters are safely HTML-escaped. Long result sets are split into Telegram-safe messages.
 
 To enable notifications, open **Settings → Secrets and variables → Actions** in this repository and add these repository secrets:
 
