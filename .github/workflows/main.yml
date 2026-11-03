@@ -160,14 +160,3 @@ jobs:
           done
           echo "::error::Could not push after 3 attempts"
           exit 1
-
-      - name: Notify Telegram about new port-80 WebSocket servers
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python Files/telegram_notify.py \
-            --metrics server-metrics.json \
-            --previous "$RUNNER_TEMP/previous-server-metrics.json"
-        # A Telegram outage must not invalidate a successfully published dataset.
-        continue-on-error: true
