@@ -16,6 +16,7 @@ Automated collection of V2Ray/Xray-compatible configuration URIs, aggregated fro
 - **Protocol-specific subscriptions** for clients that need a single protocol.
 - **Dynamic 1000-config packs** generated according to the current dataset size.
 - **Automated validation tests** run before the configuration pipeline.
+- **Telegram alerts** for newly discovered port-80 VLESS/VMess WebSocket servers, sorted by protocol and latency.
 - **No registration or application account** is required to download the generated files.
 
 ## Supported Protocols
@@ -194,6 +195,25 @@ The GitHub Actions workflow:
 7. Commits generated output changes back to the repository.
 
 Concurrent scheduled runs are prevented from publishing overlapping updates.
+
+## Telegram Notifications
+
+The update workflow can send Telegram messages when it discovers new, protocol-validated servers matching all of these conditions:
+
+- Protocol is **VLESS** or **VMess**.
+- Transport is **WebSocket** (\`type=ws\` for VLESS or \`net=ws\` for VMess).
+- The actual server port is **80**.
+
+Servers are grouped by protocol and sorted by ascending measured latency. Each message contains the country, endpoint, latency, and complete importable configuration URI. Long result sets are split into Telegram-safe messages.
+
+To enable notifications, open **Settings → Secrets and variables → Actions** in this repository and add these repository secrets:
+
+| Secret | Value |
+| --- | --- |
+| \`TELEGRAM_BOT_TOKEN\` | Token created with Telegram's BotFather |
+| \`TELEGRAM_CHAT_ID\` | Your private chat ID or target group ID |
+
+Start a chat with your bot (or add it to the target group) before the first notification. The workflow compares the current metrics with the previous run and sends **new matching configurations only**, avoiding a repeated message on every scheduled refresh. A changed server configuration is treated as new. If the secrets are absent, notification is skipped. Telegram delivery failures are reported by the step but do not fail the config publication.
 
 ## Data Quality
 
