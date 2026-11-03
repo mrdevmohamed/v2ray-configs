@@ -7,6 +7,7 @@ import argparse
 import base64
 import binascii
 import hashlib
+import html
 import json
 import os
 import sys
@@ -174,25 +175,42 @@ def _telegram_length(value: str) -> int:
     return len(value.encode("utf-16-le")) // 2
 
 
-def _server_block(server: dict[str, Any]) -> str:
-    country = str(server.get("country") or "Unknown").replace("\r", " ").replace("\n", " ")
-    code = str(server.get("country_code") or "XX").replace("\r", " ").replace("\n", " ")
-    host = str(server.get("host") or "unknown").replace("\r", " ").replace("\n", " ")
+def _html_text(value: Any) -> str:
+    """Escape dynamic server metadata and URI text for Telegram HTML mode."""
+    return html.escape(str(value), quote=False).replace("\r", " ").replace("\n", " ")
+
+
+def _server_block(server: dict[str, Any], number: int) -> str:
+    country = _html_text(server.get("country") or "Unknown")
+    code = _html_text(server.get("country_code") or "XX")
+    host = _html_text(server.get("host") or "unknown")
     try:
         latency = f"{float(server.get('latency_ms')):.1f} ms"
     except (TypeError, ValueError):
         latency = "latency unavailable"
-    config = str(server["config"]).replace("\r", " ").replace("\n", " ")
-    return f"{country} [{code}] | {host}:80 | {latency}\n{config}\n"
+    config = _html_text(server["config"])
+    return (
+        f"<b>{number}. {country} [{code}]</b>\n"
+        f"<code>{host}:80</code>  |  <b>{latency}</b>\n"
+        f"<code>{config}</code>\n"
+    )
+
+
+def _message_header() -> str:
+    return (
+        "<b>🛰️ New WebSocket Servers</b>\n"
+        "<code>Port 80</code>  |  <b>VLESS + VMess</b>\n"
+        "<i>Validated configurations, sorted by latency</i>\n"
+    )
 
 
 def build_message_batches(
     servers: list[dict[str, Any]], max_length: int = MESSAGE_LIMIT
 ) -> list[tuple[str, list[dict[str, Any]]]]:
-    """Build Telegram-safe messages and retain each message's server records."""
+    """Build Telegram HTML messages and retain each message's server records."""
     if not servers:
         return []
-    if max_length <= _telegram_length(MESSAGE_TITLE) + 80:
+    if max_length <= _telegram_length(_message_header()) + 80:
         raise ValueError("message limit is too small")
 
     grouped = {
@@ -200,23 +218,26 @@ def build_message_batches(
         for protocol in ("vless", "vmess")
     }
     batches: list[tuple[str, list[dict[str, Any]]]] = []
-    current = MESSAGE_TITLE
+    current = _message_header()
     current_protocol: str | None = None
     current_servers: list[dict[str, Any]] = []
 
     for protocol in ("vless", "vmess"):
         group = grouped[protocol]
-        for server in group:
-            section = f"\n{protocol.upper()} ({len(group)})\n" if current_protocol != protocol else ""
-            block = _server_block(server)
+        for index, server in enumerate(group, start=1):
+            section = (
+                f"\n<b>{protocol.upper()} • {len(group)} server(s)</b>\n"
+                if current_protocol != protocol else ""
+            )
+            block = _server_block(server, index)
             if _telegram_length(current + section + block) > max_length:
                 if not current_servers:
                     raise ValueError("a single server entry exceeds Telegram's message limit")
                 batches.append((current.rstrip(), current_servers))
-                current = MESSAGE_TITLE
+                current = _message_header()
                 current_protocol = None
                 current_servers = []
-                section = f"\n{protocol.upper()} ({len(group)}; continued)\n"
+                section = f"\n<b>{protocol.upper()} • continued</b>\n"
             if _telegram_length(current + section + block) > max_length:
                 raise ValueError("a single server entry exceeds Telegram's message limit")
             current += section + block
@@ -245,6 +266,7 @@ def send_telegram_message(
             json={
                 "chat_id": chat_id,
                 "text": message,
+                "parse_mode": "HTML",
                 "disable_web_page_preview": True,
             },
             timeout=20,

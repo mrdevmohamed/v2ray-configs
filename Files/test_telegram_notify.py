@@ -102,6 +102,31 @@ class MessageTests(unittest.TestCase):
             self.assertLessEqual(len(message.encode("utf-16-le")) // 2, 500)
         self.assertTrue(all("vless://" in message for message in messages))
 
+    def test_html_formatting_escapes_config_query_parameters(self):
+        server = {
+            **metric("vless://uuid@example.com:80?type=ws&host=cdn.example.com&path=%2Fws"),
+            "protocol": "vless",
+        }
+        message = build_messages([server])[0]
+        self.assertIn("<b>VLESS • 1 server(s)</b>", message)
+        self.assertIn("<code>example.com:80</code>", message)
+        self.assertIn(
+            "<code>vless://uuid@example.com:80?type=ws&amp;host=cdn.example.com&amp;path=%2Fws</code>",
+            message,
+        )
+        self.assertNotIn("&host=cdn.example.com", message)
+
+    def test_html_metadata_is_escaped(self):
+        server = {
+            **metric("vless://uuid@example.com:80?type=ws"),
+            "protocol": "vless",
+            "country": "A <B> & C",
+            "host": "edge&node.example.com",
+        }
+        message = build_messages([server])[0]
+        self.assertIn("A &lt;B&gt; &amp; C", message)
+        self.assertIn("edge&amp;node.example.com:80", message)
+
     def test_batches_keep_their_server_records(self):
         servers = [
             {
@@ -174,6 +199,7 @@ class StateAndDeliveryTests(unittest.TestCase):
         self.assertEqual(post.call_args.kwargs["json"]["chat_id"], "12345")
         self.assertEqual(post.call_args.kwargs["json"]["text"], "hello")
         self.assertTrue(post.call_args.kwargs["json"]["disable_web_page_preview"])
+        self.assertEqual(post.call_args.kwargs["json"]["parse_mode"], "HTML")
 
     @patch("telegram_notify.requests.post")
     def test_delivery_error_does_not_expose_bot_token(self, post):
