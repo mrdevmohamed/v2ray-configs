@@ -114,6 +114,14 @@ jobs:
             echo "- Countries: $(ls By-Country/*.txt 2>/dev/null | wc -l)"
           } >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Notify Telegram about new port-80 WebSocket servers
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python Files/telegram_notify.py --metrics server-metrics.json --state .github/telegram-notified.json
+        # State is checkpointed after each successful Telegram message; publication continues on API errors.
+        continue-on-error: true
+
       - name: Commit and push files
         run: |
           set -euo pipefail
@@ -129,7 +137,8 @@ jobs:
             'Base64/Sub*_base64.txt' \
             'Splitted-By-Protocol/*.txt' \
             'By-Country/*.txt' \
-            server-metrics.json; do
+            server-metrics.json \
+            .github/telegram-notified.json; do
             git add -A -- "$path" 2>/dev/null || true
           done
 
