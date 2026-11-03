@@ -1,1 +1,1 @@
-vless://9dd38d60-e683-47c6-bd53-d71bdfee78f3@179.43.187.67:443?type=tcp&security=tls&fp=chrome&sni=portal.mavexa.ir#%F0%9F%87%B5%F0%9F%87%A6%20Panama%20%E2%80%A2%20811.2ms%20%E2%80%A2%20mrdevmohamed
+vless://9dd38d60-e683-47c6-bd53-d71bdfee78f3@179.43.187.67:443?type=tcp&security=tls&fp=chrome&sni=portal.mavexa.ir#%F0%9F%87%B5%F0%9F%87%A6%20Panama%20%E2%80%A2%20921.2ms%20%E2%80%A2%20mrdevmohamed
