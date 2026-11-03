@@ -1,4 +1,2 @@
-vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20835.2ms%20%E2%80%A2%20mrdevmohamed
-vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&host=95.174.68.188&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20835.7ms%20%E2%80%A2%20mrdevmohamed
-vless://39947382-3212-41c9-bc3a-589574ac8b23@uae.unixzone.us:22573?encryption=none&security=none&type=ws&host=uae.unixzone.us&path=/#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20932.8ms%20%E2%80%A2%20mrdevmohamed
-vless://39947382-3212-41c9-bc3a-589574ac8b23@uae.unixzone.us:22573?encryption=none&security=&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%205052.1ms%20%E2%80%A2%20mrdevmohamed
+vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&host=95.174.68.188&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20988ms%20%E2%80%A2%20mrdevmohamed
+vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20994.3ms%20%E2%80%A2%20mrdevmohamed
