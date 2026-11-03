@@ -1,0 +1,1 @@
+vless://483079ae-79ba-48aa-9071-340b79117a22@45.148.117.151:38291?security=reality&encryption=none&pbk=PNT2xM-R4OpFcV-bVO1Fgdb_C8tuB32bGIznjy2YYzc&headerType=none&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=reality.airvpn.su&sid=55e00de72e977e65#%F0%9F%87%AC%F0%9F%87%AA%20Georgia%20%E2%80%A2%20879.5ms%20%E2%80%A2%20mrdevmohamed
