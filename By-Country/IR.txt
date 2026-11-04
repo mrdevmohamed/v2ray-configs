@@ -1,0 +1,1 @@
+vless://93579113-3df4-4206-8124-a75d381a3e32@31.14.116.80:8443?encryption=none&security=none&type=tcp#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%202612.8ms%20%E2%80%A2%20mrdevmohamed
