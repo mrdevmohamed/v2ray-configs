@@ -1,2 +1,1 @@
-vless://6202b230-417c-4d8e-b624-0f71afa9c75d@185.225.195.30:8880?path=/&security=none&encryption=none&host=vms.lifetime18.workers.dev&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20306.1ms%20%E2%80%A2%20mrdevmohamed
-vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&host=95.174.68.188&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20925.9ms%20%E2%80%A2%20mrdevmohamed
+vless://965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0@95.174.68.188:14430?encryption=none&host=95.174.68.188&path=/vless&security=none&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%201070.5ms%20%E2%80%A2%20mrdevmohamed
