@@ -1,1 +1,2 @@
-vless://39947382-3212-41c9-bc3a-589574ac8b23@uae.unixzone.us:22573?encryption=none&security=&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20966.8ms%20%E2%80%A2%20mrdevmohamed
+vless://6202b230-417c-4d8e-b624-0f71afa9c75d@185.225.195.30:8880?path=/&security=none&encryption=none&host=vms.lifetime18.workers.dev&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20276.9ms%20%E2%80%A2%20mrdevmohamed
+vless://39947382-3212-41c9-bc3a-589574ac8b23@uae.unixzone.us:22573?encryption=none&security=&type=ws#%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%201279.3ms%20%E2%80%A2%20mrdevmohamed

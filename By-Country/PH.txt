@@ -1,4 +1,4 @@
-trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201420.1ms%20%E2%80%A2%20mrdevmohamed
-trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com&type=tcp&headerType=none#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201494.5ms%20%E2%80%A2%20mrdevmohamed
-trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201521.8ms%20%E2%80%A2%20mrdevmohamed
-trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201522.2ms%20%E2%80%A2%20mrdevmohamed
+trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201472.7ms%20%E2%80%A2%20mrdevmohamed
+trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?sni=ph001.zestapp778.com#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201724.9ms%20%E2%80%A2%20mrdevmohamed
+trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com&type=tcp&headerType=none#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%201808.2ms%20%E2%80%A2%20mrdevmohamed
+trojan://5t6i121em5lkmsmk@ph001.zestapp778.com:46298?security=tls&sni=ph001.zestapp778.com&type=tcp#%F0%9F%87%B5%F0%9F%87%AD%20Philippines%20%E2%80%A2%202186.3ms%20%E2%80%A2%20mrdevmohamed
