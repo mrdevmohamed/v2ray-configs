@@ -1,0 +1,1 @@
+vless://f0bdf133-ad83-495e-bbb2-13f6e0a6bf6a@83.141.93.50:34243?encryption=none&security=reality&sni=it.nvidia.com&fp=chrome&pbk=wBq0ryrrs4o5r99fGzCfgkd3JYQHH4BhjwSQSPlE6xg&sid=732f&spx=/e61f54e467c3b2e&type=grpc&mode=gun&authority=&serviceName=#%F0%9F%87%AE%F0%9F%87%AA%20Ireland%20%E2%80%A2%201131.1ms%20%E2%80%A2%20mrdevmohamed
