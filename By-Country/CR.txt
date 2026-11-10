@@ -1,1 +1,1 @@
-vless://9443badf-414f-4b12-b19a-7cc2c7431163@190.93.244.47:8443?encryption=none&fp=chrome&host=moz.ar-marz.fun&path=/man&security=tls&sni=moz.ar-marz.fun&type=ws#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%20748.1ms%20%E2%80%A2%20mrdevmohamed
+vless://9443badf-414f-4b12-b19a-7cc2c7431163@190.93.244.47:8443?encryption=none&fp=chrome&host=moz.ar-marz.fun&path=/man&security=tls&sni=moz.ar-marz.fun&type=ws#%F0%9F%87%A8%F0%9F%87%B7%20Costa%20Rica%20%E2%80%A2%201597.3ms%20%E2%80%A2%20mrdevmohamed
