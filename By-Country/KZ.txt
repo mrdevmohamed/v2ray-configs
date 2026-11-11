@@ -1,1 +1,0 @@
-vless://83cc8226-1087-49ae-aac3-1f157ddc57b4@176.120.21.23:443?encryption=none&flow=xtls-rprx-vision&pbk=OAU9917HKYqvTO59c9SvAL9BBh8v85tfJhw5PMg-2iU&security=reality&sid=c4d4cf50489d51&sni=yahoo.com&type=tcp#%F0%9F%87%B0%F0%9F%87%BF%20Kazakhstan%20%E2%80%A2%206845.8ms%20%E2%80%A2%20mrdevmohamed
