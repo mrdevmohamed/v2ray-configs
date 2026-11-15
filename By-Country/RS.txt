@@ -1,1 +1,1 @@
-hy2://307ee0e53ea04dfd86a7f2f9fcd53844@s5.libertyrunet.store:443/?hop_interval=10&sni=s5.libertyrunet.store#%F0%9F%87%B7%F0%9F%87%B8%20Serbia%20%E2%80%A2%201429.5ms%20%E2%80%A2%20mrdevmohamed
+hy2://307ee0e53ea04dfd86a7f2f9fcd53844@s5.libertyrunet.store:443/?hop_interval=10&sni=s5.libertyrunet.store#%F0%9F%87%B7%F0%9F%87%B8%20Serbia%20%E2%80%A2%201140ms%20%E2%80%A2%20mrdevmohamed
