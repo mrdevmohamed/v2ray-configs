@@ -1,2 +1,1 @@
-vless://081cd1d2-4a06-440b-b68a-1472a6aa69f1@bg.spirako.com:8443?security=reality&encryption=none&pbk=0hH6R90pSxwm7nZPGtJJcJFhwCXU3Rvf-wcEHE7hczo&headerType=none&fp=ios&type=tcp&flow=xtls-rprx-vision&sni=apple.com&sid=9ce04f63#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%20606ms%20%E2%80%A2%20mrdevmohamed
-ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@94.156.250.148:7001#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%205134.5ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@94.156.250.148:7001#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%201381.4ms%20%E2%80%A2%20mrdevmohamed
