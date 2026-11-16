@@ -1,1 +1,1 @@
-vless://301d514e-4aa0-47b0-ba44-a0cb891cd52f@2.59.183.167:443?encryption=none&fp=&pbk=OZVjfQBboTDTBw0baMFqzVPsVUI4FNQmspTEb0b0zW4&security=reality&sid=a1b2c3d4&sni=www.samsung.com&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%20438ms%20%E2%80%A2%20mrdevmohamed
+vless://8197b9b9-8945-460f-99c9-325ef8a8a7c3@193.181.210.205:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=arZrNPbhlxNAGMzO_g2Dx3AAV_FEMnFyydbBsyZUCiY&security=reality&sid=54005328cd&sni=dk1.gofizz.in&type=tcp#%F0%9F%87%A9%F0%9F%87%B0%20Denmark%20%E2%80%A2%20517ms%20%E2%80%A2%20mrdevmohamed
