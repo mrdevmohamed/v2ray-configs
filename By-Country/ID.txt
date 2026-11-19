@@ -1,0 +1,1 @@
+vless://fd90e601-a56c-42b8-aab7-aa02d26fcb04@31.58.213.31:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&security=tls&sni=app.streamru2.net&type=tcp#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%20393.9ms%20%E2%80%A2%20mrdevmohamed
