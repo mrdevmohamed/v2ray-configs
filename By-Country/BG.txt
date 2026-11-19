@@ -1,1 +1,2 @@
-vless://a346c521-7a7f-452b-9356-a4893feb5982@93.123.101.198:443?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=de14-r.bankai.party&pbk=FWitre1jinQR7qz5HQ0q2Q4Gg9xA9B0SyizCziN7Ch0&fp=qq#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%20764.8ms%20%E2%80%A2%20mrdevmohamed
+vless://a346c521-7a7f-452b-9356-a4893feb5982@93.123.101.198:443?encryption=none&flow=xtls-rprx-vision&type=tcp&security=reality&sni=de14-r.bankai.party&pbk=FWitre1jinQR7qz5HQ0q2Q4Gg9xA9B0SyizCziN7Ch0&fp=qq#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%20714.6ms%20%E2%80%A2%20mrdevmohamed
+ss://YWVzLTI1Ni1nY206UmV4bkJnVTdFVjVBRHhH@94.156.250.148:7001#%F0%9F%87%A7%F0%9F%87%AC%20Bulgaria%20%E2%80%A2%20812.5ms%20%E2%80%A2%20mrdevmohamed
