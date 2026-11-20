@@ -1,1 +1,0 @@
-vless://ca60984f-b1f0-4073-bd33-4c75168f749a@31.59.148.132:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=c8IEc_c_QBmI5YAwILoVH0xw2xC4AJgJDKEYKcmKogo&security=reality&sid=7f2e9c4b1a8d6e55&sni=nl-salad-12.fantoff.online&type=tcp#%F0%9F%87%AE%F0%9F%87%A9%20Indonesia%20%E2%80%A2%20649.8ms%20%E2%80%A2%20mrdevmohamed
