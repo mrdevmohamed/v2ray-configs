@@ -1,3 +1,3 @@
-hysteria2://linlin-2026@13.55.52.44:36712/?insecure=1&sni=13.55.52.44#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201016.4ms%20%E2%80%A2%20mrdevmohamed
-trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?security=tls&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201063ms%20%E2%80%A2%20mrdevmohamed
-trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?allowInsecure=0&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201257.2ms%20%E2%80%A2%20mrdevmohamed
+hysteria2://linlin-2026@13.55.52.44:36712/?insecure=1&sni=13.55.52.44#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20949.8ms%20%E2%80%A2%20mrdevmohamed
+trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?security=tls&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201532.8ms%20%E2%80%A2%20mrdevmohamed
+trojan://0ab6c98dae3b48e8b9c4a776b6c9c19a@45.63.30.142:443?allowInsecure=0&sni=connectwithemployerstohireyouridealteam.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201595.1ms%20%E2%80%A2%20mrdevmohamed
