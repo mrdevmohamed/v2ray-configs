@@ -1,1 +1,0 @@
-vless://0b7337bf-dcff-432b-9ec6-b4fb6d22fc92@45.135.235.255:443?encryption=none&fp=chrome&host=worker3.fivon81984.workers.dev&path=/&security=tls&sni=worker3.fivon81984.workers.dev&type=ws#%F0%9F%87%A7%F0%9F%87%BF%20Belize%20%E2%80%A2%20267.6ms%20%E2%80%A2%20mrdevmohamed

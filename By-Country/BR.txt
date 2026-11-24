@@ -1,1 +1,1 @@
-vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform102.golnamakcert.top:80?encryption=none&host=platform102.halalkhor.info&path=/platform102&security=none&type=ws#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%20696.1ms%20%E2%80%A2%20mrdevmohamed
+vless://e13cf851-b4fd-413b-8d49-146e6eb8e5d4@platform102.golnamakcert.top:80?encryption=none&host=platform102.halalkhor.info&path=/platform102&security=none&type=ws#%F0%9F%87%A7%F0%9F%87%B7%20Brazil%20%E2%80%A2%20610.2ms%20%E2%80%A2%20mrdevmohamed
