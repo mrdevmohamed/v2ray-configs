@@ -1,4 +1,5 @@
-vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:10443?encryption=none&security=none&type=tcp&headerType=none#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%20664.6ms%20%E2%80%A2%20mrdevmohamed
-vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:14430?path=/vless&security=none&encryption=none&host=178.172.227.124&type=ws#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%20765ms%20%E2%80%A2%20mrdevmohamed
-vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:10443?#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%201859.2ms%20%E2%80%A2%20mrdevmohamed
-vless://b6e5dc56-836f-48c1-9163-b0b0b43b647d@178.172.227.228:14430?type=ws&host=178.172.227.228&path=/vless#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%201996.2ms%20%E2%80%A2%20mrdevmohamed
+vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:10443?encryption=none&security=none&type=tcp&headerType=none#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%201848.4ms%20%E2%80%A2%20mrdevmohamed
+vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:10443?#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%203143ms%20%E2%80%A2%20mrdevmohamed
+vless://1af36694-b548-4b18-89a0-bc076eab4ed7@178.172.227.124:14430?path=/vless&security=none&encryption=none&host=178.172.227.124&type=ws#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%203808.2ms%20%E2%80%A2%20mrdevmohamed
+vless://b6e5dc56-836f-48c1-9163-b0b0b43b647d@178.172.227.228:14430?path=/vless&security=none&encryption=none&host=178.172.227.228&type=ws#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%205042.5ms%20%E2%80%A2%20mrdevmohamed
+vless://b6e5dc56-836f-48c1-9163-b0b0b43b647d@178.172.227.228:14430?type=ws&host=178.172.227.228&path=/vless#%F0%9F%87%A7%F0%9F%87%BE%20Belarus%20%E2%80%A2%206865.7ms%20%E2%80%A2%20mrdevmohamed

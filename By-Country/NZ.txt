@@ -1,1 +1,0 @@
-vless://89be587f-0e93-4c67-822e-98ad0a56c29e@103.119.15.175:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.amazon.com&fp=chrome&security=reality&pbk=vQgrNIQTmbTIqtauDixzp2ePvd-aK_zlTctIDRPk3wQ&sid=ce90a4459f024897#%F0%9F%87%B3%F0%9F%87%BF%20New%20Zealand%20%E2%80%A2%205467.8ms%20%E2%80%A2%20mrdevmohamed
