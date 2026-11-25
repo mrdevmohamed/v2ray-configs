@@ -1,2 +1,0 @@
-hy2://b42d90fa667942aebc734d60@159.13.55.48:20000?sni=hy2-au2.whuiy.xyz&obfs=salamander&obfs-password=b42d90fa667942aebc734d60#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%20886.9ms%20%E2%80%A2%20mrdevmohamed
-vless://f7fa5a16-1279-46ba-ac18-001b41884080@46.250.240.80:2053?type=tcp&security=reality&fp=chrome&pbk=nrG0dLD2wazG9wHwqCDb7sF6UNRophzBmCX3hDxuqAE&sid=3611e663b53177f2&sni=www.cloudflare.com#%F0%9F%87%A6%F0%9F%87%BA%20Australia%20%E2%80%A2%201361ms%20%E2%80%A2%20mrdevmohamed
