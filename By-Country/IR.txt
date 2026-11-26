@@ -1,0 +1,1 @@
+vless://3558c89d-8498-41ea-8739-59c1af4f537b@ir.g-boot.ir:443?encryption=none&flow=xtls-rprx-vision&security=reality&fp=chrome&pbk=KaVqOudPdBy9TIEDxGMN_fcOGlKJmNg2e2grikDJ2lE&sid=9a597f16c2171bab&sni=www.nvidia.com&type=tcp&headerType=none#%F0%9F%87%AE%F0%9F%87%B7%20Iran%20%28Islamic%20Republic%20of%29%20%E2%80%A2%201817.8ms%20%E2%80%A2%20mrdevmohamed

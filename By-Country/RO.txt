@@ -1,2 +1,1 @@
-ss://cmM0LW1kNToxNGZGUHJiZXpFM0hEWnpzTU9yNg==@146.70.61.37:8080#%F0%9F%87%B7%F0%9F%87%B4%20Romania%20%E2%80%A2%20833.7ms%20%E2%80%A2%20mrdevmohamed
-vless://58e22afd-bf74-4736-984d-63a8ca03d7f0@185.247.224.206:443?&security=tls&fp=chrome&sni=accessfooter.cleanfoodshop.org&type=ws&headerType=none&host=accessfooter.cleanfoodshop.org&path=/media/ws/#%F0%9F%87%B7%F0%9F%87%B4%20Romania%20%E2%80%A2%201552.9ms%20%E2%80%A2%20mrdevmohamed
+vless://d1a6a033-fdbd-46a6-a177-3370ba042b9f@46.28.67.55:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=www.cloudflare.com&security=reality&pbk=i2dJ1_XGDpp50qpEclh6SWSWkxt4B0t2hi2qOVQbeSU&sid=d06d78e974491b6e#%F0%9F%87%B7%F0%9F%87%B4%20Romania%20%E2%80%A2%20672.6ms%20%E2%80%A2%20mrdevmohamed
