@@ -1,1 +1,1 @@
-vless://39947382-3212-41c9-bc3a-589574ac8b23@84.235.244.108:22573?encryption=none&host=uae.unixzone.us&path=/&security=none&type=ws##%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%201066.9ms%20%E2%80%A2%20mrdevmohamed
+vless://39947382-3212-41c9-bc3a-589574ac8b23@84.235.244.108:22573?encryption=none&host=uae.unixzone.us&path=/&security=none&type=ws##%F0%9F%87%A6%F0%9F%87%AA%20United%20Arab%20Emirates%20%E2%80%A2%20879.1ms%20%E2%80%A2%20mrdevmohamed
