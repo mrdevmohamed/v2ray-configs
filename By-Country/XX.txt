@@ -1,3 +1,0 @@
-vless://7aa77858-f235-000c-9434-7ab060848b17@85.8.201.186:443?sni=cdn.mornismp.ru&flow=xtls-rprx-vision&fp=chrome&security=tls#%F0%9F%8C%90%20Unknown%20%E2%80%A2%201449.5ms%20%E2%80%A2%20mrdevmohamed
-vless://7aa77858-f235-000c-9434-7ab060848b17@85.8.201.186:443?security=tls&flow=xtls-rprx-vision&fp=chrome&sni=cdn.mornismp.ru&type=tcp&headerType=none&path=/#%F0%9F%8C%90%20Unknown%20%E2%80%A2%201560ms%20%E2%80%A2%20mrdevmohamed
-vless://7aa77858-f235-000c-9434-7ab060848b17@85.8.201.186:443?Telegram=@GozargahAzad,@GozargahAzad,@GozargahAzad,@GozargahAzad,@GozargahAzad,@GozargahAzad,@GozargahAzad&sni=cdn.mornismp.ru&flow=xtls-rprx-vision&fp=chrome&security=tls#%F0%9F%8C%90%20Unknown%20%E2%80%A2%201567.9ms%20%E2%80%A2%20mrdevmohamed

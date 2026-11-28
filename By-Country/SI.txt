@@ -1,0 +1,1 @@
+vless://aac58603-fe15-41e5-bd10-bae80815b082@xray-vless-aac5-8z4azf.cranl.net:443?path=/vless&security=tls&encryption=none&insecure=0&host=xray-vless-aac5-8z4azf.cranl.net&type=ws&allowInsecure=0&sni=xray-vless-aac5-8z4azf.cranl.net#%F0%9F%87%B8%F0%9F%87%AE%20Slovenia%20%E2%80%A2%201002.4ms%20%E2%80%A2%20mrdevmohamed
